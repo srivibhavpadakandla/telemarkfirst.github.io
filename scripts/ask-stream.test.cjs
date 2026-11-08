@@ -197,5 +197,12 @@ const check = async (fn) => { await fn(); checks += 1; };
     assert.deepEqual(seen, ['start', 'reasoning', 'Sources only']);
   });
 
+  await check(async () => {
+    stub({ok: false, status: 502, json: async () => null});
+    let error = '';
+    await askSharpAi('q', {idToken: 't'}, {onError: (m) => { error = m; }});
+    assert.match(error, /could not answer/);
+  });
+
   console.log(`Answer stream tests passed (${checks} cases)`);
 })();

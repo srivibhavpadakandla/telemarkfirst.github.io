@@ -74,8 +74,9 @@ export async function askSharpAi(
   }
 
   if (!response.ok || !response.body) {
-    const detail = await response.json().catch(() => ({}));
-    events.onError?.(messageFor(response.status, detail as ErrorDetail));
+    const detail = await response.json().catch(() => null);
+    events.onError?.(messageFor(response.status,
+      detail && typeof detail === 'object' ? detail as ErrorDetail : {}));
     return;
   }
 
