@@ -7,7 +7,7 @@ const source = fs.readFileSync(path.join(__dirname, '../src/telemark/assistantCo
 const {outputText} = ts.transpileModule(source, {compilerOptions: {module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022}});
 const loaded = {};
 new Function('exports', outputText)(loaded);
-const {captureSimulatorFiles, captureLessonSection, codeContextError} = loaded;
+const {captureSimulatorFiles, captureLessonSection, codeContextError, assistantHistory} = loaded;
 let checks = 0;
 {
   const {document} = new JSDOM('<iframe class="telemark-simulator"></iframe>').window;
@@ -42,4 +42,6 @@ let checks = 0;
 assert.match(codeContextError([{name: 'A.java', source: 'a'.repeat(16001)}]), /16,000/); checks++;
 assert.match(codeContextError([{name: 'A.java', source: 'a'}, {name: 'A.java', source: 'b'}]), /unique/); checks++;
 assert.equal(codeContextError([{name: 'A.java', source: 'a'.repeat(16000)}]), null); checks++;
+assert.equal(assistantHistory([{role: 'you', text: 'Hint?'}, {role: 'ai', text: '', beyond: 'Consider the false branch.', complete: true}])[0].answer, 'Consider the false branch.'); checks++;
+assert.equal(assistantHistory([{role: 'you', text: 'Hint?'}, {role: 'ai', text: '', beyond: 'Partial', complete: false}]).length, 0); checks++;
 console.log(`Assistant code and lesson context tests passed (${checks} cases)`);

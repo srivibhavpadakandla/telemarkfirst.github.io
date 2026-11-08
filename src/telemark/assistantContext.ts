@@ -48,3 +48,13 @@ export function captureLessonSection(root: Document = document): string {
   content.querySelectorAll('button, iframe, script, style, textarea, input, nav').forEach((node) => node.remove());
   return (content.textContent || '').replace(/[\t ]+/g, ' ').trim().slice(0, 3000);
 }
+
+export function assistantHistory(messages: {role: 'you' | 'ai'; text: string; beyond?: string; complete?: boolean; error?: string}[]): {question: string; answer: string}[] {
+  const pairs = [];
+  for (let i = 0; i < messages.length - 1; i++) {
+    const next = messages[i + 1];
+    if (messages[i].role === 'you' && next.role === 'ai' && (next.text || next.beyond) && next.complete !== false && !next.error)
+      pairs.push({question: messages[i].text, answer: [next.text, next.beyond].filter(Boolean).join('\n\n').slice(0, 1200)});
+  }
+  return pairs.slice(-2);
+}

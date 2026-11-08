@@ -3,7 +3,7 @@ import {useLocation} from '@docusaurus/router';
 import {useAuth} from '@site/src/telemark/useAuth';
 import {signInWithGoogle} from '@site/src/telemark/googleAuth';
 import {askSharpAi, type Citation, type PageContext} from '@site/src/telemark/askSharpAi';
-import {captureLessonSection, captureSimulatorFiles, codeContextError, type CodeFile, type EvidenceClaim, type HelpMode, type TutorPlan} from '@site/src/telemark/assistantContext';
+import {assistantHistory, captureLessonSection, captureSimulatorFiles, codeContextError, type CodeFile, type EvidenceClaim, type HelpMode, type TutorPlan} from '@site/src/telemark/assistantContext';
 import {trackEvent} from '@site/src/telemark/analytics';
 import {chatLabel, deleteChat, listChats, loadChat, newChatId, saveChat, type StoredChat} from '@site/src/telemark/chatStore';
 import styles from './AskPanel.module.css';
@@ -62,7 +62,7 @@ export default function AskPanel(): React.JSX.Element {
     const controller = new AbortController();
     abort.current?.abort(); abort.current = controller;
     busyRef.current = true; setBusy(true); setDraft(''); setShowHistory(false); setContextOpen(false);
-    const history = pairsFrom(messages);
+    const history = assistantHistory(messages);
     setMessages((prev) => [...prev, {role: 'you', text}, {role: 'ai', text: '', complete: false}]);
     const update = (fn: (message: Message) => Message) => {
       if (controller.signal.aborted) return;
@@ -108,7 +108,7 @@ export default function AskPanel(): React.JSX.Element {
       </div>)}
     </div> : messages.length ? <div className={styles.thread} ref={thread} aria-busy={busy}>
       {messages.map((message, i) => <div key={i} className={message.role === 'you' ? styles.fromYou : styles.fromAi}>
-        {!message.text && !message.error ? <span className={styles.typing} role="status" aria-label="Thinking"><span className={styles.typingDot} /></span> : <AnswerText text={message.text} />}
+        {!message.text && !message.error && message.complete === false && !message.beyond ? <span className={styles.typing} role="status" aria-label="Thinking"><span className={styles.typingDot} /></span> : <AnswerText text={message.text} />}
         {message.error && <p className={styles.error} role="alert">{message.error}</p>}
         {message.beyond && <div className={styles.beyond}><p className={styles.beyondLabel}>Engineering suggestion · not verified by the cited sources</p><AnswerText text={message.beyond} /></div>}
         {!!message.citations?.length && <Evidence citations={message.citations} claims={message.evidence || []} />}
@@ -162,13 +162,6 @@ function Evidence({citations, claims}: {citations: Citation[]; claims: EvidenceC
     {claims.map((claim, i) => <section key={i}><p>{claim.claim}</p>{claim.sources.map((source) => <div key={source.n}><p>[{source.n}] {source.version} · {source.status === 'matched' ? 'Matching wording' : source.status === 'weak' ? 'Weak wording match : check carefully' : 'Original passage unavailable here'}</p>{source.passage && <blockquote>{source.passage}</blockquote>}</div>)}</section>)}
     {citations.map((citation) => <p key={citation.n}>[{citation.n}] {citation.url && /^https?:\/\//.test(citation.url) ? <a href={citation.url} target="_blank" rel="noopener noreferrer">{citation.pageTitle || citation.title || citation.sourceName || 'Open source'}</a> : citation.sourceName} {citation.version && `· ${citation.version}`}</p>)}
   </details>;
-}
-function pairsFrom(messages: Message[]): {question: string; answer: string}[] {
-  const pairs: {question: string; answer: string}[] = [];
-  for (let i = 0; i < messages.length - 1; i++) {
-    if (messages[i].role === 'you' && messages[i + 1].role === 'ai' && messages[i + 1].text && messages[i + 1].complete !== false && !messages[i + 1].error) pairs.push({question: messages[i].text, answer: messages[i + 1].text});
-  }
-  return pairs.slice(-2);
 }
 function currentPage(): PageContext | null {
   if (typeof document === 'undefined') return null;
