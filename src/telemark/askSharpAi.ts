@@ -57,6 +57,7 @@ export async function askSharpAi(
       headers: {'content-type': 'application/json'},
       body: JSON.stringify({
         question,
+        chat: true,
         idToken: options.idToken,
         page: options.page ?? null,
         // The worker keeps the last two turns, which is what a follow-up needs
@@ -66,26 +67,47 @@ export async function askSharpAi(
       }),
       signal: options.signal,
     });
-  } catch {
+  } catch (error) {
+    if (options.signal?.aborted || (error instanceof DOMException && error.name === 'AbortError')) return;
     events.onError?.('Could not reach the assistant. Check your connection and try again.');
     return;
   }
 
   if (!response.ok || !response.body) {
     const detail = await response.json().catch(() => ({}));
-    events.onError?.(messageFor(response.status, (detail as {error?: string}).error));
+    events.onError?.(messageFor(response.status, detail as ErrorDetail));
     return;
   }
 
   const reader = response.body.getReader();
   const decoder = new TextDecoder();
   let buffer = '';
-  let event = '';
   let finished = false;
+  let terminal = false;
   const finish = () => {
     if (finished) return;
     finished = true;
     events.onDone?.();
+  };
+  const dispatch = (frame: string) => {
+    let event = '';
+    const data: string[] = [];
+    for (const line of frame.split('\n')) {
+      if (line.startsWith('event:')) event = line.slice(6).trim();
+      else if (line.startsWith('data:')) data.push(line.slice(5).trimStart());
+    }
+    const payload = safeParse(data.join('\n'));
+    if (!payload || terminal) return;
+    if (event === 'meta') events.onMeta?.((payload.citations as Citation[]) ?? []);
+    else if (event === 'token' && typeof payload.t === 'string') events.onToken?.(payload.t);
+    else if (event === 'beyond_start') events.onBeyondStart?.();
+    else if (event === 'beyond' && typeof payload.t === 'string') events.onBeyond?.(payload.t);
+    else if (event === 'degrade') events.onDegrade?.(String(payload.answerMd ?? ''));
+    else if (event === 'done') terminal = true;
+    else if (event === 'error') {
+      terminal = true;
+      events.onError?.(String(payload.message ?? 'Something went wrong.'));
+    }
   };
 
   // SSE frames are separated by a blank line and can split across reads, so
@@ -95,30 +117,21 @@ export async function askSharpAi(
   // dropped mid-answer. Both escaped as a rejection before, so the caller's
   // cleanup never ran and the panel stayed disabled until a reload.
   try {
-    while (true) {
+    while (!terminal) {
       const {done, value} = await reader.read();
       if (done) break;
       buffer += decoder.decode(value, {stream: true});
-
+      // Normalize complete CRLF pairs; a trailing CR stays buffered until the next read.
+      buffer = buffer.replace(/\r\n/g, '\n');
       let split = buffer.indexOf('\n\n');
       while (split !== -1) {
-        const frame = buffer.slice(0, split);
+        dispatch(buffer.slice(0, split));
         buffer = buffer.slice(split + 2);
-        for (const line of frame.split('\n')) {
-          if (line.startsWith('event:')) event = line.slice(6).trim();
-          else if (line.startsWith('data:')) {
-            const payload = safeParse(line.slice(5).trim());
-            if (event === 'meta') events.onMeta?.((payload?.citations as Citation[]) ?? []);
-            else if (event === 'token' && typeof payload?.t === 'string') events.onToken?.(payload.t);
-            else if (event === 'beyond_start') events.onBeyondStart?.();
-            else if (event === 'beyond' && typeof payload?.t === 'string') events.onBeyond?.(payload.t);
-            else if (event === 'degrade') events.onDegrade?.(String(payload?.answerMd ?? ''));
-            else if (event === 'done') finish();
-            else if (event === 'error') events.onError?.(String(payload?.message ?? 'Something went wrong.'));
-          }
-        }
         split = buffer.indexOf('\n\n');
       }
+    }
+    if (!terminal && !options.signal?.aborted) {
+      events.onError?.('The answer stopped partway. Ask again to retry.');
     }
   } catch (error) {
     // An abort is the student moving on, not a failure to report to them.
@@ -127,8 +140,11 @@ export async function askSharpAi(
     if (!aborted) {
       events.onError?.('The answer stopped partway. Ask again to retry.');
     }
+  } finally {
+    if (terminal) await reader.cancel?.().catch(() => {});
+    reader.releaseLock?.();
+    finish();
   }
-  finish();
 }
 
 function safeParse(text: string): Record<string, unknown> | null {
@@ -139,14 +155,31 @@ function safeParse(text: string): Record<string, unknown> | null {
   }
 }
 
-function messageFor(status: number, error?: string): string {
+interface ErrorDetail {
+  error?: string;
+  scope?: string;
+  maxChars?: number;
+}
+
+function messageFor(status: number, detail: ErrorDetail): string {
   if (status === 429) {
-    return 'You have used your questions for today. The limit resets tomorrow.';
+    return detail.scope === 'minute'
+      ? 'You are asking questions too quickly. Wait a minute and try again.'
+      : 'You have used your questions for today. The limit resets tomorrow.';
+  }
+  if (detail.error === 'auth-unavailable') {
+    return 'The assistant could not verify your sign-in right now. Try again shortly.';
+  }
+  if (detail.error === 'turnstile-failed') {
+    return 'The assistant’s sign-in connection is unavailable. Try again later.';
   }
   if (status === 403) {
     return 'Your session expired. Sign out and back in, then try again.';
   }
-  if (error === 'no-answer') {
+  if (status === 413) {
+    return `Keep your question under ${detail.maxChars ?? 500} characters and try again.`;
+  }
+  if (detail.error === 'no-answer') {
     return 'Nothing in the curriculum or the official docs covers that yet.';
   }
   return 'The assistant could not answer that. Try rewording the question.';

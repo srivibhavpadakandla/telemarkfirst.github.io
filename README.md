@@ -341,3 +341,16 @@ never returns learner names, emails, or UIDs.
 
 See [ANALYTICS_SETUP.md](./ANALYTICS_SETUP.md) for the required one-time Google
 Analytics, Firebase, IAM, and GitHub Actions configuration.
+
+### Sharp AI lesson chat
+
+The lesson panel calls `https://sharp-ai.srivibhavp.workers.dev/api/ask` with the
+student’s Firebase ID token, `chat: true`, current lesson, and recent turns.
+The Worker must trust the `telemark-e9159` Firebase project and allow the
+Telemark site origin. An API health check alone does not verify either.
+
+Run `node scripts/ask-stream.test.cjs` to check the request contract, streamed
+answers, interrupted connections, cancellation, and actionable error messages.
+Minute limits ask the student to wait a minute; daily limits and expired
+sessions have separate messages. Changes to the Worker live in the Sharp AI
+repository and require a separate deployment.
