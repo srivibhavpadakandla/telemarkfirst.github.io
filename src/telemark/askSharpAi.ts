@@ -1,8 +1,11 @@
+import type {LearningContext, EvidenceClaim, TutorPlan} from './assistantContext';
 const ENDPOINT = 'https://sharp-ai.srivibhavp.workers.dev/api/ask';
 
 export interface Citation {
   n: number;
   title?: string;
+  pageTitle?: string;
+  version?: string;
   url?: string;
   sourceName?: string;
 }
@@ -19,7 +22,8 @@ export interface Turn {
 }
 
 export interface AskEvents {
-  onMeta?: (citations: Citation[]) => void;
+  onMeta?: (citations: Citation[], tutor?: TutorPlan) => void;
+  onEvidence?: (claims: EvidenceClaim[]) => void;
   onToken?: (text: string) => void;
   /**
    * The assistant has finished what the sources support and is about to reason
@@ -47,7 +51,7 @@ export interface AskEvents {
  */
 export async function askSharpAi(
   question: string,
-  options: {idToken: string; page?: PageContext; history?: Turn[]; signal?: AbortSignal},
+  options: {idToken: string; page?: PageContext; history?: Turn[]; learning?: LearningContext; signal?: AbortSignal},
   events: AskEvents,
 ): Promise<void> {
   let response: Response;
@@ -58,6 +62,7 @@ export async function askSharpAi(
       body: JSON.stringify({
         question,
         chat: true,
+        ...(options.learning ? {learning: options.learning} : {}),
         idToken: options.idToken,
         page: options.page ?? null,
         // The worker keeps the last two turns, which is what a follow-up needs
@@ -99,7 +104,8 @@ export async function askSharpAi(
     }
     const payload = safeParse(data.join('\n'));
     if (!payload || terminal) return;
-    if (event === 'meta') events.onMeta?.((payload.citations as Citation[]) ?? []);
+    if (event === 'meta') events.onMeta?.((payload.citations as Citation[]) ?? [], payload.tutor as TutorPlan | undefined);
+    else if (event === 'evidence') events.onEvidence?.((payload.claims as EvidenceClaim[]) ?? []);
     else if (event === 'token' && typeof payload.t === 'string') events.onToken?.(payload.t);
     else if (event === 'beyond_start') events.onBeyondStart?.();
     else if (event === 'beyond' && typeof payload.t === 'string') events.onBeyond?.(payload.t);
@@ -176,6 +182,9 @@ function messageFor(status: number, detail: ErrorDetail): string {
   }
   if (status === 403) {
     return 'Your session expired. Sign out and back in, then try again.';
+  }
+  if (detail.error === 'context-too-long' || detail.error === 'request-too-large') {
+    return 'Attach at most 6 files and 16,000 code characters. Shorten the error or lesson text if needed.';
   }
   if (status === 413) {
     return `Keep your question under ${detail.maxChars ?? 500} characters and try again.`;

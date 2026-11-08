@@ -354,3 +354,17 @@ answers, interrupted connections, cancellation, and actionable error messages.
 Minute limits ask the student to wait a minute; daily limits and expired
 sessions have separate messages. Changes to the Worker live in the Sharp AI
 repository and require a separate deployment.
+
+The lesson panel offers hints, explanations, worked solutions, and guided
+diagnosis. In **Lesson and code context**, choose **Attach current simulator
+code** to preview a snapshot of all Java project files, then **Explain this
+code** or ask a question. Refresh the snapshot after editing the simulator.
+You can also paste code, an exact error, and your attempt. Limits are six files
+and 16,000 code characters total, with the lesson section capped at 3,000
+characters. Code is never automatically run or applied.
+
+The chat now retains citation numbers and shows source passages under **Check
+sources and claims**. Matching words are an inspection aid, not proof that a
+claim is correct. Restricted sources show links instead of copied text.
+Personalized requests bypass Sharp AI's shared cache and query log; generated
+replies can remain in local browser history.

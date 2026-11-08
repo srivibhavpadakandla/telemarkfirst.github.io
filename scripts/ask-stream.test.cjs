@@ -204,5 +204,21 @@ const check = async (fn) => { await fn(); checks += 1; };
     assert.match(error, /could not answer/);
   });
 
+  await check(async () => {
+    let sent;
+    const learning = {mode: 'hint', files: [{name: 'Main.java', source: 'motor.setPower(0);'}], error: 'Stopped'};
+    const tutor = {mode: 'hint', followUps: ['Show the solution.']};
+    const claims = [{claim: 'Set power.', sources: [{n: 1, status: 'matched', passage: 'Set power.', version: 'SDK 12'}]}];
+    global.fetch = async (_url, request) => {
+      sent = JSON.parse(request.body);
+      return {ok: true, body: bodyOf([sse([{event: 'meta', data: {citations: [{n: 1}], tutor}}, {event: 'evidence', data: {claims}}, {event: 'done', data: {}}])])};
+    };
+    let actualTutor, actualClaims;
+    await askSharpAi('Why?', {idToken: 't', learning}, {onMeta: (_citations, plan) => {actualTutor = plan;}, onEvidence: (e) => {actualClaims = e;}});
+    assert.deepEqual(sent.learning, learning);
+    assert.deepEqual(actualTutor, tutor);
+    assert.deepEqual(actualClaims, claims);
+  });
+
   console.log(`Answer stream tests passed (${checks} cases)`);
 })();
