@@ -1,0 +1,45 @@
+---
+id: rehearsal
+title: "Lesson F14.4: Rehearse a Match"
+slug: /unit-14/rehearsal
+sidebar_label: "F14.4 · Rehearse a Match"
+sidebar_position: 4
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F14.4: Rehearse a Match
+
+Rehearse program choice, launch alignment, attachment handling, returns, and the full 150 second clock together. Use the current FIRST rulebook for handling and scoring rather than the simulator's generic score. Save the last reliable Pybricks program before any final adjustment.
+
+## Worked example
+
+~~~python
+watch = StopWatch()
+for mission_name in ["line", "target"]:
+    print("Launch:", mission_name, "at ms:", watch.time())
+    if mission_name == "line":
+        robot.straight(250)
+    else:
+        attachment.run_angle(160, 60)
+    robot.stop()
+print("Rehearsal ms:", watch.time())
+~~~
+
+## Simulator practice
+
+Run the planned sequence against the simulator clock. Record every launch and return.
+
+<FllPythonPractice lessonId="fll-unit-14/rehearsal" />
+
+## On the robot
+
+Perform a timed physical rehearsal with the same people and attachments. Record a complete run, including handling and any recovery.
+
+## Check and adjust
+
+The team can execute the plan without reading the source during the match. If rehearsal time differs, include handling in the budget.
+
+Reference: [FIRST season materials](https://www.firstinspires.org/resources/library/fll/season-materials).
+
+<MarkComplete lessonId="fll-unit-14/rehearsal" nextUnit="/fll/unit-14/full-match-capstone" nextUnitName="Lesson F14.5: Full Match Capstone" />

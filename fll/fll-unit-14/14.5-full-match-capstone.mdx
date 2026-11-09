@@ -1,0 +1,53 @@
+---
+id: full-match-capstone
+title: "Lesson F14.5: Full Match Capstone"
+slug: /unit-14/full-match-capstone
+sidebar_label: "F14.5 · Full Match Capstone"
+sidebar_position: 5
+---
+
+# Lesson F14.5: Full Match Capstone
+
+Complete the practice target and delivery objectives, return home, and document repeated runs. Submit the Python source, port map, wheel geometry, sensor thresholds, launch marks, and at least five trial results. Include a failed cue test with its safe response, and use current FIRST materials for any real season scoring claim.
+
+## Worked example
+
+~~~python
+def run_match():
+    watch = StopWatch()
+    print("Start light:", color_sensor.reflection())
+    robot.straight(1380)
+    attachment.run_angle(160, 90)
+    robot.turn(180)
+    robot.straight(430)
+    robot.turn(90)
+    robot.straight(180)
+    robot.straight(480)
+    robot.turn(90)
+    robot.straight(830)
+    attachment.run_angle(160, -90)
+    robot.turn(180)
+    robot.straight(1780)
+    robot.turn(-90)
+    robot.straight(660)
+    robot.stop()
+    print("Run ms:", watch.time())
+
+run_match()
+~~~
+
+## Simulator practice
+
+Study the generic-field route, then replace it with your tested functions. Run under the 150 second clock and record the target, delivery, and home results.
+
+<FllPythonPractice lessonId="fll-unit-14/full-match-capstone" />
+
+## On the robot
+
+Run five complete physical trials with the actual robot. Present the success count, longest time, one failure and its recovery, and the last reliable source file.
+
+## Check and adjust
+
+A teammate can reproduce the launch and explain the evidence for the final route. If fewer than five trials succeed, report failures and recovery.
+
+Reference: [FIRST season materials](https://www.firstinspires.org/resources/library/fll/season-materials).

@@ -1,0 +1,150 @@
+.editor { margin-bottom: var(--tm-sp-5); }
+
+.toolbar,
+.inlineHeading,
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--tm-sp-3);
+}
+
+.toolbar { flex-wrap: wrap; }
+.editingToolbar {
+  position: fixed;
+  right: var(--tm-sp-4);
+  bottom: var(--tm-sp-4);
+  z-index: 100;
+  max-width: min(44rem, calc(100vw - 2rem));
+  padding: var(--tm-sp-3);
+  background: var(--tm-surface-2);
+  border: 1px solid var(--tm-border-strong);
+  border-radius: 6px;
+  box-shadow: var(--tm-shadow-md);
+}
+.inlineHeading { justify-content: space-between; }
+.actions { flex-wrap: wrap; margin-top: var(--tm-sp-3); }
+
+.modeButton,
+.secondaryButton,
+.deleteButton,
+.saveButton {
+  border: 1px solid var(--tm-border-strong);
+  border-radius: 6px;
+  padding: var(--tm-sp-2) var(--tm-sp-3);
+  font: 600 var(--tm-fs-sm) / 1.4 var(--tm-font-body);
+  cursor: pointer;
+  transition: background-color 150ms, border-color 150ms;
+}
+
+.modeButton,
+.secondaryButton {
+  color: var(--tm-text-strong);
+  background: var(--tm-surface-2);
+}
+
+.modeButton:hover,
+.secondaryButton:hover { background: var(--tm-surface-4); }
+
+.deleteButton {
+  color: var(--tm-danger);
+  background: var(--tm-danger-wash);
+  border-color: var(--tm-danger);
+}
+
+.deleteButton:hover:not(:disabled) { background: var(--tm-surface-4); }
+
+.saveButton {
+  color: var(--tm-text-on-accent);
+  background: var(--tm-accent);
+  border-color: var(--tm-accent);
+}
+
+.saveButton:hover:not(:disabled) { background: var(--tm-accent-bright); }
+
+.modeButton:focus-visible,
+.secondaryButton:focus-visible,
+.deleteButton:focus-visible,
+.saveButton:focus-visible,
+.textarea:focus-visible {
+  outline: 2px solid var(--tm-accent);
+  outline-offset: 2px;
+}
+
+.saveButton:disabled,
+.secondaryButton:disabled,
+.deleteButton:disabled,
+.modeButton:disabled { opacity: 0.55; cursor: default; }
+
+.instructions,
+.hint,
+.status { color: var(--tm-text-soft); font-size: var(--tm-fs-sm); }
+.pending { color: var(--tm-text-strong); font: 600 var(--tm-fs-sm) / 1.4 var(--tm-font-body); }
+
+.mount { margin: var(--tm-sp-3) 0 var(--tm-sp-5); }
+
+.inlineEditor {
+  padding: var(--tm-sp-4);
+  background: var(--tm-surface-2);
+  border: 1px solid var(--tm-border-strong);
+  border-radius: 6px;
+}
+
+.inlineHeading strong { color: var(--tm-text-strong); }
+
+.label {
+  display: block;
+  margin: var(--tm-sp-4) 0 var(--tm-sp-2);
+  color: var(--tm-text-strong);
+  font-weight: 600;
+}
+
+.textarea {
+  display: block;
+  width: 100%;
+  min-height: 7rem;
+  resize: vertical;
+  padding: var(--tm-sp-3);
+  color: var(--tm-text-strong);
+  background: var(--tm-surface-3);
+  border: 1px solid var(--tm-border-strong);
+  border-radius: 6px;
+  font: var(--tm-fs-sm) / 1.55 var(--tm-font-mono);
+  tab-size: 2;
+}
+
+.textarea::selection { color: var(--tm-text-on-accent); background: var(--tm-accent); }
+.status, .error { margin: var(--tm-sp-3) 0 0; }
+.error { color: var(--tm-danger); }
+
+:global(.theme-doc-markdown[data-telemark-edit-enabled] [data-telemark-edit-block]) {
+  cursor: text;
+  outline: 1px dashed var(--tm-border-strong);
+  outline-offset: 4px;
+  background: var(--tm-accent-a08);
+}
+
+:global(.theme-doc-markdown[data-telemark-edit-enabled] [data-telemark-edit-block]:hover),
+:global(.theme-doc-markdown[data-telemark-edit-enabled] [data-telemark-edit-block]:focus-visible),
+:global(.theme-doc-markdown[data-telemark-edit-enabled] [data-telemark-editing]) {
+  outline: 2px solid var(--tm-accent);
+  outline-offset: 4px;
+}
+
+:global(.theme-doc-markdown[data-telemark-edit-enabled]) { padding-bottom: 7rem; }
+
+:global(.theme-doc-markdown[data-telemark-edit-enabled] [data-telemark-edit-pending]) {
+  outline: 2px solid var(--tm-accent);
+  outline-offset: 4px;
+}
+
+:global(.theme-doc-markdown[data-telemark-edit-enabled] [data-telemark-edit-deleted]) {
+  opacity: 0.55;
+  text-decoration: line-through;
+  outline-color: var(--tm-danger);
+  background: var(--tm-danger-wash);
+}
+
+@media (max-width: 600px) {
+  .inlineEditor { padding: var(--tm-sp-3); }
+  .editingToolbar { left: var(--tm-sp-3); right: var(--tm-sp-3); bottom: var(--tm-sp-3); max-width: none; }
+}

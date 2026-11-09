@@ -1,0 +1,43 @@
+---
+id: thresholds-and-hysteresis
+title: "Lesson F4.4: Avoid Threshold Chatter"
+slug: /unit-04/thresholds-and-hysteresis
+sidebar_label: "F4.4 · Avoid Threshold Chatter"
+sidebar_position: 4
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F4.4: Avoid Threshold Chatter
+
+A sensor reading may cross one threshold repeatedly even while the robot barely moves. Keep a previous dark or light state and use two limits: enter dark below 30 percent, then leave it only above 40 percent. Test readings around both limits before using the state to control a route.
+
+## Worked example
+
+~~~python
+light = color_sensor.reflection()
+on_line = False
+if not on_line and light < 30:
+    on_line = True
+elif on_line and light > 40:
+    on_line = False
+print("On line:", on_line)
+~~~
+
+## Simulator practice
+
+First update on_line with sample readings of 50, 29, 35, and 41 percent. Then drive toward the fixed line and compare the real reading sequence.
+
+<FllPythonPractice lessonId="fll-unit-04/thresholds-and-hysteresis" />
+
+## On the robot
+
+Record five light and dark values. Choose two thresholds with a gap wider than normal sensor noise.
+
+## Check and adjust
+
+The state changes once when crossing each edge rather than switching repeatedly at one value. If state changes repeatedly at an edge, widen the threshold gap.
+
+Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).
+
+<MarkComplete lessonId="fll-unit-04/thresholds-and-hysteresis" nextUnit="/fll/unit-04/decision-challenge" nextUnitName="Lesson F4.5: Decision Challenge" />

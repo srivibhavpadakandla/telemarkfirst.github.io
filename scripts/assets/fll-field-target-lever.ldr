@@ -1,0 +1,10 @@
+0 FLL practice field hinged target - moving LEGO lever
+0 Name: fll-field-target-lever.ldr
+0 Author: Telemark curriculum contributors
+0 // Origin: axle-hole hinge centre. Mount at (0,6.64,0) cm on fll-field-target-base.
+0 // Rotate this entire asset around local Z; the 11L beam lifts from its left end.
+0 // Official LDraw parts only. Crossbars form a visible contact paddle.
+1 14 100 0 0 0 0 1 0 1 0 -1 0 0 32525.dat
+1 25 200 0 -20 0 1 0 0 0 1 1 0 0 32523.dat
+1 25 200 0 20 0 1 0 0 0 1 1 0 0 32523.dat
+1 0 200 0 0 0 0 -1 0 1 0 1 0 0 6558.dat

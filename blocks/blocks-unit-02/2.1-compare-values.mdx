@@ -9,19 +9,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson 2.1: Compare Two Values
 
-A **comparison** checks the relationship between two values. Its result is always the Boolean value `true` or `false`.
+A **comparison** checks two values and produces `true` or `false`, which a robot program can use when a reading reaches a threshold. For `distanceReading >= 10`, values 10 and 11 pass while 9 fails. The operator `>` excludes 10, so the choice matters at the boundary.
 
-Number comparisons include equal to, not equal to, less than, greater than, less than or equal to, and greater than or equal to. The comparison `8 > 5` is `true`. The comparison `8 = 5` is `false`.
+## Test the boundary
 
-Equal to is a question. Assignment is a command that stores a value. They do different jobs even when their symbols or blocks look similar.
-
-Text can also be checked for equality. Capital letters matter, so `Ready` and `ready` are different text values. Keep both inputs the same type unless the lesson clearly says otherwise.
-
-## Guided practice
-
-Print the result of `7 < 10`, then predict and run `7 = 10` and `7 ≠ 10`. Create a variable named `level`, set it to 3, and compare `level >= 3`.
-
-Change `level` to 2 without changing the comparison. Use Step and explain why the result changes. The comparison reads the variable's current value each time it runs.
+Set `distanceReading` to 10 and predict the results of `distanceReading >= 10`, `distanceReading > 10`, and `distanceReading = 10` before printing them. Repeat with 9 and 11 to see which results change. These values are entered test data, so record that assumption when applying the rule to a real sensor.
 
 <BlockPractice lessonId="blocks-unit-02/compare-values" />
 

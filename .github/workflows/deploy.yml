@@ -4,9 +4,6 @@ on:
   push:
     branches: [main]
 
-permissions:
-  contents: write
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -39,25 +36,35 @@ jobs:
       - name: Build
         env:
           TELEMARK_ADMIN_EMAIL: ${{ vars.TELEMARK_ADMIN_EMAIL }}
-          TELEMARK_BASE_URL: /
+          TELEMARK_BASE_URL: /${{ github.event.repository.name }}/
           TELEMARK_BUILD_COMMIT: ${{ github.sha }}
-          TELEMARK_URL: https://telemarkfirst.github.io
+          TELEMARK_URL: https://${{ github.repository_owner }}.github.io
         run: npm run build
 
       - name: Verify production build
         run: npm run verify:build
 
+      - name: Build and verify staged redirects
+        run: npm run test:redirects
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          publish_dir: ${{ vars.TELEMARK_REDIRECTS_ENABLED == 'true' && './redirect-build' || './build' }}
 
       - name: Smoke test deployed site
+        if: vars.TELEMARK_REDIRECTS_ENABLED != 'true'
         env:
           TELEMARK_BUILD_COMMIT: ${{ github.sha }}
-          TELEMARK_DEPLOY_URL: https://telemarkfirst.github.io
+          TELEMARK_DEPLOY_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
         run: npm run smoke:deployed
+
+      - name: Smoke test deployed redirects
+        if: vars.TELEMARK_REDIRECTS_ENABLED == 'true'
+        env:
+          TELEMARK_DEPLOY_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+        run: npm run smoke:redirects
 
   deploy-functions:
     runs-on: ubuntu-latest
@@ -65,7 +72,7 @@ jobs:
       FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TELEMARK }}
       GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
       TELEMARK_ADMIN_EMAIL: ${{ vars.TELEMARK_ADMIN_EMAIL }}
-      TELEMARK_ALLOWED_ORIGINS: ${{ vars.TELEMARK_ALLOWED_ORIGINS != '' && vars.TELEMARK_ALLOWED_ORIGINS || 'https://telemarkfirst.github.io' }}
+      TELEMARK_ALLOWED_ORIGINS: ${{ vars.TELEMARK_ALLOWED_ORIGINS != '' && vars.TELEMARK_ALLOWED_ORIGINS || format('https://{0}.github.io,https://telemarkfirst.github.io', github.repository_owner) }}
     steps:
       - uses: actions/checkout@v4
 

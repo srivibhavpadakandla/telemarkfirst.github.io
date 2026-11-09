@@ -1,0 +1,43 @@
+---
+id: line-following
+title: "Lesson F9.4: Follow an Edge Briefly"
+slug: /unit-09/line-following
+sidebar_label: "F9.4 · Follow an Edge Briefly"
+sidebar_position: 4
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F9.4: Follow an Edge Briefly
+
+A proportional line follower adjusts turn rate from the difference between measured reflection and a target value. Begin at low speed with a short time limit, and reverse the correction sign if the robot turns away from the edge. One sensor cannot recover its side after fully losing the line, while the simulator's short dark line supports only a brief edge test.
+
+## Worked example
+
+~~~python
+target = 35
+watch = StopWatch()
+while watch.time() < 300:
+    error = color_sensor.reflection() - target
+    robot.drive(40, error * 0.5)
+    wait(20)
+robot.stop()
+~~~
+
+## Simulator practice
+
+Run the 300 ms steering demonstration and compare heading with the correction sign reversed. The one-line field cannot confirm continuous edge following.
+
+<FllPythonPractice lessonId="fll-unit-09/line-following" />
+
+## On the robot
+
+Use a wide practice line, clear nearby mission objects, and record whether the sensor remains over the intended edge.
+
+## Check and adjust
+
+The robot follows the chosen edge briefly and stops when the timer expires. If correction turns away from the edge, reverse its sign.
+
+Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).
+
+<MarkComplete lessonId="fll-unit-09/line-following" nextUnit="/fll/unit-09/sensor-route-challenge" nextUnitName="Lesson F9.5: Sensor Route Challenge" />

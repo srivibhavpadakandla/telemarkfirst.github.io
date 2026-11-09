@@ -1,0 +1,45 @@
+---
+id: decision-challenge
+title: "Lesson F4.5: Decision Challenge"
+slug: /unit-04/decision-challenge
+sidebar_label: "F4.5 · Decision Challenge"
+sidebar_position: 5
+---
+
+# Lesson F4.5: Decision Challenge
+
+Approach the practice obstacle with a bounded loop, stopping for a valid range reading or taking a different action if the dark line appears first. Give those cues a clear priority and print the reason for stopping. Test obstacle first, line first, and no cue so the timeout path also ends safely.
+
+## Worked example
+
+~~~python
+watch = StopWatch()
+reason = "timeout"
+robot.drive(100, 0)
+while watch.time() < 4000:
+    if distance_sensor.distance() < 150:
+        reason = "obstacle"
+        break
+    if color_sensor.reflection() < 35:
+        reason = "line"
+        break
+    wait(10)
+robot.stop()
+print(reason)
+~~~
+
+## Simulator practice
+
+Keep the field fixed. Change thresholds and timeout values to exercise each printed reason, then restore calibrated values. Confirm every run stops.
+
+<FllPythonPractice lessonId="fll-unit-04/decision-challenge" />
+
+## On the robot
+
+Run the same cases on a practice mat at low speed and compare the printed reason with the actual stop point.
+
+## Check and adjust
+
+Your program ends safely for obstacle, line, and timeout cases. If the no-cue test moves too long, inspect timeout and stop calls.
+
+Reference: [Pybricks timing tools reference](https://docs.pybricks.com/en/stable/tools/).

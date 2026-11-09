@@ -7,10 +7,8 @@ sidebar_position: 5
 
 # Lesson 3.5: Coding Challenge: Grid Scanner
 
-Build a route that ends at x = 4 and y = 4 using exactly eight movement operations. Use at least one loop so repeated work is not copied by hand.
+Create a route that ends at x = 4, y = 4 after exactly eight movement steps, using at least one loop and staying within the operation limit. One plan moves east four steps, turns right, and moves south four steps. Record the expected position after each section before building it.
 
-Trace the loop count and scene position. Watch for off-by-one errors at the start and end of each repeated section. The program must finish without reaching the operation limit.
-
-Run the visible checks. If one fails, use Step to find the first movement that leaves the expected route.
+Run the visible checks and inspect direction before the second movement section if the endpoint is wrong. Count actual grid steps, including those requested by a move block inside a loop, when checking the total. The grid measures program flow rather than physical path accuracy.
 
 <BlockPractice lessonId="blocks-unit-03/grid-scanner-challenge" />

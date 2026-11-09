@@ -9,25 +9,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson 5.2: Combine State, Decisions, Loops, and Functions
 
-Each programming tool has a different job.
+A combined program uses each structure for a different job: variables retain state, conditions select actions, loops repeat work, functions group routines, and lists keep related values in order. Trace the main sequence first, entering each function call and recording the Boolean result and loop count as they occur.
 
-- Variables store changing state.
-- Conditions choose which branch runs.
-- Loops repeat work.
-- Functions name and organize work.
-- Lists keep related values in order.
+## Process a mission list
 
-A strong program uses the smallest tool that fits each part. A single choice needs an `if`, not a loop. Known repeated work needs a loop, not copied blocks. A value needed by later commands belongs in a variable or returned result.
-
-Trace combined programs one layer at a time. First follow the main sequence. At a function call, trace that function. At a loop, record the repeat number. At a condition, record its Boolean result.
-
-## Guided practice
-
-Store `[2, 6, 9]` in a list named `amounts`. Create a function that accepts one amount. If the amount is at least 5, print `keep`; otherwise print `check`.
-
-Loop through the list and call the function for each item. Add a variable that counts how many items were processed, then print the final count.
-
-Before running, predict the three decisions and the final count. Use Step to locate the first difference if a result is wrong.
+Store `[2, 6, 9]` as planned values. Write a function that prints `keep` for a value of at least 5 and `check` otherwise, then call it for each list item in a loop. Increase `processed` on every repeat and predict the three labels and final count before running. Use Step at the first difference between your trace and the output.
 
 <BlockPractice lessonId="blocks-unit-05/combine-programming-tools" />
 

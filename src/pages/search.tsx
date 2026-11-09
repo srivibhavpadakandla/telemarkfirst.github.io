@@ -9,7 +9,7 @@ interface SearchEntry {
   title: string;
   label: string;
   path: string;
-  track: 'blocks' | 'software' | 'mechanical';
+  track: 'blocks' | 'fll' | 'software' | 'mechanical';
   unit: number | null;
   excerpt: string;
 }
@@ -32,7 +32,7 @@ export default function SearchPage(): React.JSX.Element {
   }, [entries, normalized]);
 
   return (
-    <Layout title="Search · Telemark" description="Search Telemark FTC software, Blocks, and mechanical lessons.">
+    <Layout title="Search · Telemark" description="Search Telemark FTC, FLL robotics, Blocks, and mechanical lessons.">
       <main className={styles.page}>
         <div className={styles.shell}>
           <h1 className={styles.title}>Search lessons</h1>
@@ -73,7 +73,8 @@ export default function SearchPage(): React.JSX.Element {
                     <span className={styles.badge}>
                       {entry.track === 'mechanical'
                         ? 'Mechanical'
-                        : entry.track === 'blocks' ? 'Software · Blocks' : 'Software'}
+                        : entry.track === 'fll' ? 'FLL Robotics'
+                        : entry.track === 'blocks' ? 'Blocks' : 'Software'}
                     </span>
                   </div>
                   <p className={styles.path}>{entry.path}</p>

@@ -54,7 +54,7 @@ const blockMdx = fs.readdirSync(path.join(root, 'blocks'), {recursive: true})
   .map((name) => fs.readFileSync(path.join(root, 'blocks', name), 'utf8'))
   .join('\n');
 assert.doesNotMatch(blockMdx, /—/, 'blocks prose contains an em dash');
-assert.doesNotMatch(blockMdx, /!/, 'blocks prose contains an exclamation mark');
+assert.doesNotMatch(blockMdx, /!(?!=)/, 'blocks prose contains an exclamation mark');
 assert.match(blockMdx, /Code\.org/);
 assert.match(blockMdx, /Scratch/);
 assert.match(blockMdx, /Blockly/);

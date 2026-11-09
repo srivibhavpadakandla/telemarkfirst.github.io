@@ -1,0 +1,29 @@
+FLL teaching mechanism CAD
+
+These GLB files were built from geometry in the official LDraw Parts Library,
+available at https://library.ldraw.org/. The source LDraw part files are licensed
+under Creative Commons Attribution 2.0 or 4.0 as marked in their headers; see
+https://www.ldraw.org/docs-main/licenses/legal-info.html and the library's
+CAreadme.txt. Credit belongs to the LDraw part authors.
+
+Part references used by scripts/export-fll-rig.mjs:
+  45601c01.dat  SPIKE Prime six-port hub, Philippe Hurbain
+  54675.dat     Powered Up large angular motor, Philippe Hurbain
+  54696p01.dat Powered Up medium angular motor body, Philippe Hurbain
+  39367p01.dat  56 mm medium-azure wheel, Philippe Hurbain
+  32525.dat    Technic beam 11, Philippe Hurbain
+  32523.dat    Technic beam 3, Tim Gould
+  37308.dat    Powered Up color sensor, Philippe Hurbain
+  37316.dat    Powered Up distance sensor, Philippe Hurbain
+  37312.dat    Powered Up force sensor, Philippe Hurbain
+
+The cargo, obstacle, and hinged target are additional teaching assemblies made
+from official LDraw brick, plate, beam, axle, and pin files. Their source models
+and full part list are in scripts/assets/fll-field-*.ldr and
+scripts/assets/fll-field-models-ATTRIBUTION.txt in the Telemark repository.
+
+The drivebase, lever tool, mount points, and lesson placement are Telemark
+teaching assemblies. They are not a certified or official FIRST LEGO League
+robot. No BrickLink Studio-only custom mesh is included in these new assets.
+LEGO and SPIKE are trademarks of the LEGO Group. FIRST LEGO League is a
+trademark of FIRST and the LEGO Group.

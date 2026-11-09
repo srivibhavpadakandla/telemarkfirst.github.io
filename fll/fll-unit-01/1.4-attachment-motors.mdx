@@ -1,0 +1,39 @@
+---
+id: attachment-motors
+title: "Lesson F1.4: Attachment Motors and Objects"
+slug: /unit-01/attachment-motors
+sidebar_label: "F1.4 · Attachment Motors and Objects"
+sidebar_position: 4
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F1.4: Attachment Motors and Objects
+
+A tool motor can lift, push, or release a mission object through `Motor.run_angle()`, which takes an angle in motor degrees and a speed in degrees per second. The visible direction depends on the build, so test a small movement with the robot lifted before committing to a full tool action. Use a physical stop and limit force where the mechanism might jam.
+
+## Worked example
+
+~~~python
+attachment = Motor(Port.E)
+attachment.run_angle(200, 90)
+attachment.run_angle(200, -90)
+~~~
+
+## Simulator practice
+
+Move the virtual attachment forward and back. Then drive to the red object and test the tool at that position.
+
+<FllPythonPractice lessonId="fll-unit-01/attachment-motors" />
+
+## On the robot
+
+Measure the safe travel of your actual tool. Run 30, 60, and 90 degree moves and record which position reaches the object without binding.
+
+## Check and adjust
+
+The tool returns to its start angle without striking the frame or staying under load. If the tool binds, reduce angle and inspect clearance before increasing speed.
+
+Reference: [Pybricks Motor reference](https://docs.pybricks.com/en/stable/pupdevices/motor.html).
+
+<MarkComplete lessonId="fll-unit-01/attachment-motors" nextUnit="/fll/unit-01/retrieve-deliver-challenge" nextUnitName="Lesson F1.5: Retrieve and Deliver Challenge" />

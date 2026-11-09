@@ -1,0 +1,42 @@
+---
+id: my-blocks
+title: "Lesson F2.1: Python Functions and Parameters"
+slug: /unit-02/my-blocks
+sidebar_label: "F2.1 · Python Functions and Parameters"
+sidebar_position: 1
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F2.1: Python Functions and Parameters
+
+A Python function names an action that can be reused with different inputs. Name it for the action rather than a mission number, and include units in parameters such as `distance_mm` so a teammate can follow each call. The function can use DriveBase methods once the robot object has been created.
+
+## Worked example
+
+~~~python
+def drive_mm(distance_mm):
+    robot.straight(distance_mm)
+
+drive_mm(200)
+robot.turn(90)
+drive_mm(50)
+~~~
+
+## Simulator practice
+
+Define drive_mm and call it twice with different distances. Edit one call and check which segment changes.
+
+<FllPythonPractice lessonId="fll-unit-02/my-blocks" />
+
+## On the robot
+
+Put a repeated drive or tool action in a function in Pybricks Code. Verify both calls use the same tested behavior.
+
+## Check and adjust
+
+You can identify the function definition, each call, and the argument passed to it. If a call drives the wrong distance, inspect its argument before the function.
+
+Reference: [Pybricks first robot program](https://pybricks.com/learn/making-programs/your-first-program/).
+
+<MarkComplete lessonId="fll-unit-02/my-blocks" nextUnit="/fll/unit-02/launch-plan-and-home" nextUnitName="Lesson F2.2: Launch Marks and Home" />

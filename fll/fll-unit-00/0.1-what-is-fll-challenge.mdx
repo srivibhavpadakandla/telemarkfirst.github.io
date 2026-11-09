@@ -1,0 +1,42 @@
+---
+id: what-is-fll-challenge
+title: "Lesson F0.1: What FLL Challenge Is"
+slug: /unit-00/what-is-fll-challenge
+sidebar_label: "F0.1 · What FLL Challenge Is"
+sidebar_position: 6
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F0.1: What Is FLL?
+
+In the FIRST LEGO League, a team launches an autonomous robot from home to attempt missions. You may use the practice field here to test out your code before running it on the field, but the intended use of the simulator is to educate.
+
+## Worked example
+
+Use the [course port map](/fll/python-starter) already loaded in the simulator editor for this route, and update its wiring and dimensions before running the code on a physical robot.
+
+~~~python
+print("Robot Game practice")
+robot.straight(200)
+robot.turn(180)
+robot.straight(200)
+~~~
+
+## Simulator practice
+
+Run the starter program. Record the starting pose, each movement, and whether the final pose is inside home.
+
+<FllPythonPractice lessonId="fll-unit-00/what-is-fll-challenge" />
+
+## On the robot
+
+Read the current FIRST season materials with your team. Place the physical robot in your chosen launch position and trace the same route without attaching a tool.
+
+## Check and adjust
+
+You can explain which actions belong to code and which scoring details must come from the current rulebook. If the final pose misses home, mark the first divergent segment.
+
+Reference: [FIRST season materials](https://www.firstinspires.org/resources/library/fll/season-materials).
+
+<MarkComplete lessonId="fll-unit-00/what-is-fll-challenge" nextUnit="/fll/unit-00/spike-app-and-simulator" nextUnitName="Lesson F0.2: Set Up Pybricks and Telemark" />

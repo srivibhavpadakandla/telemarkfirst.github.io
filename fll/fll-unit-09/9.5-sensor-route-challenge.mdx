@@ -1,0 +1,39 @@
+---
+id: sensor-route-challenge
+title: "Lesson F9.5: Sensor Route Challenge"
+slug: /unit-09/sensor-route-challenge
+sidebar_label: "F9.5 · Sensor Route Challenge"
+sidebar_position: 5
+---
+
+# Lesson F9.5: Sensor Route Challenge
+
+Drive toward the dark line and let a reflected light reading end the movement. Log the value and elapsed time at the stop, then set the threshold below zero to force a second run through the timeout path. Both runs must stop before the next field object.
+
+## Worked example
+
+~~~python
+robot.straight(200)
+watch = StopWatch()
+robot.drive(90, 0)
+while color_sensor.reflection() > 35 and watch.time() < 8000:
+    wait(10)
+robot.stop()
+print("Light:", color_sensor.reflection())
+~~~
+
+## Simulator practice
+
+Drive to the dark line and stop over it. Inspect the final reflection reading and stop event.
+
+<FllPythonPractice lessonId="fll-unit-09/sensor-route-challenge" />
+
+## On the robot
+
+Test five line stops from the same launch pose. Record the stop distance and any missed detection.
+
+## Check and adjust
+
+Both the measured threshold and the forced timeout should stop the route safely. If the line is missed, check the recorded stop reason before changing the threshold.
+
+Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).

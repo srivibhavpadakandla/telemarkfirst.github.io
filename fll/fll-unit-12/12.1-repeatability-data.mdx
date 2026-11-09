@@ -1,0 +1,41 @@
+---
+id: repeatability-data
+title: "Lesson F12.1: Record Repeatability"
+slug: /unit-12/repeatability-data
+sidebar_label: "F12.1 · Record Repeatability"
+sidebar_position: 1
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F12.1: Record Repeatability
+
+Run the same code several times and record final position, heading, elapsed time, and mission result. The mean can reveal a consistent bias, while the spread shows how much results vary between runs. Include failures, and keep simulator calibration profiles separate from physical trials because they represent different conditions.
+
+## Worked example
+
+~~~python
+times_ms = [3200, 3350, 3280]
+mean_ms = sum(times_ms) / len(times_ms)
+spread_ms = max(times_ms) - min(times_ms)
+print("Mean ms:", mean_ms)
+print("Spread ms:", spread_ms)
+~~~
+
+## Simulator practice
+
+Run a fixed route once, then compare the automatic three-profile table. Record position, home status, and error for each profile.
+
+<FllPythonPractice lessonId="fll-unit-12/repeatability-data" />
+
+## On the robot
+
+Run five physical trials from the same launch marks. Record success or failure and the measured endpoint for every trial.
+
+## Check and adjust
+
+Your table includes all trials, not only successful ones. If results vary, fix launch and loose hardware before constants.
+
+Reference: [Pybricks timing tools reference](https://docs.pybricks.com/en/stable/tools/).
+
+<MarkComplete lessonId="fll-unit-12/repeatability-data" nextUnit="/fll/unit-12/calibrate-diameter" nextUnitName="Lesson F12.2: Calibrate Wheel Diameter" />

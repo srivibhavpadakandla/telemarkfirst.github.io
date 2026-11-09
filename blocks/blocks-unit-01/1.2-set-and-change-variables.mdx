@@ -9,19 +9,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson 1.2: Create, Set, and Change Variables
 
-A **variable** is a named place where a program stores a value. The stored value is part of the program's current **state**. State can change while the program runs.
+A **variable** stores a named value during a run. For example, `completedTasks` could start at 0 and increase after each successful task, so later commands use its current value. **Set** replaces that value, **Change by** adds or subtracts from it, and **Get** reads it. Setting 2 and then adding 3 produces 5.
 
-Use a name that tells what the value means. `score`, `attempts`, and `playerName` are clearer than `x` when those are the facts being stored.
+## Trace a changing score
 
-The `set score to 0` block performs an **assignment**. It stores `0` in `score`, replacing any earlier value. A `change score by 1` block reads the old number, adds `1`, and assigns the new number back to the same variable.
-
-Reading a variable does not change it. Printing `score` only sends its current value to the output.
-
-## Trace the state
-
-Create a variable named `score`. Set it to 5, change it by 2, and print it. Predict the final value before running.
-
-Add another change of -1. Use Step and watch the variables panel after each assignment. Record the sequence of values, not just the final answer. Then move the print block earlier and explain why the output changes.
+Create `score`, set it to 4, and print it before changing it by 3 and printing it again. Change it by 5 for a final output of 12, then use Step to inspect the stored value after each assignment. A variable name alone is not a measurement: the program still needs to assign a sensor reading, calculation, or chosen constant.
 
 <BlockPractice lessonId="blocks-unit-01/set-and-change-variables" />
 

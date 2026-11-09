@@ -55,12 +55,17 @@ module.exports = function telemarkSearchPlugin(context) {
     name: 'telemark-search',
 
     async loadContent() {
-      // The two main tracks and the software foundations are indexed.
+      // Index each curriculum from its own documentation root.
       const collections = [
         {
           track: 'blocks',
           root: path.resolve(context.siteDir, 'blocks'),
           routeBase: '/blocks',
+        },
+        {
+          track: 'fll',
+          root: path.resolve(context.siteDir, 'fll'),
+          routeBase: '/fll',
         },
         {
           track: 'software',

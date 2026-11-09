@@ -1,0 +1,42 @@
+---
+id: function-definitions
+title: "Lesson F6.1: Define and Call Functions"
+slug: /unit-06/function-definitions
+sidebar_label: "F6.1 · Define and Call Functions"
+sidebar_position: 1
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F6.1: Define and Call Functions
+
+A function groups an action in an indented body, but that body runs only when the program calls it. Name a routine for its result, such as `approach_line`, and keep DriveBase setup outside the function so each call uses the same calibrated robot.
+
+## Worked example
+
+~~~python
+def leave_home():
+    robot.straight(250)
+    robot.turn(90)
+
+leave_home()
+print("Launch route finished")
+~~~
+
+## Simulator practice
+
+Call leave_home twice with a reset between runs. Remove the call once and confirm no movement occurs.
+
+<FllPythonPractice lessonId="fll-unit-06/function-definitions" />
+
+## On the robot
+
+Add one named route function in Pybricks Code and have a teammate explain it without seeing the field.
+
+## Check and adjust
+
+The function name, body, and call have distinct roles you can explain. If a definition causes no movement, check whether it is called.
+
+Reference: [Pybricks first robot program](https://pybricks.com/learn/making-programs/your-first-program/).
+
+<MarkComplete lessonId="fll-unit-06/function-definitions" nextUnit="/fll/unit-06/parameters-and-return" nextUnitName="Lesson F6.2: Parameters and Return Values" />

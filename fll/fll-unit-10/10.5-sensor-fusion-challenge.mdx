@@ -1,0 +1,42 @@
+---
+id: sensor-fusion-challenge
+title: "Lesson F10.5: Sensor Check Challenge"
+slug: /unit-10/sensor-fusion-challenge
+sidebar_label: "F10.5 · Sensor Check Challenge"
+sidebar_position: 5
+---
+
+# Lesson F10.5: Sensor Check Challenge
+
+Approach a target only after obtaining a valid range reading, stop before contact, and report the final heading. Use one timeout for range polling and a separate heading check after stopping. The simulator can test range and heading, while physical contact still requires a force sensor or visual confirmation.
+
+## Worked example
+
+~~~python
+watch = StopWatch()
+robot.drive(80, 0)
+while watch.time() < 3000:
+    range_mm = distance_sensor.distance()
+    if range_mm < 150 or range_mm == 2000:
+        break
+    wait(10)
+robot.stop()
+print("Range mm:", range_mm)
+print("Heading deg:", hub.imu.heading())
+~~~
+
+## Simulator practice
+
+Keep the field fixed. Vary the range threshold and approach heading in code, and use a short timeout for a missing-cue case. Confirm all runs stop.
+
+<FllPythonPractice lessonId="fll-unit-10/sensor-fusion-challenge" />
+
+## On the robot
+
+Test at reduced speed and measure the physical clearance after each stop.
+
+## Check and adjust
+
+The log records range and heading, and no case leaves the drive base moving. If the target is absent, verify the loop exits within three seconds.
+
+Reference: [Pybricks UltrasonicSensor reference](https://docs.pybricks.com/en/stable/pupdevices/ultrasonicsensor.html).

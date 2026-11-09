@@ -9,19 +9,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson 4.3: Return a Result
 
-A function can **return** a value to the code that called it. A returned value can be printed, stored in a variable, compared in a condition, or used in another expression.
+A function can **return** a value to the caller for storage, comparison, or calculation. Printing only sends a value to the output panel, so it cannot replace a return when the main program needs the result. If one grid step represents two travel units, returning `steps * 2` can supply a route report.
 
-Returning and printing are different. Print sends information to the output panel. Return sends one result back to the caller. A function can return a value even when it prints nothing.
+## Calculate a route value
 
-When a return command runs, that call ends. Commands later in the same function body do not run. The caller receives the returned result and continues.
-
-## Guided practice
-
-Define a function named `double` with a parameter named `number`. Return `number * 2`. In the main program, call `double` with 6 and store its result in `answer`. Print `answer`.
-
-Predict the parameter value, returned value, and stored value before running. Then call the same function with 9.
-
-Java methods use a declared return type. For example, a Java method returning a whole number may begin with `int doubleValue(...)`. The block version prepares you to follow that same flow of data.
+Define `double(number)` to return `number * 2`, call it with 6, and store the result in `answer` before printing. Predict the parameter and output, then repeat with 9. Use a value-returning call block for the assignment. A call that ignores its result cannot set `answer`.
 
 <BlockPractice lessonId="blocks-unit-04/return-a-result" />
 

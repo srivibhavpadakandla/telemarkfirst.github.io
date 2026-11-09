@@ -1,0 +1,41 @@
+---
+id: lists-and-routes
+title: "Lesson F6.4: Represent a Route with a List"
+slug: /unit-06/lists-and-routes
+sidebar_label: "F6.4 · Represent a Route with a List"
+sidebar_position: 4
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F6.4: Represent a Route with a List
+
+A list can hold route steps in order, such as `(300, 90)` for a 300 mm drive followed by a 90 degree right turn. Document the order and units, then use a loop to execute each pair. Keep unlike mission actions outside the list when combining them would make the route harder for teammates to inspect.
+
+## Worked example
+
+~~~python
+route = [(300, 90), (50, -90), (150, 0)]
+for distance_mm, turn_deg in route:
+    robot.straight(distance_mm)
+    if turn_deg != 0:
+        robot.turn(turn_deg)
+~~~
+
+## Simulator practice
+
+Edit only the second pair and compare the final pose.
+
+<FllPythonPractice lessonId="fll-unit-06/lists-and-routes" />
+
+## On the robot
+
+Copy the route pairs into a table in your notebook. Measure each segment on the mat and mark deviations.
+
+## Check and adjust
+
+The number of route rows matches the executed drive segments. If a route row is wrong, check the order of distance and turn.
+
+Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).
+
+<MarkComplete lessonId="fll-unit-06/lists-and-routes" nextUnit="/fll/unit-06/function-challenge" nextUnitName="Lesson F6.5: Reusable Route Challenge" />

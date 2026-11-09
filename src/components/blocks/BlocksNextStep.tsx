@@ -19,17 +19,17 @@ export default function BlocksNextStep(): React.JSX.Element {
     trackEvent('blocks_exit_choice', {choice});
     history.push(basePath(choice === 'java'
       ? firstJavaLesson.path
-      : choice === 'fll' ? '/blocks/fll' : '/blocks/python-resources'));
+      : choice === 'fll' ? '/fll' : '/blocks/python-resources'));
   }
 
   return (
     <div className={styles.choices}>
       <section className={styles.choice}>
-        <p className={styles.label}>Robotics extension</p>
-        <h2>Program an FLL robot</h2>
-        <p>Apply these blocks to SPIKE Prime movement, sensors, attachments, and autonomous missions in a 3D practice field.</p>
+        <p className={styles.label}>FLL Challenge</p>
+        <h2>Build and program for FLL</h2>
+        <p>Start with simple machines and a secure robot, then apply these programming ideas with Pybricks Python for SPIKE Prime. Work through movement, sensors, attachments, and autonomous missions.</p>
         <button className={styles.secondary} type="button" onClick={() => choose('fll')}>
-          Open FLL Challenge
+          Start FLL curriculum
         </button>
       </section>
       <section className={styles.choice}>

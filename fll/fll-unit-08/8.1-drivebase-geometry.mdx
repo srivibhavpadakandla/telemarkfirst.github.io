@@ -1,0 +1,43 @@
+---
+id: drivebase-geometry
+title: "Lesson F8.1: Wheel Diameter and Axle Track"
+slug: /unit-08/drivebase-geometry
+sidebar_label: "F8.1 · Wheel Diameter and Axle Track"
+sidebar_position: 1
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F8.1: Wheel Diameter and Axle Track
+
+Wheel diameter is measured across a wheel, while axle track is the spacing between the wheel contact points on the floor. Enter both in millimeters and measure your build instead of copying the 56 mm and 112 mm examples. An incorrect diameter affects straight travel, while an incorrect track affects turns.
+
+## Worked example
+
+~~~python
+WHEEL_DIAMETER_MM = 56
+AXLE_TRACK_MM = 112
+robot = DriveBase(left_motor, right_motor,
+                  wheel_diameter=WHEEL_DIAMETER_MM,
+                  axle_track=AXLE_TRACK_MM)
+robot.straight(500)
+robot.turn(180)
+~~~
+
+## Simulator practice
+
+Try two wheel diameter values and compare the simulated distance and turn.
+
+<FllPythonPractice lessonId="fll-unit-08/drivebase-geometry" />
+
+## On the robot
+
+Measure the wheel and contact-point spacing. Run a 500 mm straight and a 180 degree turn from marked starts.
+
+## Check and adjust
+
+Your calibration sheet keeps the two geometry values and their separate errors. If straight and turn errors move together, calibrate diameter first.
+
+Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).
+
+<MarkComplete lessonId="fll-unit-08/drivebase-geometry" nextUnit="/fll/unit-08/straight-and-turn" nextUnitName="Lesson F8.2: Straight and Turn Segments" />

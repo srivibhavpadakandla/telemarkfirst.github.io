@@ -1,0 +1,41 @@
+---
+id: imu-heading
+title: "Lesson F10.3: Read and Reset Heading"
+slug: /unit-10/imu-heading
+sidebar_label: "F10.3 · Read and Reset Heading"
+sidebar_position: 3
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F10.3: Read and Reset Heading
+
+`PrimeHub.imu.heading()` reports clockwise positive heading in degrees relative to program start or the last reset. Let the robot settle before checking it. If DriveBase uses gyro control, stop the robot and call `robot.reset(angle=0)`. A direct IMU reset during gyro driving raises an error in current Pybricks.
+
+## Worked example
+
+~~~python
+robot.stop()
+robot.reset(angle=0)
+robot.turn(90)
+heading_deg = hub.imu.heading()
+print("Heading deg:", heading_deg)
+~~~
+
+## Simulator practice
+
+Run a right turn and a left turn from reset. Check the sign and magnitude.
+
+<FllPythonPractice lessonId="fll-unit-10/imu-heading" />
+
+## On the robot
+
+Compare the hub value with a marked 90 degree floor angle across three trials.
+
+## Check and adjust
+
+Your notes include commanded angle, measured heading, and error. If an IMU reset errors, stop gyro control and use robot.reset().
+
+Reference: [Pybricks PrimeHub reference](https://docs.pybricks.com/en/stable/hubs/primehub.html).
+
+<MarkComplete lessonId="fll-unit-10/imu-heading" nextUnit="/fll/unit-10/sensor-fallback" nextUnitName="Lesson F10.4: Handle Missing or Conflicting Cues" />

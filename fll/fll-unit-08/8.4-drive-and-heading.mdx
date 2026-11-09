@@ -1,0 +1,43 @@
+---
+id: drive-and-heading
+title: "Lesson F8.4: Continuous Drive and Heading"
+slug: /unit-08/drive-and-heading
+sidebar_label: "F8.4 · Continuous Drive and Heading"
+sidebar_position: 4
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F8.4: Continuous Drive and Heading
+
+`DriveBase.drive(speed, turn_rate)` starts continuous motion and returns immediately, so every route needs a stop condition. Speed is in millimeters per second and turn rate in degrees per second. A heading reading can confirm the direction of travel. If DriveBase gyro control is enabled, reset with `robot.reset()` rather than `hub.imu.reset_heading()`.
+
+## Worked example
+
+~~~python
+robot.reset()
+watch = StopWatch()
+robot.drive(120, 15)
+while watch.time() < 1000:
+    wait(10)
+robot.stop()
+print("Heading deg:", hub.imu.heading())
+~~~
+
+## Simulator practice
+
+Predict the direction and rough angle after one second. Confirm the stop and printed heading.
+
+<FllPythonPractice lessonId="fll-unit-08/drive-and-heading" />
+
+## On the robot
+
+Try the continuous drive only in a clear area at reduced speed. Compare heading from the hub with a floor mark.
+
+## Check and adjust
+
+The robot stops after one second and the heading sign matches the turn direction. If continuous motion does not stop, inspect the timer and stop call.
+
+Reference: [Pybricks PrimeHub reference](https://docs.pybricks.com/en/stable/hubs/primehub.html).
+
+<MarkComplete lessonId="fll-unit-08/drive-and-heading" nextUnit="/fll/unit-08/navigation-challenge" nextUnitName="Lesson F8.5: Navigation Challenge" />

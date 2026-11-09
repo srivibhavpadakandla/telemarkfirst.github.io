@@ -9,24 +9,22 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson 0.2: Commands Run in Order
 
-A **sequence** is a group of commands arranged in the order they run. The runner starts at the top of a connected stack, finishes one command, and then moves to the next connected command.
+The order in which connected commands run is called a **sequence**, and that order determines the route a robot will take. A turn before a drive changes the direction of that drive, so rearranging the same blocks can change the final position.
 
-Order matters when one action depends on an earlier action. If a program prints a score before it changes the score, the old value appears. If it changes the score first, the new value appears.
+## Build a route
 
-Read this sequence from top to bottom:
+The robot will start at `(0, 0)` facing east. Connect the following commands beneath `when program starts` and predict the final position before pressing Run:
 
-1. Move forward by 2.
+1. Move forward 2 steps.
 2. Turn right.
-3. Move forward by 1.
+3. Move forward 1 step.
 4. Print `done`.
 
-The final position depends on both move commands and the turn between them. Swapping the first move and turn produces a different route even though the program contains the same blocks.
+The first drive will end at `(2, 0)`, and the right turn will make the second drive end at `(2, 1)` before `done` appears in the output. Move the turn block ahead of the first drive, predict the new endpoint, and run the revised program, using Step to check each movement against your prediction.
 
-## Predict before running
+## Check output order
 
-Build three connected print blocks with the values `first`, `second`, and `third`. Before you run, write down the output you expect. Run the program and compare the actual order with your prediction.
-
-Next, move `third` above `second`. Run again. Stepping through the program should show the same order as the output panel.
+For a second test, connect three print blocks containing `first`, `second`, and `third` beneath the start block. Predict the output before running, then swap two blocks and run again to compare the printed order.
 
 <BlockPractice lessonId="blocks-unit-00/commands-in-order" />
 

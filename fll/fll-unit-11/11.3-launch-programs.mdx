@@ -1,0 +1,46 @@
+---
+id: launch-programs
+title: "Lesson F11.3: Choose a Mission Program"
+slug: /unit-11/launch-programs
+sidebar_label: "F11.3 · Choose a Mission Program"
+sidebar_position: 3
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F11.3: Choose a Mission Program
+
+Keep each mission program tied to a known home launch position. Pybricks Code provides five Prime Hub program slots, while the simulator can select a route through a mission name variable. Label tested slots in the team plan and confirm the selected program before each physical launch.
+
+## Worked example
+
+~~~python
+MISSION = "target"
+
+if MISSION == "target":
+    robot.straight(300)
+    attachment.run_angle(160, 60)
+elif MISSION == "line":
+    robot.straight(700)
+else:
+    print("Unknown mission")
+robot.stop()
+~~~
+
+## Simulator practice
+
+Run both named routes by changing MISSION. Leave an unknown name and confirm no drive occurs.
+
+<FllPythonPractice lessonId="fll-unit-11/launch-programs" />
+
+## On the robot
+
+Save two small Pybricks programs in separate hub slots. Label the slot, attachment, and launch mark in one table.
+
+## Check and adjust
+
+A teammate can select the intended program without reading its source code. If the wrong mission runs, check the hub slot or mission name.
+
+Reference: [Pybricks program guide](https://pybricks.com/learn/getting-started/pybricks-environment/).
+
+<MarkComplete lessonId="fll-unit-11/launch-programs" nextUnit="/fll/unit-11/parallel-actions" nextUnitName="Lesson F11.4: Coordinate Drive and Tool Motion" />

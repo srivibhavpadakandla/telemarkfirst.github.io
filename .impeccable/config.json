@@ -12,6 +12,12 @@
         ],
         "createdAt": "2026-10-10T21:09:24.157Z",
         "reason": "Agent: full-screen editor and gamepad image intentionally clip in-bounds code and input overlays. No DOM tooltip, menu, or popover needs to escape those containers; the detector has no extractable value for individual elements."
+      },
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-11-08T20:59:58.179Z",
+        "reason": "Existing Telemark theme defines Inter as its display, body, and label font in shared tokens; present in repository baseline before the temporary FLL preview work."
       }
     ]
   }

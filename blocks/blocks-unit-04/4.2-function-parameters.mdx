@@ -9,21 +9,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson 4.2: Give Information to a Function
 
-A **parameter** is a named input in a function definition. An **argument** is the value a call sends into that parameter.
+A **parameter** is a named input in a function definition, while an **argument** is the value supplied at a call. In `reportDistance(distance)`, calling with 4 gives `distance` the value 4 for that call. A later call with 9 uses 9 without changing the function body.
 
-For a function named `showValue` with a parameter named `item`, the call `showValue(7)` sends the argument `7`. While that call runs, the function can read `item` and get `7`.
+## Send different values
 
-Parameters let one definition work with different inputs. Calls can send 7, 12, or a value stored in a variable without copying the function body.
-
-A parameter is a local value. It belongs to the current function call. A variable created inside a function is also **local** when code outside that function cannot read it.
-
-## Guided practice
-
-Define a function named `report` with one parameter named `value`. Print `value` inside the function. Call `report` with 4, then call it with 9.
-
-Use Step and watch how the parameter value changes for each call. Then store 12 in a variable and pass that variable as the next argument.
-
-Choose parameter names based on meaning. `distance` gives more useful information than `thing` when a function controls movement.
+Define `reportDistance` with a `distance` parameter and print it inside the function. Call it with 4, 9, and a variable containing 12, predicting each output before using Step to inspect the parameter. Printing reports the value, while a movement function would also need a move command that uses it.
 
 <BlockPractice lessonId="blocks-unit-04/function-parameters" />
 

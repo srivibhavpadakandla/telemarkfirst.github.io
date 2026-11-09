@@ -1,0 +1,47 @@
+---
+id: parallel-actions
+title: "Lesson F11.4: Coordinate Drive and Tool Motion"
+slug: /unit-11/parallel-actions
+sidebar_label: "F11.4 · Coordinate Drive and Tool Motion"
+sidebar_position: 4
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F11.4: Coordinate Drive and Tool Motion
+
+A tool move may overlap a drive when clearance permits, which can save time but complicates debugging. Test the actions sequentially in Telemark before using `wait=False` and a later `done()` check on Pybricks hardware. The simulator does not model true concurrent timing, so verify clearance along the entire physical path before overlapping motion.
+
+## Worked example
+
+~~~python
+# Simulator: test the same actions in sequence.
+robot.straight(250)
+attachment.run_angle(180, 60)
+robot.straight(150)
+print("Tool done:", attachment.done())
+
+# Hardware-only timing option:
+# attachment.run_angle(180, 60, wait=False)
+# robot.straight(150)
+# while not attachment.done():
+#     wait(10)
+~~~
+
+## Simulator practice
+
+Run the sequential version and record time. Identify where overlap could happen without a collision.
+
+<FllPythonPractice lessonId="fll-unit-11/parallel-actions" />
+
+## On the robot
+
+Test the hardware-only timing option with the robot raised first. Then test at low speed and compare total time with the sequential route.
+
+## Check and adjust
+
+The tool finishes before contact with a model, and the route has a measured timing benefit if overlap is used. If overlapping actions collide, return to sequential steps.
+
+Reference: [Pybricks Motor reference](https://docs.pybricks.com/en/stable/pupdevices/motor.html).
+
+<MarkComplete lessonId="fll-unit-11/parallel-actions" nextUnit="/fll/unit-11/mission-cycle-challenge" nextUnitName="Lesson F11.5: Mission Cycle Challenge" />

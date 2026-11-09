@@ -1,0 +1,37 @@
+{
+  "units": "centimeters",
+  "forward": "+X",
+  "up": "+Y",
+  "description": "Separate official LDraw LEGO parts for focused FLL teaching scenes. All coordinates are local to the robot center at ground level.",
+  "assets": {
+    "drivebase": {
+      "file": "drivebase.glb",
+      "description": "Fixed SPIKE Prime hub, two drive motors, and Technic frame. Wheels and tool are separate."
+    },
+    "wheel": {
+      "file": "wheel.glb",
+      "diameterCm": 5.6,
+      "pivot": [0, 0, 0],
+      "rotationAxis": "+Z",
+      "leftMount": [-2.4, 2.8, -6.2],
+      "rightMount": [-2.4, 2.8, 6.2]
+    },
+    "tool": {
+      "file": "tool.glb",
+      "description": "Lever beam and contact tip, each made from official Technic beams.",
+      "pivot": [0, 0, 0],
+      "rotationAxis": "+Z",
+      "mount": [4.4, 5.0, 0],
+      "restAngleDeg": 0,
+      "tipDistanceCm": 8.4
+    },
+    "attachmentMotor": {"file": "attachment-motor.glb", "shaftAxis": "+Z", "shaftOffset": [2.42, 0, 1.6], "mountWithDrivebase": [1.98, 5, -1.6], "mountStandalone": [-2.42, 5, -1.6]},
+    "colorSensor": {"file": "color-sensor.glb", "mount": [4.8, 3.2, -2.4], "mountRotationDeg": [0, 0, -90], "opticalDirection": "-Y"},
+    "distanceSensor": {"file": "distance-sensor.glb", "pivot": [0, 0, 0]},
+    "forceSensor": {"file": "force-sensor.glb", "pivot": [0, 0, 0]},
+    "cargo": {"file": "cargo.glb", "origin": "ground center"},
+    "obstacle": {"file": "obstacle.glb", "origin": "ground center"},
+    "targetBase": {"file": "target-base.glb", "origin": "ground center"},
+    "targetLever": {"file": "target-lever.glb", "rotationAxis": "+Z", "pivot": [0, 0, 0], "mountOnBase": [0, 6.64, 0]}
+  }
+}

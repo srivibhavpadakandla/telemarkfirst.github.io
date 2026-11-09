@@ -1,0 +1,41 @@
+---
+id: wait-and-stopwatch
+title: "Lesson F5.3: Wait and Measure Time"
+slug: /unit-05/wait-and-stopwatch
+sidebar_label: "F5.3 · Wait and Measure Time"
+sidebar_position: 3
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F5.3: Wait and Measure Time
+
+`wait()` pauses for milliseconds, while `StopWatch.time()` reports elapsed milliseconds since the watch started. Use a short wait to space sensor polls and measure a maneuver instead of guessing its duration from the number of commands. A blocking wait does not check sensors until it finishes.
+
+## Worked example
+
+~~~python
+watch = StopWatch()
+robot.straight(300)
+elapsed_ms = watch.time()
+print("Elapsed ms:", elapsed_ms)
+wait(100)
+~~~
+
+## Simulator practice
+
+Compare elapsed time at two straight speeds. Keep distance at 300 mm.
+
+<FllPythonPractice lessonId="fll-unit-05/wait-and-stopwatch" />
+
+## On the robot
+
+Record five run times and the corresponding battery state. Use the longest time for conservative match planning.
+
+## Check and adjust
+
+You can convert the printed milliseconds to seconds and explain what the 100 ms wait does. If elapsed time seems large, count the milliseconds added by wait().
+
+Reference: [Pybricks timing tools reference](https://docs.pybricks.com/en/stable/tools/).
+
+<MarkComplete lessonId="fll-unit-05/wait-and-stopwatch" nextUnit="/fll/unit-05/timeouts" nextUnitName="Lesson F5.4: Add a Timeout" />

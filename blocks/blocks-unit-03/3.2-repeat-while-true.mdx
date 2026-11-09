@@ -9,17 +9,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson 3.2: Repeat While a Rule Is True
 
-A `while` loop repeats as long as its condition is true. The condition is checked before each repeat. If it starts false, the body does not run.
+A `while` loop checks its condition before every repeat and stops when that condition becomes false. Use a changing counter to practise the control flow: if `count < 4` stays true because the program never changes `count`, the simulator will eventually stop at its operation limit.
 
-Something in the loop must normally move the condition toward false. If `count < 4` controls the loop, changing `count` by 1 in the body can eventually stop it. Without that change, the condition stays true and the loop does not stop by itself.
+## Trace the stopping rule
 
-The Telemark runner has an operation limit. It stops a program that performs too many operations and asks you to inspect the loop. This protects the page, but the loop condition still needs a real fix.
-
-## Guided practice
-
-Set `count` to 0. While `count < 4`, print `count` and change it by 1. Predict the printed values and the final stored value.
-
-Use Step to find when the condition is checked and when the variable changes. Move the change block outside the loop and run again. Read the safety message, then put the change back where it belongs.
+Set `count` to 0, then print and increase it by 1 while it remains below 4. Predict the output and final value before using Step to inspect each check. Move the change block after the loop for one run to see the safety message, then return it to the loop. A physical sensor wait also needs a timeout or stop control when the expected reading never arrives.
 
 <BlockPractice lessonId="blocks-unit-03/repeat-while-true" />
 

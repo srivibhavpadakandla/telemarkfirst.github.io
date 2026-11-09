@@ -9,22 +9,15 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson 0.1: The Workspace and Run Controls
 
-A block program is built in a **workspace**. The workspace is the large editing area where you connect instructions. The toolbox holds the blocks that this lesson allows you to use. A block can accept another block only when their shapes and value types fit.
+Block programs in this workspace begin at `when program starts`. Commands connected beneath it will run when you press Run, while loose blocks will remain visible without affecting the result. Use a print block from the toolbox to test the connection and see where its connector fits.
 
-The practice panel has four main controls:
+## Compare two runs
 
-- **Run** starts at the first block and continues until the program ends or reaches its safety limit.
-- **Step** shows one completed instruction at a time. Use it when you need to see where a value changed.
-- **Reset** restores the starter program. It asks before replacing your work.
-- **Stop** is handled by the operation limit. If a program repeats too long, the runner stops and reports the problem.
+Connect a print block beneath `when program starts`, enter `robot ready`, and press Run to check the output. Then disconnect the print block and run the program again, comparing the two results before reconnecting it.
 
-The highlighted block is the instruction most recently shown by Step or Run. The output panel reports printed values. It also shows variables and the scene position when your program changes them.
+## Inspect and save your program
 
-## Guided practice
-
-Connect a `print` block under the start block. Put a text value into `print`, then enter `ready`. Run the program and find `ready` in the output. Change the text, use Reset, and confirm that the starter blocks return.
-
-Try moving a block away from the program. A loose block does not run because it is not connected to the starting stack. Connect it again and compare the output.
+After reconnecting the print block, run the program and use Step to replay the recorded instructions one at a time. If the output differs from your prediction, compare each replayed instruction with the expected result to locate the change. Download your workspace before using Reset, which will restore the starter program after confirmation, and use Import to load the version you saved.
 
 <BlockPractice lessonId="blocks-unit-00/workspace-and-run-controls" />
 

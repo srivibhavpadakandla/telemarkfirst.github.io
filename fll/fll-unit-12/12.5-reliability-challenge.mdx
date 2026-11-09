@@ -1,0 +1,39 @@
+---
+id: reliability-challenge
+title: "Lesson F12.5: Reliability Challenge"
+slug: /unit-12/reliability-challenge
+sidebar_label: "F12.5 · Reliability Challenge"
+sidebar_position: 5
+---
+
+# Lesson F12.5: Reliability Challenge
+
+Cross the dark line and return home with the same program and launch pose under all three simulator calibration profiles. Record success, endpoint, heading, and time for each run. If one profile fails, locate the first divergent segment, adjust a measured value or add a cue, and retest all three.
+
+## Worked example
+
+~~~python
+def short_route():
+    robot.straight(850)
+    robot.turn(180)
+    robot.straight(850)
+
+short_route()
+print("Final heading:", hub.imu.heading())
+~~~
+
+## Simulator practice
+
+Run once and record the automatic three-profile results. Do not change code before recording all three baseline outcomes.
+
+<FllPythonPractice lessonId="fll-unit-12/reliability-challenge" />
+
+## On the robot
+
+Run five physical trials with the same program. Report the success count and the failure location.
+
+## Check and adjust
+
+Your test log identifies whether the route is repeatable and what evidence supports that conclusion. If a profile fails, record divergence and retest every profile.
+
+Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).

@@ -1,0 +1,43 @@
+---
+id: integration-test
+title: "Lesson F14.3: Test the Whole Route"
+slug: /unit-14/integration-test
+sidebar_label: "F14.3 · Test the Whole Route"
+sidebar_position: 3
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F14.3: Test the Whole Route
+
+An integration test runs mission actions in match order with the planned launch marks, attachment, and program selection. Record an observation after each action. If the final result is wrong, find the first incorrect observation and retest that action alone.
+
+## Worked example
+
+~~~python
+watch = StopWatch()
+robot.straight(300)
+print("Approach mm:", robot.distance())
+attachment.run_angle(160, 60)
+print("Tool deg:", attachment.angle())
+robot.straight(-300)
+print("Total ms:", watch.time())
+~~~
+
+## Simulator practice
+
+Run the whole route three times without changing code. Record approach, tool action, return, and elapsed time.
+
+<FllPythonPractice lessonId="fll-unit-14/integration-test" />
+
+## On the robot
+
+Run the exact physical sequence with your match team. Record the first failure in each unsuccessful trial.
+
+## Check and adjust
+
+Your log separates each action result rather than recording only a final score. If a full run fails, find the first incorrect intermediate log.
+
+Reference: [Pybricks timing tools reference](https://docs.pybricks.com/en/stable/tools/).
+
+<MarkComplete lessonId="fll-unit-14/integration-test" nextUnit="/fll/unit-14/rehearsal" nextUnitName="Lesson F14.4: Rehearse a Match" />

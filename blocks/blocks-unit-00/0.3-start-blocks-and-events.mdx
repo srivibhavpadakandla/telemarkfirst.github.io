@@ -9,19 +9,13 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson 0.3: Start Blocks and Events
 
-An **event** is something a program can notice, such as a run button being pressed. An event handler is the code that begins because that event happened.
+An **event** starts a programmed response. On a robot, that could be a driver pressing Start, a button press, or a sensor reading crossing a threshold. The commands connected to the event form its **event handler**. In this workspace, Run starts only the stack beneath `when program starts`.
 
-In this course, the `when program starts` block is the main event handler. Pressing Run sends the start event. The runner finds that start block and follows the commands connected under it.
+## Test the start connection
 
-Blocks that are not connected to a start block do not run on their own. This rule helps you tell the difference between code that is part of the program and blocks that are waiting in the workspace.
+Connect a print block containing `started` below `when program starts`, and leave a second print block containing `loose` elsewhere in the workspace. Predict the output before running, then attach the loose block to the first print block and run again. Use Step to trace both connected commands and identify where execution begins.
 
-A larger program can respond to several kinds of events, such as a key press, a timer, or new sensor data. The important question stays the same: what event starts this stack of commands?
-
-## Guided practice
-
-Keep one print block connected under `when program starts`. Place a second print block by itself. Run the program and check which text appears. Then connect the second print block under the first and run again.
-
-Use Step and watch the highlight begin at the start block before moving through the commands. Explain the start event in one sentence using the words **event** and **handler**.
+A physical robot could start another handler from a button press. Describe the event and the commands it would trigger, keeping in mind that this workspace has no button event block.
 
 <BlockPractice lessonId="blocks-unit-00/start-blocks-and-events" />
 

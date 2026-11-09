@@ -1,0 +1,41 @@
+---
+id: ultrasonic-range
+title: "Lesson F10.1: Read Ultrasonic Range"
+slug: /unit-10/ultrasonic-range
+sidebar_label: "F10.1 · Read Ultrasonic Range"
+sidebar_position: 1
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F10.1: Read Ultrasonic Range
+
+`UltrasonicSensor.distance()` reports millimeters and returns 2000 when the current Pybricks API has no valid measurement. A narrow or slanted object may give a poor echo, so treat 2000 as unknown rather than proof of a clear path. Print readings at several measured distances before choosing a mission threshold.
+
+## Worked example
+
+~~~python
+range_mm = distance_sensor.distance()
+if range_mm == 2000:
+    print("No valid range")
+else:
+    print("Range mm:", range_mm)
+~~~
+
+## Simulator practice
+
+Print the initial range, then use a short route toward the fixed obstacle and print again. Adjust the route distance in code to compare readings.
+
+<FllPythonPractice lessonId="fll-unit-10/ultrasonic-range" />
+
+## On the robot
+
+Measure the gap with a ruler and compare it with sensor output for a flat and angled target.
+
+## Check and adjust
+
+Your log distinguishes a valid distant object from an invalid reading. If range is 2000 mm, treat it as invalid and check target angle.
+
+Reference: [Pybricks UltrasonicSensor reference](https://docs.pybricks.com/en/stable/pupdevices/ultrasonicsensor.html).
+
+<MarkComplete lessonId="fll-unit-10/ultrasonic-range" nextUnit="/fll/unit-10/force-contact" nextUnitName="Lesson F10.2: Use a Force Sensor on Hardware" />

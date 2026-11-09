@@ -316,6 +316,18 @@ npm ci
 npm start
 ```
 
+On local lesson pages, **Enter Edit Mode** highlights editable headings,
+paragraphs, list items, and table cells. Select a block to edit its Markdown
+text or mark it for deletion, then move to other blocks without saving. The
+fixed toolbar shows the unsaved count; **Save Changes** writes all staged edits
+to that page's source file under `docs/`, `mechanical/`, `blocks/`, or `fll/`
+in one request. **Revert block** undoes one staged edit; exiting edit mode with
+unsaved changes asks before discarding them. Docusaurus then reloads the page.
+A stale tab cannot silently overwrite changes made on disk. This temporary
+tool is absent from production builds. To hide it during local development,
+start with `TELEMARK_LOCAL_EDITOR=0 npm start`. This flag removes the controls
+and local write endpoint.
+
 Production checks:
 
 ```bash

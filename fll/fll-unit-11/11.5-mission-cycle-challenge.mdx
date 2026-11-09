@@ -1,0 +1,47 @@
+---
+id: mission-cycle-challenge
+title: "Lesson F11.5: Mission Cycle Challenge"
+slug: /unit-11/mission-cycle-challenge
+sidebar_label: "F11.5 · Mission Cycle Challenge"
+sidebar_position: 5
+---
+
+# Lesson F11.5: Mission Cycle Challenge
+
+Complete a target action and object delivery in one cycle, then return home. Keep the actions in separate functions and print elapsed time after each, testing both functions alone before the full route. Prepare a short return if the first action fails.
+
+## Worked example
+
+~~~python
+watch = StopWatch()
+
+def target_step():
+    robot.straight(300)
+    attachment.run_angle(180, 90)
+    attachment.run_angle(180, -90)
+
+def return_step():
+    robot.turn(180)
+    robot.straight(300)
+
+target_step()
+print("Target ms:", watch.time())
+return_step()
+print("Total ms:", watch.time())
+~~~
+
+## Simulator practice
+
+Use the generic target and delivery zones. Record the total time and home position in three attempts.
+
+<FllPythonPractice lessonId="fll-unit-11/mission-cycle-challenge" />
+
+## On the robot
+
+Time the physical route with the actual tool and mark where a failed pickup should trigger a return.
+
+## Check and adjust
+
+The complete route performs the planned actions and ends at home inside the match limit. If the cycle misses home, split actions into measured trials.
+
+Reference: [FIRST season materials](https://www.firstinspires.org/resources/library/fll/season-materials).

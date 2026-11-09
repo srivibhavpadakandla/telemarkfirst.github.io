@@ -1,0 +1,40 @@
+---
+id: function-challenge
+title: "Lesson F6.5: Reusable Route Challenge"
+slug: /unit-06/function-challenge
+sidebar_label: "F6.5 · Reusable Route Challenge"
+sidebar_position: 5
+---
+
+# Lesson F6.5: Reusable Route Challenge
+
+Write one drive function with a distance parameter and call it at least twice in a route that returns home. Keep mission values in calls or a route list instead of copying DriveBase commands. Print the planned segment count and check it against the simulator playback.
+
+## Worked example
+
+~~~python
+def drive_and_turn(distance_mm, turn_deg):
+    robot.straight(distance_mm)
+    robot.turn(turn_deg)
+
+drive_and_turn(300, 90)
+drive_and_turn(50, 90)
+drive_and_turn(300, 90)
+drive_and_turn(50, 90)
+~~~
+
+## Simulator practice
+
+Run the rectangle from a marked launch pose. Change one width through the call values and predict the new final position.
+
+<FllPythonPractice lessonId="fll-unit-06/function-challenge" />
+
+## On the robot
+
+Run three copies of the same route on the mat. Log where the final position differs from the launch mark.
+
+## Check and adjust
+
+The function is called more than once and the route finishes inside home. If the rectangle does not close, measure turns and sides separately.
+
+Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).

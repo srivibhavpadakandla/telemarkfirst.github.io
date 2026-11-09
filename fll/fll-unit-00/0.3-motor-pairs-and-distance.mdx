@@ -1,0 +1,38 @@
+---
+id: motor-pairs-and-distance
+title: "Lesson F0.3: Drive a Measured Distance"
+slug: /unit-00/motor-pairs-and-distance
+sidebar_label: "F0.3 · Drive a Measured Distance"
+sidebar_position: 8
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F0.3: Drive a Measured Distance
+
+`DriveBase.straight(300)` requests a 300 mm drive, or 30 cm, using the wheel encoders. Physical travel can differ because of wheel slip or incorrect wheel dimensions, so measure from the same edge of the robot before and after each run.
+
+## Worked example
+
+~~~python
+robot.straight(300)
+robot.straight(-300)
+~~~
+
+## Simulator practice
+
+Try forward 300 mm and backward 300 mm. Compare one 300 mm drive with two 150 mm drives.
+
+<FllPythonPractice lessonId="fll-unit-00/motor-pairs-and-distance" />
+
+## On the robot
+
+Mark a 300 mm line on a practice surface. Run three trials at the same battery state and record actual distances in millimeters.
+
+## Check and adjust
+
+Your log includes programmed distance, measured distance, and the difference for three trials. If physical travel is consistently short, check wheel diameter and grip.
+
+Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).
+
+<MarkComplete lessonId="fll-unit-00/motor-pairs-and-distance" nextUnit="/fll/unit-00/turns-and-steering" nextUnitName="Lesson F0.4: Turn and Steer" />

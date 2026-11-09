@@ -379,7 +379,7 @@
   }
 
   .trackTab {
-    flex: 1 1 0;
+    flex: 1 1 calc(50% - var(--tm-sp-3));
     min-width: 0;
   }
 

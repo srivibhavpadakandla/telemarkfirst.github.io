@@ -5,7 +5,7 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../telemark/firebase';
 import { useAuth } from '../telemark/useAuth';
 import { useProgress } from '../telemark/useProgress';
-import { getTrack, MAIN_TRACKS, type MainTrackId } from '../telemark/tracks';
+import { getTrack, DASHBOARD_TRACKS, type TrackId } from '../telemark/tracks';
 import {parseProgressExport, serializeProgress} from '../telemark/progressStore';
 import {trackEvent} from '../telemark/analytics';
 import heroStyles from './index.module.css';
@@ -23,7 +23,7 @@ export default function DashboardPage(): React.JSX.Element {
     markManyComplete,
     mergeImportedProgress,
   } = useProgress(user);
-  const [activeTrack, setActiveTrack] = useState<MainTrackId>('software');
+  const [activeTrack, setActiveTrack] = useState<TrackId>('software');
   const [collapsedUnits, setCollapsedUnits] = useState<Record<string, boolean>>({});
   const [updatingUnit, setUpdatingUnit] = useState<string | null>(null);
   const [transferMessage, setTransferMessage] = useState<string | null>(null);
@@ -195,7 +195,7 @@ export default function DashboardPage(): React.JSX.Element {
           )}
 
           <div className={styles.trackSwitcher} role="group" aria-label="Choose a track">
-            {MAIN_TRACKS.map((option) => (
+            {DASHBOARD_TRACKS.map((option) => (
               <button
                 key={option.id}
                 type="button"

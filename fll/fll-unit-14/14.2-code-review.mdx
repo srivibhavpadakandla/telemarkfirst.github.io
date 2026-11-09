@@ -1,0 +1,45 @@
+---
+id: code-review
+title: "Lesson F14.2: Review Units and Stops"
+slug: /unit-14/code-review
+sidebar_label: "F14.2 · Review Units and Stops"
+sidebar_position: 2
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F14.2: Review Units and Stops
+
+Before a full run, check the unit at every movement call and confirm that each continuous drive has a stop path. DriveBase distances use millimeters, angles use degrees, motor speeds use degrees per second, and waits use milliseconds. Test missing cues and invalid range values, then remove unused code that could confuse a match day edit.
+
+## Worked example
+
+~~~python
+def approach_safely(limit_ms):
+    watch = StopWatch()
+    robot.drive(100, 0)
+    while distance_sensor.distance() > 150 and watch.time() < limit_ms:
+        wait(10)
+    robot.stop()
+    return watch.time() < limit_ms
+
+print("Cue found:", approach_safely(3000))
+~~~
+
+## Simulator practice
+
+Run once with a 1 ms timeout and once with the normal 3000 ms timeout. Inspect whether both paths stop on the fixed field.
+
+<FllPythonPractice lessonId="fll-unit-14/code-review" />
+
+## On the robot
+
+Conduct a two-person review. One person reads the code while the other checks the field and port map.
+
+## Check and adjust
+
+The review log lists the units, stop paths, and tested failure cases. If a sensor is absent, verify timeout, stop, and returned result.
+
+Reference: [Pybricks UltrasonicSensor reference](https://docs.pybricks.com/en/stable/pupdevices/ultrasonicsensor.html).
+
+<MarkComplete lessonId="fll-unit-14/code-review" nextUnit="/fll/unit-14/integration-test" nextUnitName="Lesson F14.3: Test the Whole Route" />

@@ -1,0 +1,49 @@
+---
+id: failure-recovery
+title: "Lesson F12.4: Recover from a Failed Cue"
+slug: /unit-12/failure-recovery
+sidebar_label: "F12.4 · Recover from a Failed Cue"
+sidebar_position: 4
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F12.4: Recover from a Failed Cue
+
+When a required cue is missing, stop or return before the next tool action. Return a Boolean from the sensor step and check it before moving the attachment. On failure, stop the drive base and follow a short, tested path home that avoids the obstacle involved.
+
+## Worked example
+
+~~~python
+def approach_with_timeout():
+    watch = StopWatch()
+    robot.drive(90, 0)
+    while color_sensor.reflection() > 35 and watch.time() < 2500:
+        wait(10)
+    robot.stop()
+    return color_sensor.reflection() <= 35
+
+if approach_with_timeout():
+    attachment.run_angle(160, 60)
+else:
+    print("Skip tool action")
+    robot.straight(-150)
+~~~
+
+## Simulator practice
+
+Set the line threshold below zero to force the failed-cue branch and verify the attachment does not move. Restore the measured threshold and retest.
+
+<FllPythonPractice lessonId="fll-unit-12/failure-recovery" />
+
+## On the robot
+
+Run the failed-cue case from a safe launch. Check the reverse path and the team's plan for handling a failed mission.
+
+## Check and adjust
+
+The missing cue produces a safe stop and no tool action. If a missing line moves the tool, inspect the returned Boolean.
+
+Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).
+
+<MarkComplete lessonId="fll-unit-12/failure-recovery" nextUnit="/fll/unit-12/reliability-challenge" nextUnitName="Lesson F12.5: Reliability Challenge" />

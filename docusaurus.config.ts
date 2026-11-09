@@ -23,6 +23,15 @@ function localCommit(): string {
 const buildCommit = process.env.TELEMARK_BUILD_COMMIT
   ?? process.env.GITHUB_SHA
   ?? localCommit();
+const previewSite = process.env.TELEMARK_PREVIEW_SITE === '1';
+
+// Temporary authoring tool. Production builds never expose its UI or write API.
+// Set TELEMARK_LOCAL_EDITOR=0 during local development to hide it there too.
+const localMarkdownEditorEnabled = process.env.NODE_ENV !== 'production'
+  && process.env.TELEMARK_LOCAL_EDITOR !== '0';
+const localMarkdownRemarkPlugins = localMarkdownEditorEnabled
+  ? [require('./plugins/local-markdown-editor/remark')]
+  : [];
 
 const config: Config = {
   title: 'Telemark',
@@ -55,6 +64,7 @@ const config: Config = {
   // missing, which is also how analytics is meant to degrade: events queue on
   // dataLayer and are delivered if the real script ever loads.
   headTags: [
+    ...(previewSite ? [{tagName: 'meta', attributes: {name: 'robots', content: 'noindex,nofollow'}}] : []),
     {
       tagName: 'script',
       attributes: {},
@@ -68,6 +78,8 @@ const config: Config = {
   customFields: {
     buildCommit,
     adminEmail: process.env.TELEMARK_ADMIN_EMAIL?.trim().toLowerCase() ?? '',
+    localMarkdownEditorEnabled,
+    previewSite,
   },
 
   // Even if you don't use internationalization, you can use this field to set
@@ -83,6 +95,7 @@ const config: Config = {
       'classic',
       {
         docs: {
+          remarkPlugins: localMarkdownRemarkPlugins,
           sidebarPath: './sidebars.ts',
           sidebarItemsGenerator: async ({defaultSidebarItemsGenerator, ...args}) => {
             const items = await defaultSidebarItemsGenerator(args);
@@ -124,7 +137,7 @@ const config: Config = {
         theme: {
           customCss: './src/css/custom.css',
         },
-        gtag: {
+        gtag: previewSite ? undefined : {
           trackingID: 'G-VXW7YL7R06',
           anonymizeIP: true,
         },
@@ -134,11 +147,13 @@ const config: Config = {
 
   plugins: [
     './plugins/telemark-search',
+    ...(localMarkdownEditorEnabled ? ['./plugins/local-markdown-editor'] : []),
     [
       '@docusaurus/plugin-content-docs',
       {
         id: 'mechanical',
         path: 'mechanical',
+        remarkPlugins: localMarkdownRemarkPlugins,
         routeBasePath: 'mechanical',
         sidebarPath: './sidebarsMechanical.ts',
         sidebarItemsGenerator: async ({defaultSidebarItemsGenerator, ...args}) => {
@@ -156,8 +171,21 @@ const config: Config = {
       {
         id: 'blocks',
         path: 'blocks',
+        remarkPlugins: localMarkdownRemarkPlugins,
         routeBasePath: 'blocks',
         sidebarPath: './sidebarsBlocks.ts',
+        editUrl:
+          'https://github.com/telemarkfirst/telemarkfirst.github.io/tree/main/',
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'fll',
+        path: 'fll',
+        remarkPlugins: localMarkdownRemarkPlugins,
+        routeBasePath: 'fll',
+        sidebarPath: './sidebarsFll.ts',
         editUrl:
           'https://github.com/telemarkfirst/telemarkfirst.github.io/tree/main/',
       },
@@ -184,7 +212,20 @@ const config: Config = {
         alt: 'Telemark Logo',
         src: 'img/Telemark_logo.png',
       },
-      items: [
+      items: previewSite ? [
+        {to: '/fll', label: 'FLL Robotics', position: 'left' as const},
+        {href: 'https://telemarkfirst.github.io/', label: 'Live Telemark', position: 'right' as const},
+      ] : [
+        {
+          to: '/blocks',
+          label: 'Blocks',
+          position: 'left',
+        },
+        {
+          to: '/fll',
+          label: 'FLL Robotics',
+          position: 'left',
+        },
         {
           to: '/docs/unit-00/classes-and-objects',
           label: 'Software',
@@ -205,19 +246,22 @@ const config: Config = {
           label: 'Search',
           position: 'left',
         },
-        {
+        ...(!previewSite ? [{
           to: '/dashboard',
           label: 'Dashboard',
-          position: 'right',
+          position: 'right' as const,
           className: 'navbar-auth-link',
-        },
+        }] : []),
       ],
     },
     footer: {
       style: 'dark',
       // One link, so a returning reader can find the record of what changed
       // even after dismissing the card on the homepage.
-      links: [
+      links: previewSite ? [{
+        title: 'Telemark',
+        items: [{label: 'Live Telemark', href: 'https://telemarkfirst.github.io/'}],
+      }] : [
         {
           title: 'Telemark',
           items: [

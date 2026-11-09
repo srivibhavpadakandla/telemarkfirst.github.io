@@ -1,0 +1,42 @@
+---
+id: risk-and-recovery
+title: "Lesson F13.4: Plan a Skip Decision"
+slug: /unit-13/risk-and-recovery
+sidebar_label: "F13.4 · Plan a Skip Decision"
+sidebar_position: 4
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F13.4: Plan a Skip Decision
+
+Decide before the match which mission to skip when time is short or a cue fails. Use a clear condition based on remaining time or a failed result, and follow a tested fallback instead of improvising an unsafe route under the clock.
+
+## Worked example
+
+~~~python
+time_left_s = 38
+target_ready = False
+if time_left_s >= 30 and target_ready:
+    print("Run target mission")
+else:
+    print("Run short return mission")
+~~~
+
+## Simulator practice
+
+Try three time-left values and both target states. Confirm the printed choice matches the written plan.
+
+<FllPythonPractice lessonId="fll-unit-13/risk-and-recovery" />
+
+## On the robot
+
+Rehearse the same decision with a stopwatch and the physical hub slots. Record how long switching programs takes.
+
+## Check and adjust
+
+A teammate can make the skip decision from the written rule without reading code. If fallback selection is slow, rehearse hub slots and tools.
+
+Reference: [Pybricks timing tools reference](https://docs.pybricks.com/en/stable/tools/).
+
+<MarkComplete lessonId="fll-unit-13/risk-and-recovery" nextUnit="/fll/unit-13/match-plan-challenge" nextUnitName="Lesson F13.5: Match Plan Challenge" />

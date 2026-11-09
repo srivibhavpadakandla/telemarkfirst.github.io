@@ -1,0 +1,43 @@
+---
+id: python-starter
+title: "FLL Pybricks Python Starter"
+sidebar_label: "Python Starter and Port Map"
+slug: /python-starter
+sidebar_position: 90
+---
+
+# FLL Pybricks Python Starter
+
+Use this setup for course examples. Telemark's Python editor also provides the same names, but on a physical robot, connect only the devices you initialize, and change the port letters, motor direction, wheel diameter, and axle track to match your build.
+
+~~~python
+from pybricks.hubs import PrimeHub
+from pybricks.pupdevices import Motor, ColorSensor, UltrasonicSensor
+from pybricks.parameters import Port, Direction, Stop, Color
+from pybricks.robotics import DriveBase
+from pybricks.tools import wait, StopWatch
+
+hub = PrimeHub()
+left_motor = Motor(Port.A, Direction.COUNTERCLOCKWISE)
+right_motor = Motor(Port.B)
+robot = DriveBase(left_motor, right_motor, wheel_diameter=56, axle_track=112)
+color_sensor = ColorSensor(Port.C)
+distance_sensor = UltrasonicSensor(Port.D)
+attachment = Motor(Port.E)
+~~~
+
+| Name | Course port | What it is| Unit |
+| --- | --- | --- | --- |
+| left_motor | A | Left drive wheel | motor degrees |
+| right_motor | B | Right drive wheel | motor degrees |
+| color_sensor | C | Reflected light or color | percent or color value |
+| distance_sensor | D | Range to object | millimeters |
+| attachment | E | Mission tool | motor degrees |
+
+The example wheel diameter is 56 mm and axle track is 112 mm, as specified in the [Pybricks example dimensions](https://docs.pybricks.com/en/stable/robotics.html). These are not measurements of your robot. You should measure both the wheel diameter and the axle track before physical route calibration. If your drive motors face the opposite direction, change the Direction setting after a small wheels-up test.
+
+`robot.straight(300)` commands 300 mm of travel, and `robot.turn(90)` commands a 90 degree right turn. A call to `attachment.run_angle(180, 90)` rotates a tool by 90 degrees at 180 degrees per second, while `wait(100)` pauses for 100 milliseconds.
+
+## Simulator limits
+
+Telemark runs supported Pybricks-style Python locally in a worker, with a fixed starting pose and fixed objects on the practice field. The simulator does not upload code to a Hub or execute concurrent calls with `wait=False`, `run_task()`, Hub display and buttons, DataLog, or physical sensor lights. Lessons mark examples that require hardware.

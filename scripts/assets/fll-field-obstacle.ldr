@@ -1,0 +1,15 @@
+0 FLL practice field obstacle - two-panel LEGO Technic barrier
+0 Name: fll-field-obstacle.ldr
+0 Author: Telemark curriculum contributors
+0 // Origin: ground centre. Two 15 x 11 SPIKE frames form a 25.6 cm wide wall.
+0 // Official LDraw parts only. The yellow beams and black pins are attached to frame holes.
+1 72 -160 -8 0 1 0 0 0 1 0 0 0 1 3027.dat
+1 72 160 -8 0 1 0 0 0 1 0 0 0 1 3027.dat
+1 322 -150 -118 0 0 0 1 1 0 0 0 1 0 39790.dat
+1 322 150 -118 0 0 0 1 1 0 0 0 1 0 39790.dat
+1 14 -150 -118 20 0 0 1 0 1 0 -1 0 0 32278.dat
+1 14 150 -118 20 0 0 1 0 1 0 -1 0 0 32278.dat
+1 0 -290 -118 10 0 0 -1 0 1 0 1 0 0 2780.dat
+1 0 -10 -118 10 0 0 -1 0 1 0 1 0 0 2780.dat
+1 0 10 -118 10 0 0 -1 0 1 0 1 0 0 2780.dat
+1 0 290 -118 10 0 0 -1 0 1 0 1 0 0 2780.dat

@@ -1,0 +1,41 @@
+---
+id: motor-angles
+title: "Lesson F7.2: Relative Tool Angles"
+slug: /unit-07/motor-angles
+sidebar_label: "F7.2 · Relative Tool Angles"
+sidebar_position: 2
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F7.2: Relative Tool Angles
+
+`Motor.run_angle(speed, rotation_angle)` moves relative to the current motor position, so two positive 90 degree moves add roughly 180 degrees. Record the angle after each push and return. A blocked tool may stop short of the requested angle and change where the next mission begins.
+
+## Worked example
+
+~~~python
+start_deg = attachment.angle()
+attachment.run_angle(180, 90)
+print("After push:", attachment.angle())
+attachment.run_angle(180, -90)
+print("Back at:", attachment.angle(), "start:", start_deg)
+~~~
+
+## Simulator practice
+
+Compare the final tool angle with start_deg. Change the first move to 60 degrees and predict the result.
+
+<FllPythonPractice lessonId="fll-unit-07/motor-angles" />
+
+## On the robot
+
+Repeat the push and return three times. Inspect clearance and whether the tool drifts away from its marked home angle.
+
+## Check and adjust
+
+The final angle is near the starting angle and the tool clears the frame. If it does not return home, compare angles after both relative moves.
+
+Reference: [Pybricks Motor reference](https://docs.pybricks.com/en/stable/pupdevices/motor.html).
+
+<MarkComplete lessonId="fll-unit-07/motor-angles" nextUnit="/fll/unit-07/motor-targets" nextUnitName="Lesson F7.3: Target Angles" />
