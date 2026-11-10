@@ -1,77 +1,72 @@
 # Telemark dependency review — November 9, 2026
 
-Compatible lockfile fixes were applied with npm audit fix, without forced
-framework downgrades or major-version overrides. Firebase was refreshed from
-12.10.0 to 12.19.0 within the existing declared range.
+The production audit decreased from 55 affected packages (18 critical, 20 high,
+13 moderate, four low) to five low-severity packages. There are no remaining
+critical, high, or moderate production findings. Counts include inherited
+findings in parent packages, rather than independent application defects.
 
-Production audit before: info: 0, low: 4, moderate: 13, high: 20, critical: 18, total: 55.
+Compatible lockfile fixes and Firebase 12.10.0 → 12.19.0 were followed by scoped,
+exact-version overrides. The framework was not downgraded. These overrides go
+beyond upstream dependency ranges; the compatibility assessment below supports
+this application's tested uses and does not claim blanket upstream support.
 
-Production audit after: info: 0, low: 3, moderate: 7, high: 5, critical: 15, total: 30.
+## Scoped overrides and compatibility evidence
 
-These are affected package counts, including inherited findings in parent
-packages; they are not counts of independent exploitable application defects.
-Remaining paths include the Docusaurus build/dev-server toolchain and Firebase's
-pinned grpc-js dependency. The current registry report proposes a Docusaurus
-3.7.0 downgrade and Firebase 9.14.0 downgrade for some paths. Neither was applied.
-Latest Docusaurus 3.10.2 is also included in the affected ranges reported by npm.
-A future fix should evaluate patched upstream versions or narrowly scoped
-overrides with compatibility tests rather than accept those downgrades.
+| Parent | Dependency | Override | Reason |
+| --- | --- | --- | --- |
+| @docusaurus/core | tinypool | 2.1.2 | Patches both worker-option prototype-pollution advisories. |
+| copy-webpack-plugin | serialize-javascript | 7.1.4 | Patches code execution, CPU exhaustion, and function-output escaping advisories. |
+| css-minimizer-webpack-plugin | serialize-javascript | 7.1.4 | Same serializer patch, exercised through real parallel CSS minification. |
+| @firebase/firestore | @grpc/grpc-js | 1.14.5 | Patches unauthorized-certificate and excess error-detail advisories on the 1.14 branch. |
+| express | qs | 6.16.2 | Patches query parser/stringifier denial-of-service issues within major version 6. |
+| sockjs | uuid | 11.1.1 | Patches buffer bounds checks; SockJS uses only the retained CommonJS `v4()` API. |
 
-## Remaining affected packages
+Tinypool 2's documented breaking change is dropping Node 18. Serializer 7's
+breaking change is requiring Node 20. Telemark already requires Node 24 or newer.
+Docusaurus dynamically imports Tinypool, then uses its constructor, `run`,
+`destroy`, worker data tuple, and worker identifier. Those usages are tested.
+Serializer retains its CommonJS function interface. gRPC documents semantic
+versioning for its public API; this update stays in major version 1. Firestore's
+browser bundle does not use Node gRPC, while a local Node RPC round trip checks
+the overridden transport. A local SockJS WebSocket echo checks the UUID update
+through the consuming transport rather than only importing the package.
 
-| Package | Highest severity |
-| --- | --- |
-| @docusaurus/bundler | moderate |
-| @docusaurus/core | critical |
-| @docusaurus/plugin-content-blog | critical |
-| @docusaurus/plugin-content-docs | critical |
-| @docusaurus/plugin-content-pages | critical |
-| @docusaurus/plugin-css-cascade-layers | critical |
-| @docusaurus/plugin-debug | critical |
-| @docusaurus/plugin-google-analytics | critical |
-| @docusaurus/plugin-google-gtag | critical |
-| @docusaurus/plugin-google-tag-manager | critical |
-| @docusaurus/plugin-sitemap | critical |
-| @docusaurus/plugin-svgr | critical |
-| @docusaurus/preset-classic | critical |
-| @docusaurus/theme-classic | critical |
-| @docusaurus/theme-search-algolia | critical |
-| @firebase/firestore | high |
-| @firebase/firestore-compat | high |
-| @grpc/grpc-js | high |
-| @svgr/plugin-svgo | low |
-| @svgr/webpack | low |
-| copy-webpack-plugin | moderate |
-| css-minimizer-webpack-plugin | moderate |
-| deepmerge | low |
-| firebase | high |
-| qs | moderate |
-| serialize-javascript | high |
-| sockjs | moderate |
-| tinypool | critical |
-| uuid | moderate |
-| webpack-dev-server | moderate |
+Primary sources reviewed:
 
-## Underlying advisory references
+- [Tinypool 2 release notes](https://github.com/tinylibs/tinypool/releases/tag/v2.0.0), [worker option advisory and patch](https://github.com/advisories/GHSA-85c8-ppgw-ccpr).
+- [Serializer 7 release notes](https://github.com/yahoo/serialize-javascript/releases/tag/v7.0.0), [function-output escaping patch](https://github.com/advisories/GHSA-m5mm-p8h7-m29v), [current package API](https://github.com/yahoo/serialize-javascript/blob/v7.1.4/README.md).
+- [gRPC public API guarantees](https://github.com/grpc/grpc-node/blob/%40grpc/grpc-js%401.14.4/packages/grpc-js/README.md), [1.14.5 security fixes](https://github.com/grpc/grpc-node/releases/tag/%40grpc%2Fgrpc-js%401.14.5).
+- [qs 6.16.2 release](https://github.com/ljharb/qs/releases/tag/v6.16.2), [UUID advisory and patched versions](https://github.com/advisories/GHSA-w5hq-g745-h8pq).
 
-- [@grpc/grpc-js: In certain configurations, getAuthContext can return unauthorized certificates as though they were authorized](https://github.com/advisories/GHSA-m9gg-hp2v-232j) — high; affected range: `<1.13.6`.
-- [@grpc/grpc-js: The server transmits some error messages thrown by method handlers to the client in status messages](https://github.com/advisories/GHSA-f596-whhp-79r4) — low; affected range: `<1.13.6`.
-- [deepmerge mergeObject() allows prototype poisoning of returned objects](https://github.com/advisories/GHSA-gcqx-w48m-w2h4) — low; affected range: `>=4.2.0 <=4.3.1`.
-- [qs has a remotely triggerable DoS: qs.stringify crashes with TypeError on null/undefined entries in comma-format arrays when encodeValuesOnly is set](https://github.com/advisories/GHSA-q8mj-m7cp-5q26) — moderate; affected range: `>=6.11.1 <=6.15.1`.
-- [qs array-limit bypass via bracket-key comma parsing](https://github.com/advisories/GHSA-x5fp-wj9c-mxmx) — moderate; affected range: `>=6.14.2 <=6.15.3`.
-- [qs: Denial of Service via Attacker Controlled isBuffer](https://github.com/advisories/GHSA-4mjr-xmp4-gh2g) — moderate; affected range: `>=2.2.5 <6.16.0`.
-- [qs : qs.stringify with arrayFormat 'comma' throws an uncaught TypeError on array elements carrying a non-callable own toString (DoS)](https://github.com/advisories/GHSA-6pq8-jhm2-2vcw) — moderate; affected range: `>=6.7.0 <=6.16.0`.
-- [Serialize JavaScript is Vulnerable to RCE via RegExp.flags and Date.prototype.toISOString()](https://github.com/advisories/GHSA-5c6j-r48x-rmvq) — high; affected range: `<=7.0.2`.
-- [Serialize JavaScript has CPU Exhaustion Denial of Service via crafted array-like objects](https://github.com/advisories/GHSA-qj8w-gfj5-8c6v) — moderate; affected range: `>=5.0.0 <7.0.5`.
-- [Serialize JavaScript: Cross-site scripting (XSS) via unescaped </script at the end of a serialized function body](https://github.com/advisories/GHSA-m5mm-p8h7-m29v) — low; affected range: `<7.1.3`.
-- [Tinypool: Prototype Pollution gadget in worker options leads to Remote Code Execution](https://github.com/advisories/GHSA-5gmw-xhrv-c9v3) — critical; affected range: `<=2.1.0`.
-- [Tinypool: Prototype Pollution Gadget to RCE in run() options](https://github.com/advisories/GHSA-85c8-ppgw-ccpr) — critical; affected range: `<2.1.2`.
-- [uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided](https://github.com/advisories/GHSA-w5hq-g745-h8pq) — moderate; affected range: `<11.1.1`.
+## Remaining finding
+
+[GHSA-gcqx-w48m-w2h4](https://github.com/advisories/GHSA-gcqx-w48m-w2h4)
+reports prototype poisoning in deepmerge 4.2.0 through 4.3.1. The advisory lists
+no patched version; 4.3.1 is the current published version. The remaining five
+low-severity package findings are `deepmerge`, `@svgr/plugin-svgo`,
+`@svgr/webpack`, `@docusaurus/plugin-svgr`, and `@docusaurus/preset-classic`.
+The dependency belongs to the SVG build pipeline. Its presence remains recorded;
+this report does not dismiss the advisory based on the site's static hosting.
+An unreviewed downgrade or replacement merge implementation was not applied.
 
 ## Verification
 
-A fresh isolated `npm ci --ignore-scripts`, `npm run typecheck`,
-`npm run test:site`, and `npm run build` completed successfully. Headed Chromium
-replayed the tutor recovery fixture and actual local FLL Python route after the
-refresh. The feature checks are described in README.md. Reproduce the security report with
-`npm audit --omit=dev`; audit results can change as advisories are updated.
+A fresh isolated `npm ci --ignore-scripts` succeeded. `npm run test:dependencies`
+checks Docusaurus-style pooled workers, inherited worker-option rejection,
+serializer round trips and script escaping, actual webpack copy and parallel CSS
+minification, local synthetic gRPC, query parsing, and a SockJS WebSocket echo.
+`npm run typecheck` and the complete `npm run test:site` suite passed.
+The production build also passed with a temporary configuration enabling
+Docusaurus's pooled static rendering and forcing two worker threads. That
+configuration was removed after verification; normal rendering flags remain
+unchanged. Compatibility checks are included in the site regression suite.
+
+Headed Chromium checks also verified the 390 × 844 dock composer is reachable
+with code context expanded, then typed and sent a question, stopped the response,
+and sent a new question successfully. Synthetic authentication/answers were
+limited to the explicitly labeled component fixture; real Google sign-in and
+production authenticated answers remain separate acceptance checks.
+
+Reproduce the security report with `npm audit --omit=dev`. Advisory results may
+change after this dated review. Revisit overrides when upstream ranges accept
+patched releases, and rerun compatibility checks before removing them.
