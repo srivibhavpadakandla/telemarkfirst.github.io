@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F8.4: Continuous Drive and Heading
 
-`DriveBase.drive(speed, turn_rate)` starts continuous motion and returns immediately, so every route needs a stop condition. Speed is in millimeters per second and turn rate in degrees per second. A heading reading can confirm the direction of travel. If DriveBase gyro control is enabled, reset with `robot.reset()` rather than `hub.imu.reset_heading()`.
+Unlike `straight()` and `turn()`, `DriveBase.drive(speed, turn_rate)` starts moving and lets the next line run immediately. The program therefore needs a condition that reaches `robot.stop()`. Here a stopwatch limits the drive to one second, and a heading reading can help us check the direction of the turn.
 
 ## Worked example
+
+Speed is in millimeters per second; turn rate is in degrees per second. If DriveBase gyro control is enabled, `robot.reset()` is the appropriate way to reset its angle reference.
 
 ~~~python
 robot.reset()
@@ -26,17 +28,17 @@ print("Heading deg:", hub.imu.heading())
 
 ## Simulator practice
 
-Predict the direction and rough angle after one second. Confirm the stop and printed heading.
+Put the timed drive from the worked example in the editor and predict the curve's direction. The stopped robot and printed heading can then be compared with that prediction.
 
 <FllPythonPractice lessonId="fll-unit-08/drive-and-heading" />
 
 ## On the robot
 
-Try the continuous drive only in a clear area at reduced speed. Compare heading from the hub with a floor mark.
+A clear area and reduced speed should be used for the first physical run. A floor mark can show whether the hub's heading agrees with the visible turn.
 
 ## Check and adjust
 
-The robot stops after one second and the heading sign matches the turn direction. If continuous motion does not stop, inspect the timer and stop call.
+The run should end after about one second, with a heading sign consistent with the turn direction. If it keeps moving, inspect the loop condition and stop call before another attempt.
 
 Reference: [Pybricks PrimeHub reference](https://docs.pybricks.com/en/stable/hubs/primehub.html).
 

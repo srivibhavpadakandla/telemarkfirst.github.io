@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F4.4: Avoid Threshold Chatter
 
-A sensor reading may cross one threshold repeatedly even while the robot barely moves. Keep a previous dark or light state and use two limits: enter dark below 30 percent, then leave it only above 40 percent. Test readings around both limits before using the state to control a route.
+A reflected-light reading may hover around one threshold while the robot is near the edge of a line. Two thresholds can keep the state from switching on every small change. In this lesson, a reading below 30% enters the dark state, and a reading above 40% leaves it. The previous state must be kept between readings for that gap to work.
 
 ## Worked example
+
+This fragment shows one update to `on_line`. A light reading between 30% and 40% leaves the state as it was. To test several readings, the same `on_line` variable needs to be reused rather than reset to `False` before each reading.
 
 ~~~python
 light = color_sensor.reflection()
@@ -26,17 +28,17 @@ print("On line:", on_line)
 
 ## Simulator practice
 
-First update on_line with sample readings of 50, 29, 35, and 41 percent. Then drive toward the fixed line and compare the real reading sequence.
+The sequence 50, 29, 35, and 41 percent should produce states of light, dark, dark, and light when the state persists. A loop over those values can test the rule before you compare it with readings from the simulator line.
 
 <FllPythonPractice lessonId="fll-unit-04/thresholds-and-hysteresis" />
 
 ## On the robot
 
-Record five light and dark values. Choose two thresholds with a gap wider than normal sensor noise.
+Five readings on each physical surface may show how much they vary. A gap between the two thresholds should be wider than ordinary variation near the line edge, while still separating the surfaces you need to detect.
 
 ## Check and adjust
 
-The state changes once when crossing each edge rather than switching repeatedly at one value. If state changes repeatedly at an edge, widen the threshold gap.
+The state should hold steady for readings between 30% and 40%. If it changes repeatedly at an edge on the physical mat, the measured variation may call for a wider gap or a steadier sensor height.
 
 Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).
 

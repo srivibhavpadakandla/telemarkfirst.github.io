@@ -8,9 +8,11 @@ sidebar_position: 5
 
 # Lesson F8.5: Navigation Challenge
 
-Plan a route that crosses the practice line, uses two measured turns, and returns home. Record each segment and add a heading check after the longest one, then compare runs under at least two simulator calibration profiles. Add an arc only after the straight and turn route is reliable.
+This challenge brings measured straights and turns into one navigation route. The robot should cross the practice line, make two turns, and return home. Recording the landmarks along the way can show where a calibration profile changes the result; an arc can be considered after the segmented route works.
 
 ## Worked example
+
+The function follows the outgoing route in reverse to return. The final heading print gives one more observation, but home position and obstacle clearance still need to be checked in the field view.
 
 ~~~python
 def cross_line_and_return():
@@ -27,16 +29,16 @@ print("Heading:", hub.imu.heading())
 
 ## Simulator practice
 
-Run from the fixed home pose and check line crossing, both turns, and home return. Compare the automatic calibration profile table after the run and record the first missed landmark in a profile.
+Run from the fixed home pose and compare the line crossing, turns, and final position with the plan. The automatic profile table can reveal which landmark is missed first under a different calibration.
 
 <FllPythonPractice lessonId="fll-unit-08/navigation-challenge" />
 
 ## On the robot
 
-Trace the route on the mat with the tool installed. Test at moderate speed and mark every corner.
+The tool should be installed while tracing the route on the mat. Marked corners and moderate speed can make a clearance or turn error easier to locate.
 
 ## Check and adjust
 
-The route crosses the line, uses two measured turns, and returns home without a collision. If a profile fails, identify the first missed landmark.
+A successful run should cross the line and return without a collision. For any profile that fails, record its first missed landmark before changing a later segment.
 
 Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).

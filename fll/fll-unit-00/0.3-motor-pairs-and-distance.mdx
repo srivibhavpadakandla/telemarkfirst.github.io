@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F0.3: Drive a Measured Distance
 
-`DriveBase.straight(300)` requests a 300 mm drive, or 30 cm, using the wheel encoders. Physical travel can differ because of wheel slip or incorrect wheel dimensions, so measure from the same edge of the robot before and after each run.
+Now that the DriveBase is set up, we can ask it to travel a measured distance. `robot.straight(300)` requests 300 mm, or 30 cm, using the wheel encoders. The aim is to compare that command with how far the robot actually travels. Wheel slip or an incorrect wheel diameter may change the physical result.
 
 ## Worked example
+
+A positive distance drives forward. A negative distance drives backward, so the two calls below should finish near the starting point if both moves are accurate.
 
 ~~~python
 robot.straight(300)
@@ -21,17 +23,17 @@ robot.straight(-300)
 
 ## Simulator practice
 
-Try forward 300 mm and backward 300 mm. Compare one 300 mm drive with two 150 mm drives.
+The example should move out and back in the simulator. Comparing one 300 mm move with two 150 mm moves can show whether the programmed distances end at the same pose. The physical robot may behave differently because stopping and starting can add error.
 
 <FllPythonPractice lessonId="fll-unit-00/motor-pairs-and-distance" />
 
 ## On the robot
 
-Mark a 300 mm line on a practice surface. Run three trials at the same battery state and record actual distances in millimeters.
+A 300 mm mark on a practice surface gives a reference for the command. Measuring from the same edge of the robot before and after three trials can show whether the actual travel is consistently short, long, or variable.
 
 ## Check and adjust
 
-Your log includes programmed distance, measured distance, and the difference for three trials. If physical travel is consistently short, check wheel diameter and grip.
+The three trial records should include commanded distance, measured distance, and their difference. A consistent shortfall may point to wheel diameter or grip; variation between trials may call for a closer look at the surface and launch position.
 
 Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).
 

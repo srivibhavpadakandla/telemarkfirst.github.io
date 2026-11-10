@@ -8,9 +8,11 @@ sidebar_position: 5
 
 # Lesson F10.5: Sensor Check Challenge
 
-Approach a target only after obtaining a valid range reading, stop before contact, and report the final heading. Use one timeout for range polling and a separate heading check after stopping. The simulator can test range and heading, while physical contact still requires a force sensor or visual confirmation.
+This challenge combines range and heading in a short approach. The robot should stop before contact and report where it is facing. A timeout gives the approach an end even if the target cannot be measured, while actual clearance still needs to be checked on hardware.
 
 ## Worked example
+
+The loop stops when the range is below 150 mm, becomes invalid at 2000, or reaches three seconds. The example does not require a valid first reading before motion begins, so that stricter behavior would need an initial range check.
 
 ~~~python
 watch = StopWatch()
@@ -27,16 +29,16 @@ print("Heading deg:", hub.imu.heading())
 
 ## Simulator practice
 
-Keep the field fixed. Vary the range threshold and approach heading in code, and use a short timeout for a missing-cue case. Confirm all runs stop.
+Try the sample approach on the fixed field, then change its threshold or initial heading. A short timeout can exercise the missing-cue case; every run should end with a stop event.
 
 <FllPythonPractice lessonId="fll-unit-10/sensor-fusion-challenge" />
 
 ## On the robot
 
-Test at reduced speed and measure the physical clearance after each stop.
+Reduced speed should be used for the physical approach. Measure the clearance after each stop to see whether the threshold leaves enough room for the real robot.
 
 ## Check and adjust
 
-The log records range and heading, and no case leaves the drive base moving. If the target is absent, verify the loop exits within three seconds.
+The final log should include both range and heading. If the target is absent, the loop should still exit within three seconds and leave the drive base stopped.
 
 Reference: [Pybricks UltrasonicSensor reference](https://docs.pybricks.com/en/stable/pupdevices/ultrasonicsensor.html).

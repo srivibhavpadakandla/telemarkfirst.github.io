@@ -8,9 +8,11 @@ sidebar_position: 5
 
 # Lesson F4.5: Decision Challenge
 
-Approach the practice obstacle with a bounded loop, stopping for a valid range reading or taking a different action if the dark line appears first. Give those cues a clear priority and print the reason for stopping. Test obstacle first, line first, and no cue so the timeout path also ends safely.
+This challenge combines a distance reading, a line reading, and a time limit in one approach. The aim is a route that stops before a collision and prints which condition ended it. The simulator checks for an ultrasonic reading, an `if` decision, and a stop without collision.
 
 ## Worked example
+
+`reason` starts as `"timeout"`. Each sensor can replace that word and break out of the loop; otherwise the four-second limit ends the loop. `robot.stop()` sits after the loop, so every exit reaches the stop call.
 
 ~~~python
 watch = StopWatch()
@@ -30,16 +32,16 @@ print(reason)
 
 ## Simulator practice
 
-Keep the field fixed. Change thresholds and timeout values to exercise each printed reason, then restore calibrated values. Confirm every run stops.
+With the field fixed, changing thresholds and the timeout can make `obstacle`, `line`, and `timeout` appear in separate runs. Each run should stop. The threshold values used for the final route should come from the readings observed on the practice field.
 
 <FllPythonPractice lessonId="fll-unit-04/decision-challenge" />
 
 ## On the robot
 
-Run the same cases on a practice mat at low speed and compare the printed reason with the actual stop point.
+Low-speed mat trials can show whether each printed reason matches the physical stop point. A clear lane is useful for testing the timeout without putting an obstacle in the robot's path.
 
 ## Check and adjust
 
-Your program ends safely for obstacle, line, and timeout cases. If the no-cue test moves too long, inspect timeout and stop calls.
+The program should stop for all three reasons. If the no-cue run lasts longer than planned, check that the timer is advancing and that the stop call follows the loop.
 
 Reference: [Pybricks timing tools reference](https://docs.pybricks.com/en/stable/tools/).

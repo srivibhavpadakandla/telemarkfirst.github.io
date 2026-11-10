@@ -10,9 +10,13 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F1.3: Hub Heading and Reset
 
-The Prime Hub IMU estimates clockwise-positive heading in degrees. Keep the hub fixed in the build and reset heading only while the robot is stopped. When DriveBase uses gyro control, reset through `robot.reset()` instead of `hub.imu.reset_heading()`.
+After stopping at a line or an obstacle, a heading reading can help us check the robot's direction. The aim in this lesson is to reset heading to zero, command a 90 degree right turn, and compare the reading with that command.
+
+The Prime Hub IMU reports heading in degrees relative to its starting or reset direction. Positive values mean clockwise turns. The hub should stay fixed in a known orientation so the reading describes the robot's turn. Heading should be reset while the robot is stopped. If the DriveBase is using gyro control, use `robot.reset(angle=0)` instead of `hub.imu.reset_heading(0)`.
 
 ## Worked example
+
+The starter setup does not enable gyro control, so this example resets the IMU directly. `robot.stop()` runs first, and `hub.imu.reset_heading(0)` makes the current direction zero. After `robot.turn(90)`, the final line prints the IMU's estimate of the turn.
 
 ~~~python
 robot.stop()
@@ -23,17 +27,17 @@ print("Heading:", hub.imu.heading())
 
 ## Simulator practice
 
-Turn right and compare the commanded angle with the reported heading. Reset, then turn left.
+The starter runs the right turn and prints its heading. The field view also shows the robot's direction. A second run with `robot.turn(-90)` should give a negative reading after the reset. Comparing both readings with the field view can help you check the sign of each turn.
 
 <FllPythonPractice lessonId="fll-unit-01/hub-heading" />
 
 ## On the robot
 
-Mark north on the practice mat. Test the same turn three times after a steady launch and record heading error.
+The hub should remain fixed to the robot during these tests. A mark on the practice mat can give you the same starting direction for three right turns. Comparing each printed heading with 90 degrees may reveal a repeatable error or variation between runs. If the sign is unexpected, check how the hub is mounted.
 
 ## Check and adjust
 
-You can state the reset condition and calculate heading error in degrees. If the heading sign is unexpected, check hub orientation and turn direction.
+The heading should be positive after a right turn and negative after a left turn. The difference between a reading and the commanded angle gives the error for that run. One close result may not tell you how the next turn will end, so compare all three trials.
 
 Reference: [Pybricks PrimeHub reference](https://docs.pybricks.com/en/stable/hubs/primehub.html).
 

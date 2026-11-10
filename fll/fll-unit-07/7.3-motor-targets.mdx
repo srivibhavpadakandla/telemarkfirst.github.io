@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F7.3: Target Angles
 
-`Motor.run_target(speed, target_angle)` moves to a named motor position instead of adding a relative rotation. Use targets for states such as an open and closed gripper, but reset the angle only when the tool is physically at its reference position. Otherwise the target number will no longer match the real mechanism.
+Relative angles add to the motor's current position. A target angle instead names a position to reach, which can be useful for an open or closed tool. This lesson sets a zero reference, moves to 90 degrees, and returns to zero. The reference should match a real physical position before the same numbers are used on a robot.
 
 ## Worked example
+
+`attachment.reset_angle(OPEN_DEG)` labels the current motor position as zero. The two `run_target()` calls then request closed and open positions. If the tool was not actually open at the reset, the named positions would be misleading.
 
 ~~~python
 OPEN_DEG = 0
@@ -24,17 +26,17 @@ attachment.run_target(180, OPEN_DEG)
 
 ## Simulator practice
 
-Set two target angles and run close then open. Change CLOSED_DEG only after checking the safe range.
+The simulator starter shows a relative move. Replacing it with the target calls above should move the tool to 90 degrees and back to zero. A different closed target can be tried after the visible travel is checked.
 
 <FllPythonPractice lessonId="fll-unit-07/motor-targets" />
 
 ## On the robot
 
-Use a visible mechanical reference to set angle zero. Test the open and closed targets without an object, then with a light object.
+The physical tool should be at a visible open reference when its angle is reset to zero. Tests without an object can show whether both target positions are clear before a light object is added.
 
 ## Check and adjust
 
-Both target positions can be reached repeatedly without forcing the mechanism. If a target is wrong, reset at a real mechanical reference.
+Both targets should be reachable without forcing the mechanism. If the same number sends the tool to a different place on later runs, the zero reference or linkage may need checking.
 
 Reference: [Pybricks Motor reference](https://docs.pybricks.com/en/stable/pupdevices/motor.html).
 

@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F9.4: Follow an Edge Briefly
 
-A proportional line follower adjusts turn rate from the difference between measured reflection and a target value. Begin at low speed with a short time limit, and reverse the correction sign if the robot turns away from the edge. One sensor cannot recover its side after fully losing the line, while the simulator's short dark line supports only a brief edge test.
+A line follower can steer toward an edge by comparing current reflection with a target value. The difference, called an error, changes the turn rate each time the loop runs. Here we will test the direction of that correction at low speed for a short interval. The simulator's short line supports a steering demonstration, not a long route.
 
 ## Worked example
+
+The sign of `error * 0.5` determines which way the robot turns. A single sensor can lose track of which side of the line it is on after it leaves the edge entirely.
 
 ~~~python
 target = 35
@@ -26,17 +28,17 @@ robot.stop()
 
 ## Simulator practice
 
-Run the 300 ms steering demonstration and compare heading with the correction sign reversed. The one-line field cannot confirm continuous edge following.
+Try the worked example's 300 ms steering loop, then reverse the correction sign and compare the headings. The result can show which direction moves the sensor toward the edge.
 
 <FllPythonPractice lessonId="fll-unit-09/line-following" />
 
 ## On the robot
 
-Use a wide practice line, clear nearby mission objects, and record whether the sensor remains over the intended edge.
+A wide practice line and clear space should be used for the first physical test. Record whether the sensor stays near the intended edge for the brief run.
 
 ## Check and adjust
 
-The robot follows the chosen edge briefly and stops when the timer expires. If correction turns away from the edge, reverse its sign.
+The timer should stop the drive after the short test. If the correction steers away from the chosen edge, its sign may need reversing before a longer attempt.
 
 Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).
 

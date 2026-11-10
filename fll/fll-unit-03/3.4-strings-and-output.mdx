@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F3.4: Print Useful Diagnostics
 
-A route log is easier to read when each sensor number includes where it was measured. Print short labels such as `launch`, `line`, or `target` with the reading and its unit, then compare the sequence with the robot's position after a run. Ultrasonic distance is in millimeters, so include `mm` when you print it.
+We have printed values to inspect a route. A reading is more useful when its label says where it was taken and what unit it uses. Here we will print the launch range, a heading after a drive, and reflected light so a later run can be compared line by line.
 
 ## Worked example
+
+Each `print()` call puts a route point or measurement name beside the value. `distance_sensor.distance()` reports millimeters and `hub.imu.heading()` reports degrees. The text labels do not change the robot's motion; they help explain the output after the drive.
 
 ~~~python
 print("launch range mm:", distance_sensor.distance())
@@ -23,17 +25,17 @@ print("reflection percent:", color_sensor.reflection())
 
 ## Simulator practice
 
-Run once and copy the three output lines into a test log. Change the first straight distance in code, rerun from the fixed start, and compare.
+The example should produce three labeled lines. After a different straight distance, comparing those lines from the same start may show which readings changed with the robot's position.
 
 <FllPythonPractice lessonId="fll-unit-03/strings-and-output" />
 
 ## On the robot
 
-Print the same three readings on the physical hub. Record which values change when you move the robot by hand.
+On the physical robot, the same labels can make a test log easier to match with the route. Moving the robot by hand before a drive may show which sensor values respond to position or heading changes.
 
 ## Check and adjust
 
-Each log entry names a route point, a measured value, and a unit. If a log value has no context, add the route point and unit.
+A useful log entry should include enough context to identify the reading later. If two values look alike but were taken at different places, the route-point labels may explain the difference.
 
 Reference: [Pybricks timing tools reference](https://docs.pybricks.com/en/stable/tools/).
 

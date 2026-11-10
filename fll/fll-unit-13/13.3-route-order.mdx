@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F13.3: Order Missions
 
-Mission order affects travel, attachment handling, and the route available after a failure. Start with a reliable launch, then compare two orders using measured time rather than distance alone. Put uncertain actions where a missed cue still leaves a clear return, and label the program and attachment for each launch.
+Changing mission order can change travel time, attachment handling, and the return path after a failure. This lesson compares two orders using measured time and a clear launch plan. The order should also leave a safe return if an uncertain action does not work.
 
 ## Worked example
+
+The list prints a proposed sequence and launch number. It does not execute the missions, so the simulator practice needs routes for the selected order.
 
 ~~~python
 mission_order = ["line", "target", "delivery"]
@@ -22,17 +24,17 @@ for launch_number, mission in enumerate(mission_order, start=1):
 
 ## Simulator practice
 
-Run two mission orders on the practice field and record total elapsed time and ending position.
+The worked list only prints an order. Turn it into route calls before comparing two sequences on the practice field; total time and ending position can show differences that the list alone cannot.
 
 <FllPythonPractice lessonId="fll-unit-13/route-order" />
 
 ## On the robot
 
-Lay out physical attachments in launch order. Rehearse the handoff between programs with the same people who will run the match.
+Attachments can be laid out in launch order for a physical rehearsal. The people who will run the match can time the handoff between programs.
 
 ## Check and adjust
 
-Your written order includes program, attachment, launch mark, expected time, and return plan. If the second route starts in the wrong pose, return home first.
+The written plan should connect each launch to a program, attachment, mark, expected time, and return route. A second launch needs a known starting pose before its timing is meaningful.
 
 Reference: [FIRST season materials](https://www.firstinspires.org/resources/library/fll/season-materials).
 

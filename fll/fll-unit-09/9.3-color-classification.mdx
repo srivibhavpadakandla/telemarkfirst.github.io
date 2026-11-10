@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F9.3: Classify a Field Color
 
-`ColorSensor.color()` returns a Pybricks Color value that can identify a large, clearly colored target. Test labels on the actual mission model because lighting, distance, and texture affect readings. For a dark line whose color label varies, reflected light may provide a steadier edge cue.
+Reflected light gives a number, while `ColorSensor.color()` gives a Pybricks Color label. A large colored target may be easier to identify by label. This lesson compares labels at two field positions, then asks whether the same label is dependable on the actual mission model.
 
 ## Worked example
+
+The program prints the current label and gives a message only when it is green. It does not move the robot to a colored area; that route is part of the practice.
 
 ~~~python
 from pybricks.parameters import Color
@@ -25,17 +27,17 @@ if seen == Color.GREEN:
 
 ## Simulator practice
 
-Print the color at the fixed start. Then use short drive and turn commands to visit a colored zone and print again. Record the route and both labels.
+Start with the worked example to print a label at the fixed start, then add a short route to the colored zone and print again. Comparing both readings can show whether the sensor reached the intended surface.
 
 <FllPythonPractice lessonId="fll-unit-09/color-classification" />
 
 ## On the robot
 
-Collect labels for each surface at the intended mounting height. Move the robot a few millimeters and test again.
+On the real robot, labels should be collected at the intended sensor height. Moving a few millimeters and repeating the reading can reveal a sensitive edge or uneven target.
 
 ## Check and adjust
 
-You can state which surfaces classify consistently and which need a numeric reflection test. If labels vary with pose, use reflection or a larger target.
+Record which labels remain consistent across nearby positions. If a label changes easily, reflected light or a larger target may be more useful for that mission.
 
 Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).
 

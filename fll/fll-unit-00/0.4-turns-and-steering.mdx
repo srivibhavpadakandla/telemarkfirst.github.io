@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F0.4: Turn and Steer
 
-`DriveBase.turn()` rotates the robot in place: positive angles turn right and negative angles turn left. A turn depends on axle track and wheel grip, while a curve adds forward movement, so confirm a 90 degree right turn before testing a curve or changing speed.
+After driving a measured distance, we can change the robot's heading with `robot.turn()`. A positive angle requests a right turn and a negative angle requests a left turn. This lesson uses two turns to check where the robot faces after a short route. On a physical robot, axle track and wheel grip may affect the angle reached.
 
 ## Worked example
+
+The first turn points the robot to its right for a 50 mm drive. The second turn points it back toward its original heading. If both turns are accurate, the route should end facing the same direction it started.
 
 ~~~python
 robot.straight(200)
@@ -23,17 +25,17 @@ robot.turn(-90)
 
 ## Simulator practice
 
-Run the route. Change the second turn to 90 degrees, then predict the final heading before running again.
+The simulator shows the heading after each segment. With `robot.turn(-90)` at the end, the two turns cancel. Replacing that call with `robot.turn(90)` should leave the robot facing a different direction. A prediction before the second run can be checked against the field view.
 
 <FllPythonPractice lessonId="fll-unit-00/turns-and-steering" />
 
 ## On the robot
 
-Use tape to mark the robot's starting heading. Test a 90 degree turn three times and record the actual angle.
+A tape mark can give the robot the same starting heading for three 90 degree right turns. Comparing the final headings may show a repeatable offset or variation caused by grip and alignment.
 
 ## Check and adjust
 
-You can predict the heading after each command and explain why an encoder turn may differ on the mat. If a turn misses its mark, measure axle track and wheel contact points.
+The final heading should follow from the two commanded turns. If the physical turn misses the mark in the same direction each time, the axle track value and wheel contact points are worth checking before changing the route.
 
 Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).
 

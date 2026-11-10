@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F13.4: Plan a Skip Decision
 
-Decide before the match which mission to skip when time is short or a cue fails. Use a clear condition based on remaining time or a failed result, and follow a tested fallback instead of improvising an unsafe route under the clock.
+A match plan can include a choice for limited time or a missed cue. Here a condition checks both time remaining and whether the target is ready. The printed choice represents a decision the team can rehearse before using it with real route functions.
 
 ## Worked example
+
+With 38 seconds left but `target_ready` false, the example chooses the short return. Both conditions must be true before it prints the target mission.
 
 ~~~python
 time_left_s = 38
@@ -25,17 +27,17 @@ else:
 
 ## Simulator practice
 
-Try three time-left values and both target states. Confirm the printed choice matches the written plan.
+Try the worked condition with three time values and both target states. The six printed outcomes can show whether it matches the team's written rule.
 
 <FllPythonPractice lessonId="fll-unit-13/risk-and-recovery" />
 
 ## On the robot
 
-Rehearse the same decision with a stopwatch and the physical hub slots. Record how long switching programs takes.
+The same rule can be rehearsed with a stopwatch and the physical hub slots. Switching programs takes time that should appear in the match budget.
 
 ## Check and adjust
 
-A teammate can make the skip decision from the written rule without reading code. If fallback selection is slow, rehearse hub slots and tools.
+A teammate should be able to choose the planned route from the rule without reading source code. If the choice takes too long, the slot labels or handling plan may need simplifying.
 
 Reference: [Pybricks timing tools reference](https://docs.pybricks.com/en/stable/tools/).
 

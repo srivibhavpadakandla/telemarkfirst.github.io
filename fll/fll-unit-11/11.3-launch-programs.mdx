@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F11.3: Choose a Mission Program
 
-Keep each mission program tied to a known home launch position. Pybricks Code provides five Prime Hub program slots, while the simulator can select a route through a mission name variable. Label tested slots in the team plan and confirm the selected program before each physical launch.
+When a match uses more than one launch, the team needs a reliable way to choose the intended mission. The simulator can use a mission name variable; Pybricks Code provides five Prime Hub program slots. We will compare named routes and connect each physical slot with a launch mark and attachment.
 
 ## Worked example
+
+The `if` and `elif` branches run different routes for two known names. Any other name prints a message, and the final stop call still runs.
 
 ~~~python
 MISSION = "target"
@@ -29,17 +31,17 @@ robot.stop()
 
 ## Simulator practice
 
-Run both named routes by changing MISSION. Leave an unknown name and confirm no drive occurs.
+Use the worked example's `MISSION` branches, changing the name to each known value and then an unknown one. The printed message and robot motion should make the selected branch clear.
 
 <FllPythonPractice lessonId="fll-unit-11/launch-programs" />
 
 ## On the robot
 
-Save two small Pybricks programs in separate hub slots. Label the slot, attachment, and launch mark in one table.
+Two small programs can be saved in separate hub slots. A table linking each slot to its attachment and launch mark can help the team choose correctly at the field.
 
 ## Check and adjust
 
-A teammate can select the intended program without reading its source code. If the wrong mission runs, check the hub slot or mission name.
+A teammate should be able to choose the intended route from the slot labels and launch plan. If another route runs, check the selected slot or mission name before changing movement values.
 
 Reference: [Pybricks program guide](https://pybricks.com/learn/getting-started/pybricks-environment/).
 

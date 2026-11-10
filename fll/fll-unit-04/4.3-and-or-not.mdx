@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F4.3: Combine Conditions
 
-Use `and` when both conditions are required, `or` when either is enough, and `not` when the opposite of a Boolean is needed. A mission action might require a nearby object and a clear tool position. Name those intermediate results so the full condition remains readable. Parentheses help when `and` and `or` appear together.
+We can now combine sensor comparisons into one decision. `and` requires both conditions, `or` accepts either, and `not` reverses a Boolean. This lesson uses a nearby object and a light surface as the two requirements for moving an attachment. Naming each result can make the combined condition easier to read.
 
 ## Worked example
+
+`near_object` and `on_dark_line` are calculated separately. `safe_to_pick` is true only when the object is near and the sensor is away from the dark line. If either part fails, the example prints a message instead of moving the tool.
 
 ~~~python
 near_object = distance_sensor.distance() < 160
@@ -26,17 +28,17 @@ else:
 
 ## Simulator practice
 
-Add a short truth-table test for all four Boolean combinations before using sensor readings. Record which combination moves the tool.
+There are four possible pairs of values for two Booleans. Testing each pair before reading the field sensors can show that only `True` for `near_object` and `False` for `on_dark_line` moves the tool.
 
 <FllPythonPractice lessonId="fll-unit-04/and-or-not" />
 
 ## On the robot
 
-Before powering a tool, check physical clearance for the combination that makes safe_to_pick true.
+Before powering the physical tool, its path should be clear even when `safe_to_pick` is true. The Boolean checks sensor values; they cannot detect every object that might block the attachment.
 
 ## Check and adjust
 
-Only a nearby object away from the dark line triggers the tool. If the tool moves unsafely, print each intermediate Boolean.
+The tool should move only for the intended combination. If it moves at another time, the printed intermediate Booleans may show which comparison gave an unexpected result.
 
 Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).
 

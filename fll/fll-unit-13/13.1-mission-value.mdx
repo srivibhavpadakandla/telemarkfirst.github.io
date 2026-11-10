@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F13.1: Compare Mission Value
 
-Compare a mission's points with its measured success rate and time before choosing its place in the match. Multiplying points by success probability gives a simple expected value, though it does not account for interactions between missions. Record how trials produced the success estimate so the team can judge it alongside route time.
+Mission points are only part of a match plan. A route that scores often may contribute more than a higher-value route that rarely succeeds. This lesson uses trial results to estimate expected points, then compares that estimate with the time a mission takes.
 
 ## Worked example
+
+Four successes in five trials give an estimated success rate of 0.8. Multiplying by the example's 20 points gives a simple expected value; it does not include how this mission affects another route.
 
 ~~~python
 points = 20
@@ -25,17 +27,17 @@ print("Expected points:", expected_points)
 
 ## Simulator practice
 
-Enter two practice mission estimates and compare them. Do not treat simulator score as an official season score.
+Replace the starter's route with the worked calculation, then use two sets of practice points and trial counts to compare expected values. The simulator's generic score should not be treated as an official season score.
 
 <FllPythonPractice lessonId="fll-unit-13/mission-value" />
 
 ## On the robot
 
-Use real team trial counts and current Robot Game point values. Discuss whether attachment changes alter the choice.
+The team's real trial counts and current Robot Game values can replace the examples. Attachment changes and route time may change which mission fits best.
 
 ## Check and adjust
 
-Your comparison includes points, trials, success rate, and time for both missions. If expected value seems high, check the trial count.
+A useful comparison should show points, trial counts, estimated success rate, and time for both options. Few trials may leave the estimate uncertain, even when the calculated value looks high.
 
 Reference: [FIRST season materials](https://www.firstinspires.org/resources/library/fll/season-materials).
 

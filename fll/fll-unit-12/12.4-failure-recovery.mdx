@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F12.4: Recover from a Failed Cue
 
-When a required cue is missing, stop or return before the next tool action. Return a Boolean from the sensor step and check it before moving the attachment. On failure, stop the drive base and follow a short, tested path home that avoids the obstacle involved.
+A mission may need a different route when a sensor cue is missed. Here the approach function returns `True` only if the dark line is detected before the timeout. The tool action depends on that result; otherwise the robot takes a short return path.
 
 ## Worked example
+
+The function stops the drive before returning its Boolean. The reverse distance in the `else` branch is an example and should be checked against the actual path home.
 
 ~~~python
 def approach_with_timeout():
@@ -32,17 +34,17 @@ else:
 
 ## Simulator practice
 
-Set the line threshold below zero to force the failed-cue branch and verify the attachment does not move. Restore the measured threshold and retest.
+Use the worked example's approach and return branches. Setting its threshold below zero should force the failed-cue branch; compare that run with the measured threshold and check whether the attachment moves only after a detected line.
 
 <FllPythonPractice lessonId="fll-unit-12/failure-recovery" />
 
 ## On the robot
 
-Run the failed-cue case from a safe launch. Check the reverse path and the team's plan for handling a failed mission.
+The physical failed-cue test should begin from a safe launch. Its reverse path needs enough clearance for the actual tool, even when the line is missed.
 
 ## Check and adjust
 
-The missing cue produces a safe stop and no tool action. If a missing line moves the tool, inspect the returned Boolean.
+A missed line should leave the tool still and lead to the planned return. If the tool moves, the returned value and its `if` condition are the first places to inspect.
 
 Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).
 

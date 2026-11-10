@@ -8,9 +8,11 @@ sidebar_position: 5
 
 # Lesson F3.5: Data Check Challenge
 
-Convert a planned distance from centimeters to millimeters once, use that value for a short drive, and print both the plan and the encoder estimate afterward. Calculate their difference to inspect the command, then measure actual travel separately on the physical robot because an encoder reading is not a ruler measurement.
+This challenge brings together a named distance, a unit conversion, and a drive. The simulator checks that a Python variable reaches `robot.straight()`, the robot finishes near the 300 mm target, and the route avoids a collision. Printing the planned and estimated distances can help explain a miss.
 
 ## Worked example
+
+`target_cm * 10` converts 30 cm to 300 mm. After the drive, `robot.distance()` reports the DriveBase estimate. Subtracting the target gives an encoder-based error, which may differ from the physical distance measured on a mat.
 
 ~~~python
 target_cm = 30
@@ -24,16 +26,16 @@ print("encoder error mm:", error_mm)
 
 ## Simulator practice
 
-Change target_cm twice. Confirm that both route and output change without editing the DriveBase call.
+Changing `target_cm` should change the converted value without editing `robot.straight(target_mm)`. The check for a final position near 300 mm will pass only when the chosen value brings the robot back near that target.
 
 <FllPythonPractice lessonId="fll-unit-03/data-check-challenge" />
 
 ## On the robot
 
-Compare encoder distance with a ruler measurement for three trials and explain any difference.
+Three physical drives from the same mark can give you both encoder estimates and ruler measurements. Comparing them may reveal wheel slip even when the printed encoder error is small.
 
 ## Check and adjust
 
-The printed target is 300 mm for 30 cm, and your log separates encoder error from physical error. If encoder error is near zero but the ruler shows a miss, inspect slip.
+For a 30 cm plan, the printed target should be 300 mm. The log should keep encoder error separate from the difference measured with a ruler. A small encoder error alongside a physical miss may point to slip or an incorrect wheel diameter.
 
 Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).

@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F11.2: Plan Attachment Clearance
 
-An attachment changes the robot's effective width and forward reach, so a route that cleared an obstacle without the tool may collide afterward. Measure the tool's sweep at its open and closed angles, then add a named clearance margin that can be adjusted after a field test.
+An attachment changes the space the robot needs along a route. Even if the chassis clears an obstacle, the tool may reach into it while opening or closing. This lesson uses a named clearance distance for the approach, then checks the tool's full sweep around the target.
 
 ## Worked example
+
+The approach stops short by `TOOL_CLEARANCE_MM` before the tool moves. The number is an example; the real margin should come from the attachment's reach and a field measurement.
 
 ~~~python
 TOOL_CLEARANCE_MM = 70
@@ -24,17 +26,17 @@ attachment.run_angle(160, 60)
 
 ## Simulator practice
 
-Run the approach with the tool at both ends of its travel. Check clearance around the yellow target.
+Use the worked example's clearance value for a first approach, then compare the tool at each end of its travel. The field view can show whether the approach leaves room near the yellow target.
 
 <FllPythonPractice lessonId="fll-unit-11/attachment-geometry" />
 
 ## On the robot
 
-Trace the tool's widest position on paper. Test the route with the actual tool installed and measure the closest gap.
+Tracing the widest tool position on paper can help estimate its swept space. A slow physical test should then measure the closest gap with the actual tool installed.
 
 ## Check and adjust
 
-The planned clearance remains positive throughout the tool motion. If the tool strikes a model, measure its full swept width.
+The gap should remain positive through the whole tool motion. If contact occurs, measuring the full sweep can show whether the margin or route needs changing.
 
 Reference: [Pybricks Motor reference](https://docs.pybricks.com/en/stable/pupdevices/motor.html).
 

@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F8.1: Wheel Diameter and Axle Track
 
-Wheel diameter is measured across a wheel, while axle track is the spacing between the wheel contact points on the floor. Enter both in millimeters and measure your build instead of copying the 56 mm and 112 mm examples. An incorrect diameter affects straight travel, while an incorrect track affects turns.
+The DriveBase needs two measurements from the robot: wheel diameter and axle track. Diameter is measured across a wheel; axle track is the distance between the wheel contact points on the floor. We will use these values to compare a straight drive and a turn. The example numbers are starting values, so your own build should be measured before using them on hardware.
 
 ## Worked example
+
+Both measurements are in millimeters. A wrong diameter can affect the straight distance, while a wrong axle track can affect the turn angle.
 
 ~~~python
 WHEEL_DIAMETER_MM = 56
@@ -26,17 +28,17 @@ robot.turn(180)
 
 ## Simulator practice
 
-Try two wheel diameter values and compare the simulated distance and turn.
+Change the wheel diameter once and compare the reported distance and turn with the first run. This can help separate a geometry setting from a route command.
 
 <FllPythonPractice lessonId="fll-unit-08/drivebase-geometry" />
 
 ## On the robot
 
-Measure the wheel and contact-point spacing. Run a 500 mm straight and a 180 degree turn from marked starts.
+Measure the wheel and the contact-point spacing on the actual build. A 500 mm straight and a 180 degree turn from marked starts can show which measurement needs another look.
 
 ## Check and adjust
 
-Your calibration sheet keeps the two geometry values and their separate errors. If straight and turn errors move together, calibrate diameter first.
+Keep the two measurements and their separate errors on the calibration sheet. If straight distance is consistently wrong, check diameter first; a repeatable turn error may point to axle track.
 
 Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).
 

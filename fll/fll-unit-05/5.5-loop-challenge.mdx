@@ -8,9 +8,11 @@ sidebar_position: 5
 
 # Lesson F5.5: Loop and Timeout Challenge
 
-Build one loop that checks for the line or obstacle and stops the approach within four seconds in every case. Print or return the reason for stopping, then record the final position for a line, an obstacle, and a run with neither cue.
+This challenge combines the loop, sensor readings, and timeout from the unit. The aim is an approach that can stop for a line, an obstacle, or a four-second limit and report the reason. The simulator checks that a loop reads reflected light or time, moves the robot, and calls `robot.stop()` without a collision.
 
 ## Worked example
+
+`reason` begins as `"timeout"`. A line or obstacle reading can replace it and break out of the loop. If neither condition is met, the watch ends the loop; the stop call is outside all three exit paths.
 
 ~~~python
 watch = StopWatch()
@@ -30,16 +32,16 @@ print(reason)
 
 ## Simulator practice
 
-Use different threshold values and a short timeout to exercise line, obstacle, and timeout exits on the fixed field. Reset the program between runs.
+The fixed field can support separate tests by changing a threshold or the time limit. Each test should print the reason expected for that setup and end with the robot stopped. Resetting between runs keeps the starting pose comparable.
 
 <FllPythonPractice lessonId="fll-unit-05/loop-challenge" />
 
 ## On the robot
 
-Run at a reduced speed on the robot. Photograph or mark all three stop points for later comparison.
+Low-speed physical trials may show whether the three stop reasons correspond to different field positions. Marks or photos of those positions can help when choosing the final thresholds.
 
 ## Check and adjust
 
-No test leaves the drive base moving after the program ends. If motors continue running, place robot.stop() after every loop exit.
+Every loop exit should lead to `robot.stop()`. If a test keeps driving, check for a path that bypasses the stop and for a time condition that never becomes false.
 
 Reference: [Pybricks timing tools reference](https://docs.pybricks.com/en/stable/tools/).

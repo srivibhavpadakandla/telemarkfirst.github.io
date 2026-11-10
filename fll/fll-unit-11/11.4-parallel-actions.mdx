@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F11.4: Coordinate Drive and Tool Motion
 
-A tool move may overlap a drive when clearance permits, which can save time but complicates debugging. Test the actions sequentially in Telemark before using `wait=False` and a later `done()` check on Pybricks hardware. The simulator does not model true concurrent timing, so verify clearance along the entire physical path before overlapping motion.
+Once a drive and tool action work in sequence, some robots can perform them at the same time. That may shorten a route, but the tool needs clearance along the whole drive. Here the simulator shows the sequential actions; the hardware-only `wait=False` option introduces overlap after the route has been checked.
 
 ## Worked example
+
+The first part is suitable for the simulator. The commented lines show how Pybricks can start a tool move without waiting and later check whether it is done. The simulator does not model that concurrent timing.
 
 ~~~python
 # Simulator: test the same actions in sequence.
@@ -30,17 +32,17 @@ print("Tool done:", attachment.done())
 
 ## Simulator practice
 
-Run the sequential version and record time. Identify where overlap could happen without a collision.
+Use the sequential route from the worked example and note its time and clearance. That baseline can be compared with a later physical test of overlapping motion.
 
 <FllPythonPractice lessonId="fll-unit-11/parallel-actions" />
 
 ## On the robot
 
-Test the hardware-only timing option with the robot raised first. Then test at low speed and compare total time with the sequential route.
+The hardware-only option should first be checked with the robot raised. A later low-speed field trial can show whether it saves time without bringing the tool into an obstacle.
 
 ## Check and adjust
 
-The tool finishes before contact with a model, and the route has a measured timing benefit if overlap is used. If overlapping actions collide, return to sequential steps.
+The overlapping route is useful only if the tool clears the models and its measured time improves. A collision or uncertain clearance is a reason to use the tested sequential version.
 
 Reference: [Pybricks Motor reference](https://docs.pybricks.com/en/stable/pupdevices/motor.html).
 

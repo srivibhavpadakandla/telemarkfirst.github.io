@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F14.2: Review Units and Stops
 
-Before a full run, check the unit at every movement call and confirm that each continuous drive has a stop path. DriveBase distances use millimeters, angles use degrees, motor speeds use degrees per second, and waits use milliseconds. Test missing cues and invalid range values, then remove unused code that could confuse a match day edit.
+Before the whole route runs, a code review can catch unit mistakes and missing stop conditions. DriveBase distance uses millimeters, angles use degrees, motor speeds use degrees per second, and waits use milliseconds. This lesson tests both a quick timeout and a normal approach to see whether the drive stops in each case.
 
 ## Worked example
+
+The loop ends when the object is close enough or the time limit is reached. A 2000 mm invalid reading is not treated separately in this sample, so a robust mission would check for it before interpreting the returned Boolean.
 
 ~~~python
 def approach_safely(limit_ms):
@@ -28,17 +30,17 @@ print("Cue found:", approach_safely(3000))
 
 ## Simulator practice
 
-Run once with a 1 ms timeout and once with the normal 3000 ms timeout. Inspect whether both paths stop on the fixed field.
+Put the worked `approach_safely()` function in the editor, then compare a 1 ms timeout with the normal 3000 ms limit. Both should reach `robot.stop()`, although their returned results may differ.
 
 <FllPythonPractice lessonId="fll-unit-14/code-review" />
 
 ## On the robot
 
-Conduct a two-person review. One person reads the code while the other checks the field and port map.
+One teammate can read movement calls and units while another checks them against the field and port map. A missing sensor cue should also be tried at low speed.
 
 ## Check and adjust
 
-The review log lists the units, stop paths, and tested failure cases. If a sensor is absent, verify timeout, stop, and returned result.
+The review log should name each continuous drive's stop path and the failure cases tested. If a cue is absent, the timer, stop call, and returned result should agree.
 
 Reference: [Pybricks UltrasonicSensor reference](https://docs.pybricks.com/en/stable/pupdevices/ultrasonicsensor.html).
 

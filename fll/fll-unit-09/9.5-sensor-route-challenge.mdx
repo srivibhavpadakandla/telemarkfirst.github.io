@@ -8,9 +8,11 @@ sidebar_position: 5
 
 # Lesson F9.5: Sensor Route Challenge
 
-Drive toward the dark line and let a reflected light reading end the movement. Log the value and elapsed time at the stop, then set the threshold below zero to force a second run through the timeout path. Both runs must stop before the next field object.
+This challenge uses a sensor reading to end a drive, with a timeout for a missed line. The goal is to stop at the dark line, then test what happens when the threshold cannot be reached. The two outcomes should both leave the robot stopped before the next field object.
 
 ## Worked example
+
+The first straight drive puts the sensor nearer the line. The continuous drive then ends on a dark reading or after eight seconds. The example prints the final reflection, and the elapsed time can also be printed to distinguish the two outcomes.
 
 ~~~python
 robot.straight(200)
@@ -24,16 +26,16 @@ print("Light:", color_sensor.reflection())
 
 ## Simulator practice
 
-Drive to the dark line and stop over it. Inspect the final reflection reading and stop event.
+Use the sample route for a first line stop. Changing its threshold to a value below zero should force the timeout path; compare the final position and stop event after both runs.
 
 <FllPythonPractice lessonId="fll-unit-09/sensor-route-challenge" />
 
 ## On the robot
 
-Test five line stops from the same launch pose. Record the stop distance and any missed detection.
+Five physical starts from the same launch mark can show how much the stop distance varies. Record any run that misses the line as well as the successful ones.
 
 ## Check and adjust
 
-Both the measured threshold and the forced timeout should stop the route safely. If the line is missed, check the recorded stop reason before changing the threshold.
+Both runs should end with a stopped drive base. If the line is missed, the reading and elapsed time can help determine whether the threshold or the route needs adjustment.
 
 Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).

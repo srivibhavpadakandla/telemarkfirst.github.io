@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F14.1: Organize the Program
 
-Arrange imports and device setup first, measured constants next, mission functions after them, and the launch choice last. Keep port assignments and wheel dimensions easy for teammates to find, and pass measured parameters when launches use different values. Limit shared program state to values with a clear purpose.
+A final program should make its measured values and mission routes easy for teammates to find. We can group imports and device setup, constants, functions, and launch calls in that order. This lesson reorganizes a practice program so a calibration change has one clear place to go.
 
 ## Worked example
+
+The threshold is named once and used by the mission function. The returned Boolean tells the caller what the sensor saw at the end of the straight drive; it does not by itself stop at a line.
 
 ~~~python
 WHEEL_DIAMETER_MM = 56
@@ -29,17 +31,17 @@ print("Line mission:", result)
 
 ## Simulator practice
 
-Reorder a practice program into setup, constants, functions, and calls. Run before and after to compare behavior.
+Use the worked function or another practice route to arrange setup, constants, functions, and calls in four groups. Running before and after can check that organization changed without changing route behavior.
 
 <FllPythonPractice lessonId="fll-unit-14/program-architecture" />
 
 ## On the robot
 
-Print the program and ask a teammate to locate ports, geometry, and the main launch function.
+A teammate can read a printed program and locate the ports, wheel geometry, and main launch function. Any hard-to-find value is a candidate for a named constant.
 
 ## Check and adjust
 
-A new teammate can identify what to measure and where to update it. If a value is hard to find, move it into named configuration.
+The revised file should show which values come from measurements and where they are used. A teammate's ability to find and explain one value is a useful check.
 
 Reference: [Pybricks first robot program](https://pybricks.com/learn/making-programs/your-first-program/).
 

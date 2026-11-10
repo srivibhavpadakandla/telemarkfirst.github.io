@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F2.4: Mission Order, Recovery, and Time
 
-A 150 second Robot Game must include time for launches, attachment changes, and recovery as well as driving. Time each complete program with StopWatch, then decide which mission the team will skip if a run fails. A dependable short mission often contributes more than an extra objective with a poor success rate.
+The Robot Game lasts 150 seconds, including launches and attachment changes. We can time a short mission and use that result to decide what may fit after it. The aim here is a mission order with room to return or recover if the first attempt takes longer than expected.
 
 ## Worked example
+
+`StopWatch()` begins timing before the drive and attachment move. The final print reports the program's elapsed milliseconds after the return command. This does not include the team's time between launches, so a match plan needs a separate allowance for that work.
 
 ~~~python
 watch = StopWatch()
@@ -24,17 +26,17 @@ print("Mission ms:", watch.time())
 
 ## Simulator practice
 
-Time two routes and add a five-second setup allowance for each launch. Put the safer route first.
+The simulator can time two candidate routes. Adding a five-second setup allowance per launch gives a fuller estimate of each plan. A route with fewer chances to miss may be a better first choice even if its simulated score is lower.
 
 <FllPythonPractice lessonId="fll-unit-02/mission-order-and-time" />
 
 ## On the robot
 
-Time five physical runs with the same attachment. Record median time and the longest time, then reserve a recovery margin.
+Five physical runs with the same attachment can show how much the route time varies. The median and longest time give different planning numbers; the longest run may be more useful when deciding how much recovery time to reserve.
 
 ## Check and adjust
 
-Your plan fits 150 seconds with a stated reserve and a clear skip decision. If the plan exceeds 150 seconds, skip an objective and keep return time.
+A usable plan should fit within 150 seconds after its setup and recovery allowances. If the estimate exceeds that limit, dropping an objective may leave enough time for a return. The plan should state which objective the team would skip if time runs short.
 
 Reference: [Pybricks timing tools reference](https://docs.pybricks.com/en/stable/tools/).
 

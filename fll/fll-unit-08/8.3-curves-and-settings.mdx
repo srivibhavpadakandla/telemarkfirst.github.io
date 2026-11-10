@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F8.3: Arcs and Speed Settings
 
-`DriveBase.arc(radius, angle=...)` drives a circular segment with radius in millimeters and angle in degrees. A positive radius makes a right arc. Test a short arc and check the robot's full footprint before increasing the angle. DriveBase settings also use different units: straight speed and acceleration use mm/s and mm/s², while turn rate and acceleration use deg/s and deg/s².
+An arc can round a corner that would otherwise need a straight segment and an in-place turn. `DriveBase.arc(radius, angle=...)` takes a radius in millimeters and an angle in degrees; a positive radius makes a right arc. We will compare two short arcs with a segmented route and watch the whole robot footprint, including its attachment.
 
 ## Worked example
+
+The two arcs have equal radii with opposite signs. `settings()` also uses separate units for straight and turning motion: mm/s and mm/s², then deg/s and deg/s².
 
 ~~~python
 robot.settings(160, 320, 90, 180)  # mm/s, mm/s², deg/s, deg/s²
@@ -22,17 +24,17 @@ robot.arc(-100, angle=30)
 
 ## Simulator practice
 
-Compare a right arc followed by a left arc with two in-place turns and straight segments.
+Try the worked example's two arcs in the editor, then compare them with a route made from straight segments and in-place turns. The comparison can show whether the curve gives enough clearance on this field.
 
 <FllPythonPractice lessonId="fll-unit-08/curves-and-settings" />
 
 ## On the robot
 
-Tape a wide arc on the practice surface. Confirm the attachment clears nearby mission models throughout the path.
+A taped arc and the actual attachment can help reveal a clearance problem between the start and end points.
 
 ## Check and adjust
 
-The arc radius and speed settings are recorded with units and the robot clears the obstacle. If an arc collides, increase radius or change the route.
+Record the radius and speed settings with their units. If the robot touches an obstacle during the arc, a wider radius or another route may leave more room.
 
 Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).
 

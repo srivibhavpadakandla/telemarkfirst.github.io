@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F4.1: Compare Sensor Readings
 
-A comparison returns `True` or `False` when a sensor value meets a rule. Compare values in the same unit: a distance can be below a gap in millimeters, while a reflection can be above a threshold in percent. Print the Boolean result before using the condition to change motor motion.
+After reading a sensor, we can compare its value with a threshold. The comparison gives `True` or `False`, which a program can use to choose an action. This lesson tests a range threshold in millimeters, including the exact boundary where the result changes.
 
 ## Worked example
+
+`too_close` is true only when `range_mm` is less than 150. A reading of exactly 150 gives `False` because the operator is `<`. Printing the reading and Boolean before the `if` makes that boundary visible.
 
 ~~~python
 range_mm = distance_sensor.distance()
@@ -25,17 +27,17 @@ if too_close:
 
 ## Simulator practice
 
-Test the comparison with a Python list containing 149, 150, and 151 mm. Then print the reading from the fixed field and compare it with the chosen threshold.
+Values of 149, 150, and 151 mm should give `True`, `False`, and `False` for this comparison. Trying those values in a short Python list can show the boundary before you compare the simulator's fixed obstacle reading.
 
 <FllPythonPractice lessonId="fll-unit-04/compare-readings" />
 
 ## On the robot
 
-Measure the true gap at the moment the condition changes. Include sensor mounting offset in your notes.
+On the physical robot, the measured gap at the moment the condition changes may differ from the sensor reading. The sensor's position on the chassis should be included when you compare that gap with 150 mm.
 
 ## Check and adjust
 
-Your threshold comparison handles the exact boundary as intended. If the condition changes at the wrong gap, check both units.
+The printed Boolean should change at the boundary you chose. If it changes at an unexpected physical gap, check the units and sensor mounting position before changing the number.
 
 Reference: [Pybricks UltrasonicSensor reference](https://docs.pybricks.com/en/stable/pupdevices/ultrasonicsensor.html).
 

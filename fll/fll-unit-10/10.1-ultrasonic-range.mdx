@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F10.1: Read Ultrasonic Range
 
-`UltrasonicSensor.distance()` reports millimeters and returns 2000 when the current Pybricks API has no valid measurement. A narrow or slanted object may give a poor echo, so treat 2000 as unknown rather than proof of a clear path. Print readings at several measured distances before choosing a mission threshold.
+An ultrasonic reading can help the robot judge how far it is from an object. `UltrasonicSensor.distance()` reports millimeters, with 2000 indicating that no valid distance was measured in the current Pybricks API. We will compare readings at two positions and keep an invalid reading separate from a clear path.
 
 ## Worked example
+
+The conditional prints either an invalid-range message or a measured distance. A narrow or angled target may give a poor echo, so one reading should not decide a close approach.
 
 ~~~python
 range_mm = distance_sensor.distance()
@@ -24,17 +26,17 @@ else:
 
 ## Simulator practice
 
-Print the initial range, then use a short route toward the fixed obstacle and print again. Adjust the route distance in code to compare readings.
+The starter already prints an initial range. Add a short approach and another range print. Different route distances can show how the number changes near the fixed obstacle.
 
 <FllPythonPractice lessonId="fll-unit-10/ultrasonic-range" />
 
 ## On the robot
 
-Measure the gap with a ruler and compare it with sensor output for a flat and angled target.
+A ruler can provide a comparison for the sensor on hardware. Flat and angled targets may produce different results at the same physical gap.
 
 ## Check and adjust
 
-Your log distinguishes a valid distant object from an invalid reading. If range is 2000 mm, treat it as invalid and check target angle.
+The log should distinguish a valid distance from 2000, which means the measurement was unavailable. If invalid readings recur, the target's angle and surface are useful things to check.
 
 Reference: [Pybricks UltrasonicSensor reference](https://docs.pybricks.com/en/stable/pupdevices/ultrasonicsensor.html).
 

@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F6.2: Parameters and Return Values
 
-A parameter receives a value at a function call, and `return` passes a result back to the caller. Use a distance parameter to vary a route and a returned Boolean to report whether a sensor cue occurred. This keeps the result with the call instead of changing an unrelated global variable.
+The function in the previous lesson always ran the same route. A parameter lets a call choose its distance, while `return` gives the caller a result. This lesson uses a distance parameter to move and a Boolean return value to report whether the color sensor sees the line at the end.
 
 ## Worked example
+
+`approach_line(250)` passes 250 into `max_mm`. After driving, the function compares reflection with 35 and returns `True` or `False`. `line_found` stores that result; `return` itself does not move the robot.
 
 ~~~python
 def approach_line(max_mm):
@@ -25,17 +27,17 @@ print("Line found:", line_found)
 
 ## Simulator practice
 
-Change max_mm to 350 and compare line_found. Explain why return does not move the robot.
+The simulator's line gives the return value something to test. A run with 250 mm and another with 350 mm may end at different sensor positions, so comparing `line_found` can show whether the endpoint affects the result.
 
 <FllPythonPractice lessonId="fll-unit-06/parameters-and-return" />
 
 ## On the robot
 
-Measure the shortest safe approach distance. Pass it into the function and record the returned value for three starts.
+On the physical mat, a measured approach distance should leave room for the robot to stop safely. Three starts with that value can show whether the returned Boolean agrees with where the color sensor ends up.
 
 ## Check and adjust
 
-You can trace the argument into the parameter and the returned result into line_found. If a returned result is always False, print the reading at the endpoint.
+The call's number should reach `max_mm`, and the returned Boolean should reach `line_found`. If every result is `False`, an endpoint reflection print may show whether the sensor ever reached the line.
 
 Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).
 

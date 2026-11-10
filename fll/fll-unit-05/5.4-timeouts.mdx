@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F5.4: Add a Timeout
 
-A timeout gives a sensor wait a definite upper limit when the expected cue never appears. Start the watch immediately before continuous motion, stop the drive base after either exit condition, and print whether the cue or timer ended the loop. That result helps distinguish a missing target from a poorly chosen threshold.
+A line stop needs a backup when the sensor never sees the line. A stopwatch can bound the wait so the drive ends after three seconds even if reflection stays above the threshold. The printed result should then tell us whether the line or the time limit ended the route.
 
 ## Worked example
+
+The `while` condition requires both a light reading above 35% and elapsed time below 3000 ms. `robot.stop()` runs after either condition fails. The final `if` uses the watch to print which exit likely occurred.
 
 ~~~python
 watch = StopWatch()
@@ -28,17 +30,17 @@ else:
 
 ## Simulator practice
 
-Run with the fixed line. Then set the line threshold below zero to force the timeout case. Restore the measured threshold after the test.
+Replace the starter's fixed-distance loop with the worked example. With the visible line, the sensor should end the drive first. A threshold below zero keeps the reflection condition true, so a second run should end on the timer.
 
 <FllPythonPractice lessonId="fll-unit-05/timeouts" />
 
 ## On the robot
 
-Test on an unobstructed practice surface first. Keep one hand ready at the hub stop button during the first timed run.
+The first physical timeout test should use a clear practice surface and a person ready at the hub stop button. A timed stop there can show whether the backup works before the robot is sent toward a field model.
 
 ## Check and adjust
 
-Both tests should stop, and the printed exit reason should match the field condition. If the timeout is ignored, start the watch before the drive.
+Both runs should reach `robot.stop()`, and the printed result should match the condition that ended each run. If the route lasts too long, check that the watch starts before the drive and that the loop compares its time.
 
 Reference: [Pybricks timing tools reference](https://docs.pybricks.com/en/stable/tools/).
 

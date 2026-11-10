@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F10.4: Handle Missing or Conflicting Cues
 
-Choose a safe action for a mission when a required cue is absent. An invalid ultrasonic range is not evidence that the path is clear, so limit the wait and stop conservatively if valid readings never arrive. Check heading separately before a turn so one failed sensor cannot silently alter the rest of the route.
+A missing sensor reading needs a defined outcome in a mission program. Here the robot waits briefly for a valid ultrasonic distance. It moves only when the reading is valid and leaves enough room; otherwise it stops. This makes the decision visible in the printed result.
 
 ## Worked example
+
+The `valid` flag begins false and changes only after a reading below 2000. The one-second limit prevents the polling loop from waiting indefinitely.
 
 ~~~python
 watch = StopWatch()
@@ -32,17 +34,17 @@ print("Valid range:", valid)
 
 ## Simulator practice
 
-Use sample range values of 100 and 2000 mm to test both branches, then run against the fixed field. Record whether the real reading is valid.
+Start with the worked example's `valid` check. Temporary sample values of 100 and 2000 mm can exercise both branches before the fixed-field reading is used; the printed flag can show which branch ran.
 
 <FllPythonPractice lessonId="fll-unit-10/sensor-fallback" />
 
 ## On the robot
 
-Run the same cases at low speed with clear space. Decide whether your team should skip the mission after an invalid reading.
+The physical test should begin at low speed in clear space. If invalid readings are common, the team can decide whether this mission should be skipped or approached another way.
 
 ## Check and adjust
 
-An invalid reading produces a safe stop and an explicit log message. If an invalid reading moves the robot, inspect the valid flag.
+An invalid reading should leave the drive base stopped and print `False`. If it moves, inspect where the `valid` flag changes and which branch uses it.
 
 Reference: [Pybricks UltrasonicSensor reference](https://docs.pybricks.com/en/stable/pupdevices/ultrasonicsensor.html).
 

@@ -8,9 +8,11 @@ sidebar_position: 5
 
 # Lesson F12.5: Reliability Challenge
 
-Cross the dark line and return home with the same program and launch pose under all three simulator calibration profiles. Record success, endpoint, heading, and time for each run. If one profile fails, locate the first divergent segment, adjust a measured value or add a cue, and retest all three.
+This challenge asks whether one route can cross the dark line and return home under the simulator's three calibration profiles. The profile table can reveal how sensitive the route is to changed geometry or motion. A failed profile gives us a place to measure before adjusting the program.
 
 ## Worked example
+
+The sample route crosses the line, turns around, and drives the same nominal distance back. The final heading helps check the turn, while the field view shows whether the robot actually reached home.
 
 ~~~python
 def short_route():
@@ -24,16 +26,16 @@ print("Final heading:", hub.imu.heading())
 
 ## Simulator practice
 
-Run once and record the automatic three-profile results. Do not change code before recording all three baseline outcomes.
+Run once and record success, endpoint, heading, and time for each automatic profile. Keeping that baseline makes a later adjustment easier to judge.
 
 <FllPythonPractice lessonId="fll-unit-12/reliability-challenge" />
 
 ## On the robot
 
-Run five physical trials with the same program. Report the success count and the failure location.
+Five physical trials with the same program and launch pose can show whether the simulator's sensitivity appears on the real robot. Record both successes and the first failure point.
 
 ## Check and adjust
 
-Your test log identifies whether the route is repeatable and what evidence supports that conclusion. If a profile fails, record divergence and retest every profile.
+The log should support a claim about the route's repeatability. If one profile fails, locate its first divergence and rerun all three profiles after a measured change.
 
 Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).

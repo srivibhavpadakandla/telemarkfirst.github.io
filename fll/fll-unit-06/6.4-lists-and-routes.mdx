@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F6.4: Represent a Route with a List
 
-A list can hold route steps in order, such as `(300, 90)` for a 300 mm drive followed by a 90 degree right turn. Document the order and units, then use a loop to execute each pair. Keep unlike mission actions outside the list when combining them would make the route harder for teammates to inspect.
+Several measured moves can be stored in a list instead of written as separate calls. Each pair in this lesson gives a straight distance in millimeters and then a turn in degrees. A loop can run the pairs in order, making the route table visible in one place.
 
 ## Worked example
+
+The first pair requests a 300 mm drive and 90 degree turn. The second uses a negative turn, and the third skips turning because its angle is zero. Changing one pair should change one part of the route without rewriting the loop.
 
 ~~~python
 route = [(300, 90), (50, -90), (150, 0)]
@@ -24,17 +26,17 @@ for distance_mm, turn_deg in route:
 
 ## Simulator practice
 
-Edit only the second pair and compare the final pose.
+The starter already uses a function for one drive. Replacing its route with the list above gives the simulator three drive segments to show. A change to the second pair should affect the middle segment and may change the final pose.
 
 <FllPythonPractice lessonId="fll-unit-06/lists-and-routes" />
 
 ## On the robot
 
-Copy the route pairs into a table in your notebook. Measure each segment on the mat and mark deviations.
+A notebook table with distance and turn columns can help another teammate check the route. Physical measurements after each segment may show where the path first differs from that table.
 
 ## Check and adjust
 
-The number of route rows matches the executed drive segments. If a route row is wrong, check the order of distance and turn.
+Each route pair should cause one straight segment and, unless its angle is zero, one turn. If a segment looks wrong, check the pair's order and units before changing the loop.
 
 Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).
 

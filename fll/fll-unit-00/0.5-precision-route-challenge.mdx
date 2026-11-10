@@ -8,9 +8,11 @@ sidebar_position: 10
 
 # Lesson F0.5: Precision Route Challenge
 
-Plan a route that crosses the practice line and returns home using measured distances and angles. Mark each segment in millimeters and each turn in degrees before coding, then test the route one segment at a time. A repeatable return matters more than a longer route that works only once.
+We have driven measured distances and made measured turns. This challenge combines them in a route that crosses the dark practice line and returns to the blue home area. The simulator checks for a line crossing, a turn, and a return without collision.
 
 ## Worked example
+
+The 850 mm drive should cross the practice line in this simulator. A 180 degree turn points the robot back toward home, and the second drive requests the same distance in that direction. The numbers are a starting route to test, not measurements for a physical robot.
 
 ~~~python
 robot.straight(850)
@@ -20,16 +22,16 @@ robot.straight(850)
 
 ## Simulator practice
 
-Edit the route to cross the dark line and finish in the blue home region. Use Reset between attempts and record each result.
+The field view can show where the robot first crosses the line and where it ends after the return. If the example misses home, changing one distance or turn at a time can help identify the cause. Resetting between attempts keeps the starting pose the same.
 
 <FllPythonPractice lessonId="fll-unit-00/precision-route-challenge" />
 
 ## On the robot
 
-Run the route from the same launch marks three times. Measure the final offset from your home target after each run.
+The same launch marks should be used for three physical trials. Measuring the final offset from the home target each time can show whether the route is close and repeatable enough to keep testing.
 
 ## Check and adjust
 
-The robot crosses the line, returns to home, and your notes show three trial outcomes. If the route fails after a turn, test that turn alone from a marked heading.
+The simulator checks should confirm a line crossing, a measured turn, and a return home. On the mat, three recorded final positions may reveal a turn that needs separate testing from a marked heading.
 
 Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).

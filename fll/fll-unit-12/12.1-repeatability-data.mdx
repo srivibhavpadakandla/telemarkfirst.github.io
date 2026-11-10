@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F12.1: Record Repeatability
 
-Run the same code several times and record final position, heading, elapsed time, and mission result. The mean can reveal a consistent bias, while the spread shows how much results vary between runs. Include failures, and keep simulator calibration profiles separate from physical trials because they represent different conditions.
+A single successful run does not show how often a route works. Repeating the same program from the same launch marks can reveal variation in final position, heading, time, and mission result. This lesson introduces a mean and a spread for time, then uses a table to keep all outcomes visible.
 
 ## Worked example
+
+The mean describes the center of these three times. The spread is the longest minus the shortest, so a large spread may point to inconsistent starts or motion.
 
 ~~~python
 times_ms = [3200, 3350, 3280]
@@ -24,17 +26,17 @@ print("Spread ms:", spread_ms)
 
 ## Simulator practice
 
-Run a fixed route once, then compare the automatic three-profile table. Record position, home status, and error for each profile.
+The starter provides a fixed drive for the automatic three-profile table. Those profiles represent different calibrations, so their results should be recorded separately from repeated physical trials.
 
 <FllPythonPractice lessonId="fll-unit-12/repeatability-data" />
 
 ## On the robot
 
-Run five physical trials from the same launch marks. Record success or failure and the measured endpoint for every trial.
+Five physical trials from the same launch marks can show how much the actual result varies. Include failed runs and their endpoints in the table.
 
 ## Check and adjust
 
-Your table includes all trials, not only successful ones. If results vary, fix launch and loose hardware before constants.
+The table should make the spread and any consistent error visible. If results vary widely, launch alignment and loose hardware are useful checks before changing a calibration number.
 
 Reference: [Pybricks timing tools reference](https://docs.pybricks.com/en/stable/tools/).
 

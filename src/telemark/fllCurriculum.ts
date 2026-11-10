@@ -35,8 +35,8 @@ const FLL_UNIT_SEEDS: FllUnitSeed[] = [
   },
   {
     title: "Sensors and First Mission Tools",
-    desc: "Read light, range, and heading, then control a simple attachment.",
-    overview: "Start with sensor values you can print and measure. Add threshold decisions only after you know the range on your own field.",
+    desc: "Stop at a line or obstacle, check a turn, and move an attachment.",
+    overview: "We will use reflected light to stop at a line, a distance reading and time limit to stop before an obstacle, and heading to check a turn. After moving an attachment through a known angle, we will combine these pieces to deliver an object.",
     outcomes: [
       "Measure reflected light and distance with Pybricks sensors.",
       "Read and reset Prime Hub heading safely.",

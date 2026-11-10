@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F4.2: Choose One Branch
 
-An `if`/`elif`/`else` chain chooses one action from several conditions in order. Put urgent cases first so a close obstacle stops the robot before a lower priority color cue can trigger another action, and reserve `else` for the normal case. Arrange known field states to test every branch.
+One sensor comparison can choose between two outcomes. With `if`, `elif`, and `else`, the robot can choose one of several actions in priority order. Here a close obstacle should stop the route before a dark-line reading can trigger a turn; a clear field allows a short drive.
 
 ## Worked example
+
+Python checks `range_mm < 150` first. It checks the line reading only if that first condition is false, and it runs the `else` block only if neither condition is true. The printed word can show which branch ran in a test.
 
 ~~~python
 range_mm = distance_sensor.distance()
@@ -30,17 +32,17 @@ else:
 
 ## Simulator practice
 
-Keep the field fixed. Change the numeric thresholds to trigger each branch in turn, and verify only one action runs per test.
+The simulator field can stay fixed while you change a threshold to make each branch run in turn. The output should show `stop`, `line`, or `clear`, with only one of those words per run. Restoring the chosen thresholds afterward lets you test the intended priority.
 
 <FllPythonPractice lessonId="fll-unit-04/if-elif-else" />
 
 ## On the robot
 
-Run the branches with the robot lifted, then test at low speed on the mat. Record the input readings for each result.
+The first physical tests should keep the wheels lifted while you compare printed readings and branches. Low-speed mat trials can then show whether the chosen thresholds match the real obstacle and line.
 
 ## Check and adjust
 
-Your test log has a case for stop, line, and clear. If two actions run, check indentation and use one if, elif, else chain.
+A useful test log should include one case for each printed result. If more than one action appears in a run, check the indentation and whether the actions belong to a single `if`/`elif`/`else` chain.
 
 Reference: [Pybricks UltrasonicSensor reference](https://docs.pybricks.com/en/stable/pupdevices/ultrasonicsensor.html).
 

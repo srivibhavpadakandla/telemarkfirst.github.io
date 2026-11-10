@@ -8,9 +8,11 @@ sidebar_position: 5
 
 # Lesson F11.5: Mission Cycle Challenge
 
-Complete a target action and object delivery in one cycle, then return home. Keep the actions in separate functions and print elapsed time after each, testing both functions alone before the full route. Prepare a short return if the first action fails.
+This challenge combines a target action, a delivery, and a return in one cycle. Separate functions can make the route easier to test, while time readings can show which action takes the longest. The worked example covers a target action and return, so the delivery step still needs to be planned and added.
 
 ## Worked example
+
+The stopwatch measures from the start of the program. `target_step()` moves the attachment, and `return_step()` goes back after a half turn; neither function verifies that an object was delivered.
 
 ~~~python
 watch = StopWatch()
@@ -32,16 +34,16 @@ print("Total ms:", watch.time())
 
 ## Simulator practice
 
-Use the generic target and delivery zones. Record the total time and home position in three attempts.
+Add a delivery step for the generic field, then compare target, delivery, and home results over three attempts. The total time can be recorded alongside each result.
 
 <FllPythonPractice lessonId="fll-unit-11/mission-cycle-challenge" />
 
 ## On the robot
 
-Time the physical route with the actual tool and mark where a failed pickup should trigger a return.
+The physical route should use the actual tool. A marked point for a short return can help if the pickup fails before delivery.
 
 ## Check and adjust
 
-The complete route performs the planned actions and ends at home inside the match limit. If the cycle misses home, split actions into measured trials.
+The completed route should attempt both objectives and end at home within the time budget. If it misses, separate trials may reveal which action first changed the planned pose.
 
 Reference: [FIRST season materials](https://www.firstinspires.org/resources/library/fll/season-materials).

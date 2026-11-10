@@ -8,9 +8,11 @@ sidebar_position: 5
 
 # Lesson F13.5: Match Plan Challenge
 
-Prepare two launches that complete a reliable route first and leave enough time for a second objective and return. Record expected time and score for each launch, then run the full sequence three times in the simulator. Use the written fallback when a mission fails rather than editing code mid-match.
+This challenge brings mission value, timing, order, and fallback into one plan. The team should be able to explain why the first route comes first and how much time remains for the next objective and return. Three complete trials can show whether that plan fits the clock in practice.
 
 ## Worked example
+
+The example times two route functions and prints a reading after each. It models movement in one continuous simulator program; physical launches also include handling and may use separate hub slots.
 
 ~~~python
 watch = StopWatch()
@@ -36,16 +38,16 @@ print("Total ms:", watch.time())
 
 ## Simulator practice
 
-Run both launches under the 150 second limit and record objective completion and final home position.
+Run the sequence under the 150 second clock. Record whether each objective was completed, where the robot ended, and how much time the route used.
 
 <FllPythonPractice lessonId="fll-unit-13/match-plan-challenge" />
 
 ## On the robot
 
-Rehearse all physical handling between launches. Compare the actual duration with the planned reserve.
+Physical rehearsal should include every handoff between launches. Comparing the total with the planned reserve can reveal time missing from the code-only estimate.
 
 ## Check and adjust
 
-Your plan lists the route order, time estimate, fallback, and three complete trial results. If a run exceeds the reserve, revise the written plan.
+The final plan should include route order, time estimates, a fallback, and results from three complete trials. A run that uses the reserve may call for a shorter second objective.
 
 Reference: [FIRST season materials](https://www.firstinspires.org/resources/library/fll/season-materials).
