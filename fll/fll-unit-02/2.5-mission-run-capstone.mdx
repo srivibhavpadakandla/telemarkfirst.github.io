@@ -1,0 +1,45 @@
+---
+id: mission-run-capstone
+title: "Lesson F2.5: First Mission Run Capstone"
+slug: /unit-02/mission-run-capstone
+sidebar_label: "F2.5 · First Mission Run Capstone"
+sidebar_position: 5
+---
+
+# Lesson F2.5: First Mission Run Capstone
+
+Combine a line crossing, target action, object delivery, and return home using functions for actions already tested. Record time and final position across three trials. This early capstone establishes a route to improve later with control flow, calibration, and failure recovery.
+
+## Worked example
+
+The [course port map](/fll/python-starter) supplies the device names below. This short route separates the outward action from the return, so add the pickup and delivery actions before testing a full mission.
+
+~~~python
+def target_action():
+    robot.straight(250)
+    attachment.run_angle(180, 90)
+    attachment.run_angle(180, -90)
+
+def return_home():
+    robot.turn(180)
+    robot.straight(250)
+
+target_action()
+return_home()
+~~~
+
+## Simulator practice
+
+Complete the field objectives inside 150 simulated seconds. Use the same launch pose for each attempt.
+
+<FllPythonPractice lessonId="fll-unit-02/mission-run-capstone" />
+
+## On the robot
+
+Run the same two-objective plan on a practice field. Note which action fails first and the measured cause.
+
+## Check and adjust
+
+The run ends at home, includes reusable functions, and has three recorded trials. If the first action fails, test its function alone before the complete route.
+
+Reference: [FIRST season materials](https://www.firstinspires.org/resources/library/fll/season-materials).

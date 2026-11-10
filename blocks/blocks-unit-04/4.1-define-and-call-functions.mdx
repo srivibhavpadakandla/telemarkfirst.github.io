@@ -9,21 +9,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson 4.1: Define and Call a Function
 
-A **function** is a named part of a program that performs a specific job. A function definition contains the commands for that job. A function call tells the program to run those commands.
+A **function** groups commands under a name, but its definition does not run those commands. A call runs them at a chosen point in the main program, which makes a routine such as `reportReady` reusable without copying its print blocks.
 
-Defining a function does not run its body. The body runs each time the function is called. After the function finishes, execution returns to the command after the call.
+## Reuse one routine
 
-A useful function name states the job, such as `printStatus` or `moveRow`. Clear names make the main program easier to read and make repeated work easier to change in one place.
-
-Functions do not remove the need to plan order. A call runs exactly where it appears in the sequence.
-
-## Guided practice
-
-Define a function named `showReady` that prints `ready`. Connect two calls to `showReady` under the start block. Predict the output, then run it.
-
-Change the function body to print `system ready`. Both calls should now use the changed definition. Use Step to follow execution from the call into the function body and back to the main stack.
-
-In Java, a function that belongs to a class is usually called a **method**. You will use the same define-and-call idea in the Java curriculum.
+Define `reportReady` to print `ready`, place two calls beneath the start block, and predict two output lines. Change the definition to print `robot ready`, then run again and use Step to trace from a call into the function and back. Java calls a function inside a class a method. Later robot code can use the same structure for motor actions.
 
 <BlockPractice lessonId="blocks-unit-04/define-and-call-functions" />
 

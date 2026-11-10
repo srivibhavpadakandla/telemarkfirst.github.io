@@ -1,0 +1,42 @@
+---
+id: parameters-and-return
+title: "Lesson F6.2: Parameters and Return Values"
+slug: /unit-06/parameters-and-return
+sidebar_label: "F6.2 · Parameters and Return Values"
+sidebar_position: 2
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F6.2: Parameters and Return Values
+
+A parameter receives a value at a function call, and `return` passes a result back to the caller. Use a distance parameter to vary a route and a returned Boolean to report whether a sensor cue occurred. This keeps the result with the call instead of changing an unrelated global variable.
+
+## Worked example
+
+~~~python
+def approach_line(max_mm):
+    robot.straight(max_mm)
+    return color_sensor.reflection() < 35
+
+line_found = approach_line(250)
+print("Line found:", line_found)
+~~~
+
+## Simulator practice
+
+Change max_mm to 350 and compare line_found. Explain why return does not move the robot.
+
+<FllPythonPractice lessonId="fll-unit-06/parameters-and-return" />
+
+## On the robot
+
+Measure the shortest safe approach distance. Pass it into the function and record the returned value for three starts.
+
+## Check and adjust
+
+You can trace the argument into the parameter and the returned result into line_found. If a returned result is always False, print the reading at the endpoint.
+
+Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).
+
+<MarkComplete lessonId="fll-unit-06/parameters-and-return" nextUnit="/fll/unit-06/scope-and-constants" nextUnitName="Lesson F6.3: Scope and Calibration Constants" />

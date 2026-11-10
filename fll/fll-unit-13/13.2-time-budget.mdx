@@ -1,0 +1,42 @@
+---
+id: time-budget
+title: "Lesson F13.2: Budget the Match"
+slug: /unit-13/time-budget
+sidebar_label: "F13.2 · Budget the Match"
+sidebar_position: 2
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F13.2: Budget the Match
+
+Plan within the 150 second match clock, including launch setup, driving, tool motion, and time reserved for recovery. Convert StopWatch milliseconds to seconds before adding mission times. Use the longest recent trial or another conservative bound instead of the fastest run when deciding what fits.
+
+## Worked example
+
+~~~python
+mission_times_s = [32, 41, 28]
+launch_s = 5 * len(mission_times_s)
+reserve_s = 15
+planned_s = sum(mission_times_s) + launch_s + reserve_s
+print("Planned seconds:", planned_s)
+print("Fits match:", planned_s <= 150)
+~~~
+
+## Simulator practice
+
+Replace estimates with measured simulator times and check the total.
+
+<FllPythonPractice lessonId="fll-unit-13/time-budget" />
+
+## On the robot
+
+Time full physical launches, including handling at home. Keep a visible record of the slowest complete run.
+
+## Check and adjust
+
+The plan fits 150 seconds with a stated recovery reserve. If total time exceeds 150 seconds, remove an objective.
+
+Reference: [Pybricks timing tools reference](https://docs.pybricks.com/en/stable/tools/).
+
+<MarkComplete lessonId="fll-unit-13/time-budget" nextUnit="/fll/unit-13/route-order" nextUnitName="Lesson F13.3: Order Missions" />

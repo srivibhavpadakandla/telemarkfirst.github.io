@@ -26,7 +26,9 @@ import {
 } from './blocksCurriculum';
 import {
   FLL_LESSONS,
+  FLL_LESSON_COUNT,
   FLL_UNITS,
+  FLL_UNIT_COUNT,
   getFllLessonsForUnit,
   getFllUnitBySlug,
 } from './fllCurriculum';
@@ -41,7 +43,7 @@ import {
  */
 
 export type MainTrackId = 'software' | 'mechanical';
-export type TrackId = MainTrackId | 'blocks';
+export type TrackId = MainTrackId | 'blocks' | 'fll';
 
 export interface Track {
   id: TrackId;
@@ -87,24 +89,38 @@ export const BLOCKS_TRACK: Track = {
   lessonCount: BLOCKS_LESSON_COUNT,
 };
 
+export const FLL_TRACK: Track = {
+  id: 'fll',
+  label: 'FLL Robotics Track',
+  shortLabel: 'FLL Robotics',
+  tagline: 'Design simple mechanisms, then program a SPIKE Prime robot with Pybricks.',
+  units: FLL_UNITS,
+  lessons: FLL_LESSONS,
+  unitCount: FLL_UNIT_COUNT,
+  lessonCount: FLL_LESSON_COUNT,
+};
+
 export const MAIN_TRACKS: Array<typeof SOFTWARE_TRACK | typeof MECHANICAL_TRACK> = [
   SOFTWARE_TRACK,
   MECHANICAL_TRACK,
 ];
-/** Public top-level choices. Blocks is nested inside Software as its prerequisite. */
+export const DASHBOARD_TRACKS: Track[] = [BLOCKS_TRACK, FLL_TRACK, SOFTWARE_TRACK, MECHANICAL_TRACK];
+/** Home page primary choices remain the two FTC tracks. */
 export const TRACKS: Track[] = MAIN_TRACKS;
 
-export const TOTAL_UNIT_COUNT = BLOCKS_UNIT_COUNT + CURRICULUM_UNIT_COUNT + MECHANICAL_UNIT_COUNT;
-export const TOTAL_LESSON_COUNT = BLOCKS_LESSON_COUNT + CURRICULUM_LESSON_COUNT + MECHANICAL_LESSON_COUNT;
+export const TOTAL_UNIT_COUNT = BLOCKS_UNIT_COUNT + FLL_UNIT_COUNT + CURRICULUM_UNIT_COUNT + MECHANICAL_UNIT_COUNT;
+export const TOTAL_LESSON_COUNT = BLOCKS_LESSON_COUNT + FLL_LESSON_COUNT + CURRICULUM_LESSON_COUNT + MECHANICAL_LESSON_COUNT;
 
 /** Engineering slugs are module-NN; everything else belongs to the software track. */
 export function trackForUnitSlug(unitSlug: string): TrackId {
-  if (unitSlug.startsWith('blocks-unit-') || unitSlug.startsWith('fll-unit-')) return 'blocks';
+  if (unitSlug.startsWith('fll-unit-')) return 'fll';
+  if (unitSlug.startsWith('blocks-unit-')) return 'blocks';
   return unitSlug.startsWith('module-') ? 'mechanical' : 'software';
 }
 
 export function getTrack(trackId: TrackId): Track {
   if (trackId === 'blocks') return BLOCKS_TRACK;
+  if (trackId === 'fll') return FLL_TRACK;
   return trackId === 'mechanical' ? MECHANICAL_TRACK : SOFTWARE_TRACK;
 }
 

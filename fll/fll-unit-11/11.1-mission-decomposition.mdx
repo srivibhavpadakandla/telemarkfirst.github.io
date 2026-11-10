@@ -1,0 +1,49 @@
+---
+id: mission-decomposition
+title: "Lesson F11.1: Break a Mission into Actions"
+slug: /unit-11/mission-decomposition
+sidebar_label: "F11.1 · Break a Mission into Actions"
+sidebar_position: 1
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F11.1: Break a Mission into Actions
+
+Write a mission as leave home, approach, act, verify, and return before turning it into code. Give each action one function and place measurements near the call. When a run fails, test the smallest function that reproduces the problem so unrelated movement does not hide the cause.
+
+## Worked example
+
+~~~python
+def approach_target(distance_mm):
+    robot.straight(distance_mm)
+
+def activate():
+    attachment.run_angle(180, 90)
+    attachment.run_angle(180, -90)
+
+def return_home(distance_mm):
+    robot.straight(-distance_mm)
+
+approach_target(300)
+activate()
+return_home(300)
+~~~
+
+## Simulator practice
+
+Run each function separately, then run the full mission. Note the first function that misses its target.
+
+<FllPythonPractice lessonId="fll-unit-11/mission-decomposition" />
+
+## On the robot
+
+Label the function names on a printed route diagram. Have a teammate test one function from a known start pose.
+
+## Check and adjust
+
+Each function has a clear precondition and a visible result. If the mission fails, run the first failing function alone.
+
+Reference: [Pybricks first robot program](https://pybricks.com/learn/making-programs/your-first-program/).
+
+<MarkComplete lessonId="fll-unit-11/mission-decomposition" nextUnit="/fll/unit-11/attachment-geometry" nextUnitName="Lesson F11.2: Plan Attachment Clearance" />

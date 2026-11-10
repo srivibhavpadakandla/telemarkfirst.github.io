@@ -70,7 +70,15 @@ for (const track of ['docs', 'mechanical']) {
 }
 assert.ok(!fs.existsSync(path.join(root, 'mechanical/cad-practice.mdx')));
 assert.ok(!fs.existsSync(path.join(root, 'src/components/TrackOverview.tsx')));
-assert.match(read('blocks/index.mdx'), /<BlocksOverview \/>/, 'Blocks keeps its separate landing page');
+for (const [track, firstLesson] of [
+  ['blocks', '/blocks/blocks-unit-00/workspace-and-run-controls'],
+  ['fll', '/fll/unit-00/design-as-simple-machines'],
+]) {
+  assert.ok(!fs.existsSync(path.join(root, track, 'index.mdx')), `${track} still has an overview page`);
+  const redirect = read(`src/pages/${track}.tsx`);
+  assert.match(redirect, /Redirect/);
+  assert.ok(redirect.includes(firstLesson), `${track} must open its first lesson`);
+}
 
 // ── Every mastery quiz in both tracks is scored ─────────────────────────────
 

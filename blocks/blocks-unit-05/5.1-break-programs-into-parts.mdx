@@ -9,21 +9,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson 5.1: Break a Program into Smaller Parts
 
-**Decomposition** means splitting a problem into smaller parts that can be planned, built, and tested separately. Each part should have one clear job.
+**Decomposition** divides a program into parts with clear jobs. In a robot mission, route data, threshold checks, movement, and reporting can be tested separately before the full sequence runs. Start with the required result, list the inputs and outputs, then choose functions for steps that repeat or need a clear boundary.
 
-Begin with the required result. List the information the program starts with, the output it must produce, and the rules it must follow. Then name the smaller jobs in execution order.
+## Plan a status check
 
-A delivery program might have parts for reading a list, checking one item, choosing a route, moving, and reporting the result. Some parts become functions. Others remain a short sequence in the main program.
-
-Do not create a function only to make the program longer. A function is useful when its name explains a real job, its work is reused, or it can be tested as one unit.
-
-## Guided practice
-
-Plan a program that reads three scores and reports whether each score is at least 5. Write no more than six numbered steps.
-
-Build one function named `reportScore` with a score parameter. Put the comparison and output inside it. Store the scores in a list and call the function for each item.
-
-Test the function with 4, 5, and 6. These cases cover a value below the boundary, exactly at it, and above it.
+In no more than six numbered steps, plan a program that stores three readings and reports whether each is at least 5. Keep the readings in a list and use a `reportReading` function with one parameter for each value. Test 4, 5, and 6 to cover both sides of the threshold and the boundary. Fixed test values let you check the decision before adding a real sensor.
 
 <BlockPractice lessonId="blocks-unit-05/break-programs-into-parts" />
 

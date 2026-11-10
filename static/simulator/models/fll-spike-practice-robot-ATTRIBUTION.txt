@@ -1,0 +1,19 @@
+FLL SPIKE Prime practice robot
+
+Source: Boyd Fletcher, lego_projects, Top_Front_Attachment_Robot/front_and_top_attachment_robot_rev27.io
+https://github.com/bcfletcher/lego_projects
+The source repository is distributed under Apache License 2.0. See fll-spike-practice-robot-LICENSE.txt.
+
+Changes: extracted the BrickLink Studio LDraw model, converted it to a Three.js glTF asset,
+rotated it to a vertical-up coordinate system, centered it, scaled it to centimeters, and
+optimized the glTF mesh for web display. The simulator's animated attachment indicator is
+separate from this model and does not represent an articulated part of the source build.
+
+The conversion uses geometry from the LDraw Parts Library. Individual LDraw parts are
+licensed under CC BY 2.0 and/or CC BY 4.0 as marked in their source files. Credit to the
+LDraw parts authors and LDraw.org: https://www.ldraw.org/docs-main/licenses/legal-info.html
+The original LDraw model export is in scripts/assets/fll-practice-robot.ldr; supplemental
+geometry from the Studio export is in scripts/assets/fll-practice-robot-parts.ldr.
+
+LEGO and SPIKE are trademarks of the LEGO Group. FIRST LEGO League is a trademark of FIRST
+and the LEGO Group. This is an unofficial practice simulation.

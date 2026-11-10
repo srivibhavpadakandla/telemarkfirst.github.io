@@ -1,0 +1,41 @@
+---
+id: mission-order-and-time
+title: "Lesson F2.4: Mission Order, Recovery, and Time"
+slug: /unit-02/mission-order-and-time
+sidebar_label: "F2.4 · Mission Order, Recovery, and Time"
+sidebar_position: 4
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F2.4: Mission Order, Recovery, and Time
+
+A 150 second Robot Game must include time for launches, attachment changes, and recovery as well as driving. Time each complete program with StopWatch, then decide which mission the team will skip if a run fails. A dependable short mission often contributes more than an extra objective with a poor success rate.
+
+## Worked example
+
+~~~python
+watch = StopWatch()
+robot.straight(300)
+attachment.run_angle(200, 90)
+robot.straight(-300)
+print("Mission ms:", watch.time())
+~~~
+
+## Simulator practice
+
+Time two routes and add a five-second setup allowance for each launch. Put the safer route first.
+
+<FllPythonPractice lessonId="fll-unit-02/mission-order-and-time" />
+
+## On the robot
+
+Time five physical runs with the same attachment. Record median time and the longest time, then reserve a recovery margin.
+
+## Check and adjust
+
+Your plan fits 150 seconds with a stated reserve and a clear skip decision. If the plan exceeds 150 seconds, skip an objective and keep return time.
+
+Reference: [Pybricks timing tools reference](https://docs.pybricks.com/en/stable/tools/).
+
+<MarkComplete lessonId="fll-unit-02/mission-order-and-time" nextUnit="/fll/unit-02/mission-run-capstone" nextUnitName="Lesson F2.5: First Mission Run Capstone" />

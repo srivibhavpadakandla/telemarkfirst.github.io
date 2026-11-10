@@ -1,0 +1,41 @@
+---
+id: calibrate-track
+title: "Lesson F12.3: Calibrate Axle Track"
+slug: /unit-12/calibrate-track
+sidebar_label: "F12.3 · Calibrate Axle Track"
+sidebar_position: 3
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F12.3: Calibrate Axle Track
+
+Calibrate turns after straight travel, using a full 360 degree turn on a clear surface as recommended in the Pybricks reference. Reduce the configured axle track if the robot turns too far, or increase it if the turn is short. Recheck a straight drive afterward, and inspect grip or structure when turn results vary widely.
+
+## Worked example
+
+~~~python
+old_track_mm = 112
+requested_deg = 360
+actual_deg = 375
+new_track_mm = old_track_mm * requested_deg / actual_deg
+print("Try axle track mm:", new_track_mm)
+~~~
+
+## Simulator practice
+
+Run a 360 degree turn, then compare final heading in the automatic profile table. Change axle track in code and rerun.
+
+<FllPythonPractice lessonId="fll-unit-12/calibrate-track" />
+
+## On the robot
+
+Measure three full turns from the same mark. Change the track value in small steps and retest straight distance.
+
+## Check and adjust
+
+Your chosen track value improves the turn while retaining the straight calibration. If turn improves but straight worsens, revisit diameter first.
+
+Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).
+
+<MarkComplete lessonId="fll-unit-12/calibrate-track" nextUnit="/fll/unit-12/failure-recovery" nextUnitName="Lesson F12.4: Recover from a Failed Cue" />

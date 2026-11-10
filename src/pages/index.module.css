@@ -36,26 +36,20 @@
 
 .heroTitle {
   margin: 0 0 1.5rem;
-  color: var(--home-text);
+  color: var(--tm-bg);
   font-family: var(--telemark-font-display);
   font-size: clamp(52px, 6.25vw, 92px);
   font-weight: var(--tm-weight-display);
   letter-spacing: -0.035em;
   line-height: 0.98;
+  text-shadow: 8px 9px 0 var(--tm-text-strong);
   text-wrap: pretty;
 }
 
 .titleLine1,
 .titleLine2 {
   display: block;
-}
-
-.titleLine1 {
-  color: var(--home-text);
-}
-
-.titleLine2 {
-  color: var(--home-blue);
+  color: var(--tm-bg);
 }
 
 .heroSub {
@@ -74,6 +68,29 @@
   align-items: center;
   justify-content: flex-start;
   gap: 0.9rem;
+}
+
+.entryPaths {
+  max-width: 60ch;
+  margin: 1.25rem 0 0;
+  color: var(--home-muted);
+  font-size: var(--tm-fs-sm);
+  line-height: 1.6;
+}
+
+.entryPaths a {
+  color: var(--home-aqua);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.entryPaths a:hover {
+  color: var(--tm-accent-bright);
+}
+
+.entryPaths a:focus-visible {
+  outline: 3px solid var(--home-aqua);
+  outline-offset: 3px;
 }
 
 .btnPrimary,
@@ -153,6 +170,11 @@
   }
 
   .heroSub {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .entryPaths {
     margin-right: auto;
     margin-left: auto;
   }

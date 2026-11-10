@@ -1,0 +1,42 @@
+---
+id: compare-readings
+title: "Lesson F4.1: Compare Sensor Readings"
+slug: /unit-04/compare-readings
+sidebar_label: "F4.1 · Compare Sensor Readings"
+sidebar_position: 1
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F4.1: Compare Sensor Readings
+
+A comparison returns `True` or `False` when a sensor value meets a rule. Compare values in the same unit: a distance can be below a gap in millimeters, while a reflection can be above a threshold in percent. Print the Boolean result before using the condition to change motor motion.
+
+## Worked example
+
+~~~python
+range_mm = distance_sensor.distance()
+too_close = range_mm < 150
+print("Range mm:", range_mm)
+print("Too close:", too_close)
+if too_close:
+    robot.stop()
+~~~
+
+## Simulator practice
+
+Test the comparison with a Python list containing 149, 150, and 151 mm. Then print the reading from the fixed field and compare it with the chosen threshold.
+
+<FllPythonPractice lessonId="fll-unit-04/compare-readings" />
+
+## On the robot
+
+Measure the true gap at the moment the condition changes. Include sensor mounting offset in your notes.
+
+## Check and adjust
+
+Your threshold comparison handles the exact boundary as intended. If the condition changes at the wrong gap, check both units.
+
+Reference: [Pybricks UltrasonicSensor reference](https://docs.pybricks.com/en/stable/pupdevices/ultrasonicsensor.html).
+
+<MarkComplete lessonId="fll-unit-04/compare-readings" nextUnit="/fll/unit-04/if-elif-else" nextUnitName="Lesson F4.2: Choose One Branch" />

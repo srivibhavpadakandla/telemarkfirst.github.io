@@ -1,0 +1,42 @@
+---
+id: variables-and-units
+title: "Lesson F3.2: Variables and Units"
+slug: /unit-03/variables-and-units
+sidebar_label: "F3.2 · Variables and Units"
+sidebar_position: 2
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F3.2: Variables and Units
+
+A variable gives a measured value a name, and a unit in that name can prevent a distance or angle from being used incorrectly. DriveBase distances use millimeters, color reflection uses percent, and motor angles use degrees. Convert at a clear boundary so another teammate can find the value to adjust after measuring the robot.
+
+## Worked example
+
+~~~python
+TARGET_CM = 30
+target_mm = TARGET_CM * 10
+speed_mm_s = 150
+print("Target:", target_mm, "mm")
+robot.settings(speed_mm_s, 300, 90, 180)  # mm/s, mm/s², deg/s, deg/s²
+robot.straight(target_mm)
+~~~
+
+## Simulator practice
+
+Change TARGET_CM to 40. Check that the robot moves 400 mm, not 40 mm.
+
+<FllPythonPractice lessonId="fll-unit-03/variables-and-units" />
+
+## On the robot
+
+Measure a route in centimeters, write the converted millimeters in your notebook, and compare the output with the tape marks.
+
+## Check and adjust
+
+Your code and notebook show the same unit conversion and measured target. If a 30 cm route moves only 30 mm, check the conversion.
+
+Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).
+
+<MarkComplete lessonId="fll-unit-03/variables-and-units" nextUnit="/fll/unit-03/math-for-motion" nextUnitName="Lesson F3.3: Arithmetic for Motion" />

@@ -9,19 +9,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson 2.2: Make a Choice with If
 
-An `if` block uses a **condition** to decide whether a group of commands should run. A condition is an expression with a Boolean result.
+An `if` block runs its inner commands when its condition is true, then the program continues with commands connected below the complete block. That placement matters: a status report inside the branch is conditional, while a report after it runs either way.
 
-When the condition is `true`, the commands inside the `if` branch run. When it is `false`, those commands are skipped. Execution then continues after the whole `if` block.
+## Test one decision
 
-For example, `if score >= 10` can print `level complete`. That message appears only when the current score meets the rule.
-
-Indentation and block shape show which commands belong inside a branch. A command connected below the entire `if` block runs afterward, no matter which result the condition had.
-
-## Guided practice
-
-Set `temperature` to 30. Add an `if` block that prints `warm` when `temperature > 25`. Add a second print block after the `if` that prints `checked`.
-
-Run with values 30 and 20. For each run, predict both the condition result and output. Use Step to confirm that `checked` appears in both runs while `warm` appears in only one.
+Set `distanceReading` to 6 and add an `if` that prints `obstacle near` when the value is below 8. Connect a second print block after the `if` for `check complete`, and predict both output lines. Change the reading to 10, run again, and use Step to see why only `check complete` remains. The fixed reading models a sensor rule without requiring a sensor on the grid.
 
 <BlockPractice lessonId="blocks-unit-02/choose-with-if" />
 

@@ -144,6 +144,10 @@ function HeroSection(): React.JSX.Element {
             Begin Mechanical
           </Link>
         </div>
+        <p className={styles.entryPaths}>
+          New to programming? <Link to="/blocks">Start with Blocks</Link>.
+          {' '}Programming an FLL robot? <Link to="/fll">Learn Pybricks</Link>.
+        </p>
       </div>
 
       <HeroVideo />

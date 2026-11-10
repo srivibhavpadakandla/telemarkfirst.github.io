@@ -1,0 +1,45 @@
+---
+id: launch-plan-and-home
+title: "Lesson F2.2: Launch Marks and Home"
+slug: /unit-02/launch-plan-and-home
+sidebar_label: "F2.2 · Launch Marks and Home"
+sidebar_position: 2
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F2.2: Launch Marks and Home
+
+A consistent launch position reduces variation before the program starts, so align the same chassis edges with the same field marks for each trial. Write the route as distance, turn, action, and return, keeping the first mission near home. Reverse along the outgoing path only when it remains clear. Otherwise use a measured turn and return route.
+
+## Worked example
+
+~~~python
+def run_short_mission():
+    robot.straight(250)
+    robot.turn(90)
+    robot.straight(50)
+    robot.straight(-50)
+    robot.turn(-90)
+    robot.straight(-250)
+
+run_short_mission()
+~~~
+
+## Simulator practice
+
+Draw the planned path, then run it from the same start pose. Compare the final pose with home boundaries.
+
+<FllPythonPractice lessonId="fll-unit-02/launch-plan-and-home" />
+
+## On the robot
+
+Add two physical launch references. Run five starts and mark each final position on paper.
+
+## Check and adjust
+
+Your launch method is written down, and you can repeat it without moving the code. If final position changes between launches, check launch marks and alignment.
+
+Reference: [FIRST season materials](https://www.firstinspires.org/resources/library/fll/season-materials).
+
+<MarkComplete lessonId="fll-unit-02/launch-plan-and-home" nextUnit="/fll/unit-02/calibration-and-repeatability" nextUnitName="Lesson F2.3: Calibration and Repeatability" />

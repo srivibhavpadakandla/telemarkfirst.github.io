@@ -1,0 +1,50 @@
+---
+id: spike-app-and-simulator
+title: "Lesson F0.2: Set Up Pybricks and Telemark"
+slug: /unit-00/spike-app-and-simulator
+sidebar_label: "F0.2 · Set Up Pybricks and Telemark"
+sidebar_position: 7
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F0.2: Set Up Pybricks
+
+Pybricks Code runs Python on a SPIKE Prime Hub after Pybricks firmware is installed, while Telemark provides a browser space for testing the same programming ideas. This course setup uses drive motors on ports A and B, a color sensor on C, an ultrasonic sensor on D, and an optional tool motor on E. You should match the ports and motor directions to your build, and remember that Pybricks hub slots and Telemark browser files store programs separately.
+
+## Worked example
+
+This is the full course setup. The simulator editor already includes it. On hardware, change the wiring and dimensions to match your build.
+
+~~~python
+from pybricks.hubs import PrimeHub
+from pybricks.pupdevices import Motor, ColorSensor, UltrasonicSensor
+from pybricks.parameters import Port, Direction
+from pybricks.robotics import DriveBase
+
+hub = PrimeHub()
+left_motor = Motor(Port.A, Direction.COUNTERCLOCKWISE)
+right_motor = Motor(Port.B)
+robot = DriveBase(left_motor, right_motor, wheel_diameter=56, axle_track=112)
+color_sensor = ColorSensor(Port.C)
+distance_sensor = UltrasonicSensor(Port.D)
+robot.straight(100)
+~~~
+
+## Simulator practice
+
+Run, reset, and rerun the starter. Change only the straight distance to 150 mm and compare the final positions.
+
+<FllPythonPractice lessonId="fll-unit-00/spike-app-and-simulator" />
+
+## On the robot
+
+Follow the Pybricks firmware guide with your mentor, connect the hub in Pybricks Code, and run with the wheels lifted first. Installing Pybricks will change the hub firmware. The Pybricks guide also explains how to restore LEGO firmware.
+
+## Check and adjust
+
+You can identify the port map and state where Telemark files and hub programs are stored. If the Hub will not connect, check firmware and Bluetooth permissions.
+
+Reference: [Pybricks installation guide](https://pybricks.com/learn/getting-started/install-pybricks/).
+
+<MarkComplete lessonId="fll-unit-00/spike-app-and-simulator" nextUnit="/fll/unit-00/motor-pairs-and-distance" nextUnitName="Lesson F0.3: Drive a Measured Distance" />

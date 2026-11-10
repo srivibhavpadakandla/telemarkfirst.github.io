@@ -1,0 +1,41 @@
+---
+id: calibrate-diameter
+title: "Lesson F12.2: Calibrate Wheel Diameter"
+slug: /unit-12/calibrate-diameter
+sidebar_label: "F12.2 · Calibrate Wheel Diameter"
+sidebar_position: 2
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F12.2: Calibrate Wheel Diameter
+
+Measure a long straight drive on the real mat before changing wheel diameter. Reduce the configured diameter when the robot consistently stops short, and increase it when the robot travels too far. Keep axle track fixed during this pass, using `old diameter × actual distance ÷ requested distance` as a starting estimate.
+
+## Worked example
+
+~~~python
+old_diameter_mm = 56
+requested_mm = 500
+actual_mm = 480
+new_diameter_mm = old_diameter_mm * actual_mm / requested_mm
+print("Try wheel diameter mm:", new_diameter_mm)
+~~~
+
+## Simulator practice
+
+Change the wheel diameter in code, rerun a 500 mm drive, and compare the automatic three-profile table after each run.
+
+<FllPythonPractice lessonId="fll-unit-12/calibrate-diameter" />
+
+## On the robot
+
+Measure at least three 500 mm drives. Try the calculated value, then repeat the measurement before accepting it.
+
+## Check and adjust
+
+Your new value reduces consistent straight-line error without relying on one trial. If diameter correction worsens error, check the formula order.
+
+Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).
+
+<MarkComplete lessonId="fll-unit-12/calibrate-diameter" nextUnit="/fll/unit-12/calibrate-track" nextUnitName="Lesson F12.3: Calibrate Axle Track" />

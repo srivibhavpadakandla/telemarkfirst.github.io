@@ -4,6 +4,7 @@ import {
   signInWithPopup,
   type UserCredential,
 } from 'firebase/auth';
+import siteConfig from '@generated/docusaurus.config';
 import { auth, provider } from './firebase';
 import { trackEvent } from './analytics';
 import {syncLocalProgressWithUser} from './progressCloud';
@@ -16,6 +17,9 @@ interface SignInOptions {
 export async function signInWithGoogle(
   options: SignInOptions = {},
 ): Promise<UserCredential> {
+  if (siteConfig.customFields?.previewSite === true) {
+    throw new Error('Sign-in is disabled on the Telemark testing site. Lesson progress stays in this browser.');
+  }
   const result = await signInWithPopup(auth, provider);
 
   if (!result.user.emailVerified) {

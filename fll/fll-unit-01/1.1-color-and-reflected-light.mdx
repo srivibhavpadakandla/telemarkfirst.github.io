@@ -1,0 +1,41 @@
+---
+id: color-and-reflected-light
+title: "Lesson F1.1: Color and Reflected Light"
+slug: /unit-01/color-and-reflected-light
+sidebar_label: "F1.1 · Color and Reflected Light"
+sidebar_position: 1
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F1.1: Color and Reflected Light
+
+A ColorSensor reports reflected light as a percentage, and a dark line usually reads lower than the surrounding mat. Print readings over the actual light and dark surfaces with the sensor at its normal height, then choose a threshold between those measurements. Sensor height and surface finish can change the numbers, so a threshold from another robot is only a starting guess.
+
+## Worked example
+
+~~~python
+print("Light:", color_sensor.reflection())
+robot.drive(100, 0)
+while color_sensor.reflection() > 35:
+    wait(10)
+robot.stop()
+~~~
+
+## Simulator practice
+
+Run toward the dark line. Adjust 35 only after reading the simulated light and dark values.
+
+<FllPythonPractice lessonId="fll-unit-01/color-and-reflected-light" />
+
+## On the robot
+
+Mount the sensor at a fixed height and log five readings on each surface. Record the midpoint threshold and three line-stop results.
+
+## Check and adjust
+
+Your threshold separates the measured surfaces and the program stops at the line. If light and dark readings overlap, fix sensor height before the threshold.
+
+Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).
+
+<MarkComplete lessonId="fll-unit-01/color-and-reflected-light" nextUnit="/fll/unit-01/distance-and-wait-until" nextUnitName="Lesson F1.2: Distance and Wait Until" />

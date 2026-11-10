@@ -1,0 +1,40 @@
+---
+id: hub-heading
+title: "Lesson F1.3: Hub Heading and Reset"
+slug: /unit-01/hub-heading
+sidebar_label: "F1.3 · Hub Heading and Reset"
+sidebar_position: 3
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F1.3: Hub Heading and Reset
+
+The Prime Hub IMU estimates clockwise-positive heading in degrees. Keep the hub fixed in the build and reset heading only while the robot is stopped. When DriveBase uses gyro control, reset through `robot.reset()` instead of `hub.imu.reset_heading()`.
+
+## Worked example
+
+~~~python
+robot.stop()
+hub.imu.reset_heading(0)
+robot.turn(90)
+print("Heading:", hub.imu.heading())
+~~~
+
+## Simulator practice
+
+Turn right and compare the commanded angle with the reported heading. Reset, then turn left.
+
+<FllPythonPractice lessonId="fll-unit-01/hub-heading" />
+
+## On the robot
+
+Mark north on the practice mat. Test the same turn three times after a steady launch and record heading error.
+
+## Check and adjust
+
+You can state the reset condition and calculate heading error in degrees. If the heading sign is unexpected, check hub orientation and turn direction.
+
+Reference: [Pybricks PrimeHub reference](https://docs.pybricks.com/en/stable/hubs/primehub.html).
+
+<MarkComplete lessonId="fll-unit-01/hub-heading" nextUnit="/fll/unit-01/attachment-motors" nextUnitName="Lesson F1.4: Attachment Motors and Objects" />

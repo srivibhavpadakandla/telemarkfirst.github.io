@@ -1,0 +1,42 @@
+---
+id: python-values
+title: "Lesson F3.1: Numbers, Booleans, and Text"
+slug: /unit-03/python-values
+sidebar_label: "F3.1 · Numbers, Booleans, and Text"
+sidebar_position: 1
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F3.1: Numbers, Booleans, and Text
+
+Python uses whole numbers, decimal numbers, Booleans, and strings for different jobs in robot code. Keep distance and speed as numbers, use `True` or `False` for a condition, and use text for a console label. A number in quotes cannot be used as a number in a calculation, so print values with their units when checking a route.
+
+## Worked example
+
+~~~python
+distance_mm = 300
+turn_deg = 90
+at_home = True
+label = "launch"
+print(label, distance_mm, "mm", at_home)
+robot.straight(distance_mm)
+~~~
+
+## Simulator practice
+
+Change distance_mm to 450, run, and inspect the printed value and final pose.
+
+<FllPythonPractice lessonId="fll-unit-03/python-values" />
+
+## On the robot
+
+In Pybricks Code, print one measured distance and one Boolean result before moving the physical robot.
+
+## Check and adjust
+
+You can identify each value's type and explain why the string `"300"` needs numeric conversion before a distance calculation. If arithmetic fails, check whether the value is text rather than a number.
+
+Reference: [Pybricks first robot program](https://pybricks.com/learn/making-programs/your-first-program/).
+
+<MarkComplete lessonId="fll-unit-03/python-values" nextUnit="/fll/unit-03/variables-and-units" nextUnitName="Lesson F3.2: Variables and Units" />

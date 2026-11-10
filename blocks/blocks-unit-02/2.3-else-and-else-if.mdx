@@ -9,21 +9,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson 2.3: Use Else and Else If
 
-An `else` branch runs when the matching `if` condition is false. An `if` with `else` chooses exactly one of two branches.
+Use `else` for a second outcome and `else if` when several conditions need separate responses. The program checks from top to bottom and runs the first matching branch, leaving the final `else` for all remaining values. Put restrictive thresholds first: a reading of 50 would match `distanceReading >= 20` before reaching `distanceReading >= 40` if those branches were reversed.
 
-Use `else if` when there are more than two cases. Conditions are checked from top to bottom. The first true branch runs, then the rest of that chain is skipped. An ending `else` handles any value that did not match an earlier condition.
+## Classify a reading
 
-Branch order matters. Suppose a program checks `score >= 50` before `score >= 100`. A score of 120 matches the first rule, so the later rule never gets a turn. The more specific `score >= 100` rule should come first.
-
-## Guided practice
-
-Create a variable named `size`. Build these ordered branches:
-
-- If `size >= 10`, print `large`.
-- Else if `size >= 5`, print `medium`.
-- Else, print `small`.
-
-Test 12, 7, and 3. Then test the boundary values 10 and 5. Record which branch runs for each input and explain why only one branch runs.
+Print `clear` at 40 or above, `caution` from 20 through 39, and `stop` below 20. Test 50, 30, 10, and the exact boundaries 40 and 20, recording which branch runs each time. The labels classify entered values, while a physical robot would also need calibrated readings and a tested action policy.
 
 <BlockPractice lessonId="blocks-unit-02/else-and-else-if" />
 

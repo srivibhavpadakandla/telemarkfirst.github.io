@@ -1,0 +1,42 @@
+---
+id: line-stop
+title: "Lesson F9.2: Stop at a Dark Line"
+slug: /unit-09/line-stop
+sidebar_label: "F9.2 · Stop at a Dark Line"
+sidebar_position: 2
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F9.2: Stop at a Dark Line
+
+`DriveBase.drive()` and `ColorSensor.reflection()` can stop a route at a dark line, provided the loop also has a timeout. Place the sensor ahead of the wheel contact point if the wheels must stop before the line, and measure a braking offset because higher speed can carry the robot farther after detection.
+
+## Worked example
+
+~~~python
+watch = StopWatch()
+robot.drive(100, 0)
+while color_sensor.reflection() > 35 and watch.time() < 3000:
+    wait(10)
+robot.stop()
+print("Stop mm:", robot.distance())
+~~~
+
+## Simulator practice
+
+Run at 100 and 200 mm/s. Compare the final distance and line position.
+
+<FllPythonPractice lessonId="fll-unit-09/line-stop" />
+
+## On the robot
+
+Measure the gap from sensor to wheels and the overshoot at both speeds. Use the slower speed if the mission tolerance is narrow.
+
+## Check and adjust
+
+The program stops for a line and for a missing line within the time limit. If the robot overshoots, reduce speed or account for sensor offset.
+
+Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).
+
+<MarkComplete lessonId="fll-unit-09/line-stop" nextUnit="/fll/unit-09/color-classification" nextUnitName="Lesson F9.3: Classify a Field Color" />

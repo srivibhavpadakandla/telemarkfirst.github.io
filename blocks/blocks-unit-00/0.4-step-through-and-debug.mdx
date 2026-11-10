@@ -9,26 +9,15 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson 0.4: Step Through and Debug a Program
 
-A **bug** is a mistake in a program. **Debugging** is the careful work of finding the mistake, correcting it, and checking the result again.
+**Debugging** starts with the first difference between what a program should do and what it actually does. A final position tells you where the route ended, but checking each step tells you which command changed it.
 
-Start with evidence. First state what the program should do. Next run it and record what it actually does. Then use Step to find the first instruction where the actual state no longer matches the expected state.
+Plan a route from x = 0, y = 0, facing east: move 3, turn right, move 2, then print `done`. Record the expected position and direction after each command. The planned finish is x = 3, y = 2, facing south.
 
-Do not change several blocks at once. One small change gives you useful evidence. After the change, run the same test again.
+## Find the first wrong step
 
-## Trace a route
+Build the route and use Step to compare each field state with your notes. Move the turn below the second move, predict the new endpoint, and run again to locate the first departure from the original plan. Restore the turn before repeating the test, changing one block at a time so each result has a clear cause.
 
-Build this intended route:
-
-1. Move forward by 3.
-2. Turn right.
-3. Move forward by 2.
-4. Print `done`.
-
-Run it and watch the robot follow the route one movement at a time. Then use Step to control when each command runs. After each movement, check the robot's place on the grid and the direction it faces. The position readout gives the exact column and row when you need them.
-
-Now place the turn after the second move. Predict where the robot will finish before running it.
-
-Repair the order and run the original test one more time. The final state should match your first trace. This same process works later when the state contains variables, list items, or returned values.
+On a physical robot, motor direction and wheel movement would also need checking. The grid exercise focuses on command order and values.
 
 <BlockPractice lessonId="blocks-unit-00/step-through-and-debug" />
 

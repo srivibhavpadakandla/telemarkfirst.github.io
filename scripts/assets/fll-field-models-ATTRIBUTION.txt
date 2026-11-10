@@ -1,0 +1,37 @@
+FLL practice field LEGO CAD props
+
+The four fll-field-*.ldr source assemblies in this directory were arranged for
+the Telemark curriculum from official LDraw Parts Library files. Their meshes
+are representations of real LEGO parts supplied by the independent LDraw
+community; they are not original engineering CAD supplied by the LEGO Group.
+
+Part source: LDraw.org Official Parts Library, 2026-10 complete release
+https://library.ldraw.org/updates
+https://library.ldraw.org/library/updates/complete.zip
+
+The LDraw part files are licensed under CC BY 4.0 and/or CC BY 2.0 as marked
+in each source part's !LICENSE line. Attribution to the LDraw Parts Library:
+https://www.ldraw.org/docs-main/licenses/legal-info.html
+https://ldraw.org/ldraw-org-contributor-agreement
+
+Parts used:
+3001.dat  Brick 2 x 4
+3004.dat  Brick 1 x 2
+3022.dat  Plate 2 x 2
+3027.dat  Plate 6 x 16
+3036.dat  Plate 6 x 8
+3068b.dat Tile 2 x 2 with Groove
+32523.dat Technic Beam 3
+32525.dat Technic Beam 11
+32278.dat Technic Beam 15
+3700.dat  Technic Brick 1 x 2 with Hole
+3706.dat  Technic Axle 6
+3713.dat  Technic Bush with Two Flanges
+3958.dat  Plate 6 x 6
+39790.dat Technic Beam 15 x 11 with Open Center 13 x 9
+6558.dat  Technic Pin Long with Friction and Slot
+2780.dat  Technic Pin with Friction and Slots
+
+The 3D GLB exports are conversions of these LDraw parts and assemblies.
+LEGO is a trademark of the LEGO Group. This is an unofficial educational
+practice field, not an official LEGO or FIRST mission model.

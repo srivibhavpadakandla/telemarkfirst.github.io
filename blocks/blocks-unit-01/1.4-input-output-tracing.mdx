@@ -9,24 +9,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson 1.4: Inputs, Outputs, and Value Tracing
 
-An **input** is information a program or operation receives. An **output** is information it sends out. In the practice runner, blocks provide inputs to other blocks, and the print block sends visible output.
+A program receives an **input**, keeps or changes values as state, and produces an **output** such as a report or commanded action. The workspace has no live distance sensor, so use a fixed test number for `distanceReading` and distinguish that assumed input from anything the program calculates.
 
-A trace records important values in execution order. It answers questions such as: What was `score` before this command? Which expression produced the next value? What was printed?
+## Record each change
 
-Consider this program:
-
-1. Set `score` to 4.
-2. Print `score`.
-3. Change `score` by 3.
-4. Print `score`.
-
-Its outputs are `4` and `7`. The first print does not change when a later command changes the variable.
-
-## Guided practice
-
-Build that program, predict both outputs, and use Step to verify the trace. Then set `bonus` to 2 and change `score` by the value stored in `bonus`.
-
-Make a small table with one row per instruction. Include the instruction number, `score`, `bonus`, and any new output. If the actual trace differs from your table, find the first row that differs before editing the program.
+Set `distanceReading` to 6 and `safeDistance` to 4, then print both. Change `distanceReading` to 2 and print it again. Before using Step, make a table with columns for instruction, distance, threshold, and output, then compare each row with the variable panel. The same tracing method will work when a real sensor replaces the fixed test value.
 
 <BlockPractice lessonId="blocks-unit-01/input-output-tracing" />
 

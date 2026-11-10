@@ -1,0 +1,39 @@
+---
+id: retrieve-deliver-challenge
+title: "Lesson F1.5: Retrieve and Deliver Challenge"
+slug: /unit-01/retrieve-deliver-challenge
+sidebar_label: "F1.5 · Retrieve and Deliver Challenge"
+sidebar_position: 5
+---
+
+# Lesson F1.5: Retrieve and Deliver Challenge
+
+Build a short mission that uses one sensor cue and one attachment action to retrieve the practice object, deliver it, and return home. Test the line stop, pickup angle, and delivery route separately before combining them, then record the first missed position and change only the measurement responsible.
+
+## Worked example
+
+~~~python
+robot.drive(100, 0)
+while color_sensor.reflection() > 35:
+    wait(10)
+robot.stop()
+attachment.run_angle(200, 90)
+robot.straight(500)
+attachment.run_angle(200, -90)
+~~~
+
+## Simulator practice
+
+Use the field objects and delivery zone to complete the mission. Add a return command after the release.
+
+<FllPythonPractice lessonId="fll-unit-01/retrieve-deliver-challenge" />
+
+## On the robot
+
+Test pickup and release at reduced speed on a practice mat. Log three runs, including whether the object remains inside the delivery area.
+
+## Check and adjust
+
+Your program uses a sensor reading, moves the attachment, delivers the object, and ends at home. If the object misses delivery, separate pickup error from release error.
+
+Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).

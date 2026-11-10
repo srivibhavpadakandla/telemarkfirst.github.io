@@ -1,0 +1,28 @@
+0 FLL practice field cargo - movable 8 x 6 stud LEGO block
+0 Name: fll-field-cargo.ldr
+0 Author: Telemark curriculum contributors
+0 // Origin: ground centre. LDraw X right, Y down, Z toward viewer.
+0 // Official LDraw parts only. Geometry is loaded from the LDraw Parts Library.
+0 // 8 x 6 stud plate at Y=-8, with three brick courses and a small pickup handle.
+1 72 0 -8 0 1 0 0 0 1 0 0 0 1 3036.dat
+1 4 -40 -32 -40 1 0 0 0 1 0 0 0 1 3001.dat
+1 4 40 -32 -40 1 0 0 0 1 0 0 0 1 3001.dat
+1 4 -40 -32 0 1 0 0 0 1 0 0 0 1 3001.dat
+1 4 40 -32 0 1 0 0 0 1 0 0 0 1 3001.dat
+1 4 -40 -32 40 1 0 0 0 1 0 0 0 1 3001.dat
+1 4 40 -32 40 1 0 0 0 1 0 0 0 1 3001.dat
+1 15 -40 -56 -40 1 0 0 0 1 0 0 0 1 3001.dat
+1 15 40 -56 -40 1 0 0 0 1 0 0 0 1 3001.dat
+1 15 -40 -56 0 1 0 0 0 1 0 0 0 1 3001.dat
+1 15 40 -56 0 1 0 0 0 1 0 0 0 1 3001.dat
+1 15 -40 -56 40 1 0 0 0 1 0 0 0 1 3001.dat
+1 15 40 -56 40 1 0 0 0 1 0 0 0 1 3001.dat
+1 4 -40 -80 -40 1 0 0 0 1 0 0 0 1 3001.dat
+1 4 40 -80 -40 1 0 0 0 1 0 0 0 1 3001.dat
+1 4 -40 -80 0 1 0 0 0 1 0 0 0 1 3001.dat
+1 4 40 -80 0 1 0 0 0 1 0 0 0 1 3001.dat
+1 4 -40 -80 40 1 0 0 0 1 0 0 0 1 3001.dat
+1 4 40 -80 40 1 0 0 0 1 0 0 0 1 3001.dat
+1 15 0 -88 0 1 0 0 0 1 0 0 0 1 3036.dat
+1 1 0 -96 0 1 0 0 0 1 0 0 0 1 3022.dat
+1 1 0 -104 0 1 0 0 0 1 0 0 0 1 3068b.dat

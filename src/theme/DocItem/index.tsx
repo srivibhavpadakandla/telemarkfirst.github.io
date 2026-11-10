@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import {HtmlClassNameProvider} from '@docusaurus/theme-common';
 import {DocProvider} from '@docusaurus/plugin-content-docs/client';
 import type {Props} from '@theme/DocItem';
@@ -9,7 +10,14 @@ import {getUnitSlug} from '@site/src/telemark/accessPolicy';
 import {trackForUnitSlug} from '@site/src/telemark/tracks';
 import {trackEvent} from '@site/src/telemark/analytics';
 
+// Keep the temporary editor code out of optimized release bundles entirely.
+const LocalMarkdownEditor: React.ComponentType<{source: string}> | null =
+  process.env.NODE_ENV === 'production'
+    ? null
+    : require('@site/src/components/LocalMarkdownEditor').default;
+
 export default function DocItem(props: Props): React.JSX.Element {
+  const {siteConfig} = useDocusaurusContext();
   const docHtmlClassName = `docs-doc-id-${props.content.metadata.id}`;
   const MDXComponent = props.content;
   const docPath = props.content.metadata.permalink ?? props.content.metadata.id;
@@ -34,6 +42,9 @@ export default function DocItem(props: Props): React.JSX.Element {
       <HtmlClassNameProvider className={docHtmlClassName}>
         <DocItemMetadata />
         <DocItemLayout>
+          {LocalMarkdownEditor && siteConfig.customFields.localMarkdownEditorEnabled && props.content.metadata.source && (
+            <LocalMarkdownEditor key={props.content.metadata.source} source={props.content.metadata.source} />
+          )}
           <MDXComponent />
           {/* Opens the chat in the corner rather than being a second one:
               two panels on a page meant two separate conversations. */}

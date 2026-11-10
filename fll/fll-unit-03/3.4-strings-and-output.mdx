@@ -1,0 +1,40 @@
+---
+id: strings-and-output
+title: "Lesson F3.4: Print Useful Diagnostics"
+slug: /unit-03/strings-and-output
+sidebar_label: "F3.4 · Print Useful Diagnostics"
+sidebar_position: 4
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F3.4: Print Useful Diagnostics
+
+A route log is easier to read when each sensor number includes where it was measured. Print short labels such as `launch`, `line`, or `target` with the reading and its unit, then compare the sequence with the robot's position after a run. Ultrasonic distance is in millimeters, so include `mm` when you print it.
+
+## Worked example
+
+~~~python
+print("launch range mm:", distance_sensor.distance())
+robot.straight(200)
+print("after 200 mm, heading deg:", hub.imu.heading())
+print("reflection percent:", color_sensor.reflection())
+~~~
+
+## Simulator practice
+
+Run once and copy the three output lines into a test log. Change the first straight distance in code, rerun from the fixed start, and compare.
+
+<FllPythonPractice lessonId="fll-unit-03/strings-and-output" />
+
+## On the robot
+
+Print the same three readings on the physical hub. Record which values change when you move the robot by hand.
+
+## Check and adjust
+
+Each log entry names a route point, a measured value, and a unit. If a log value has no context, add the route point and unit.
+
+Reference: [Pybricks timing tools reference](https://docs.pybricks.com/en/stable/tools/).
+
+<MarkComplete lessonId="fll-unit-03/strings-and-output" nextUnit="/fll/unit-03/data-check-challenge" nextUnitName="Lesson F3.5: Data Check Challenge" />

@@ -1,0 +1,41 @@
+---
+id: motor-targets
+title: "Lesson F7.3: Target Angles"
+slug: /unit-07/motor-targets
+sidebar_label: "F7.3 · Target Angles"
+sidebar_position: 3
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F7.3: Target Angles
+
+`Motor.run_target(speed, target_angle)` moves to a named motor position instead of adding a relative rotation. Use targets for states such as an open and closed gripper, but reset the angle only when the tool is physically at its reference position. Otherwise the target number will no longer match the real mechanism.
+
+## Worked example
+
+~~~python
+OPEN_DEG = 0
+CLOSED_DEG = 90
+attachment.reset_angle(OPEN_DEG)
+attachment.run_target(180, CLOSED_DEG)
+attachment.run_target(180, OPEN_DEG)
+~~~
+
+## Simulator practice
+
+Set two target angles and run close then open. Change CLOSED_DEG only after checking the safe range.
+
+<FllPythonPractice lessonId="fll-unit-07/motor-targets" />
+
+## On the robot
+
+Use a visible mechanical reference to set angle zero. Test the open and closed targets without an object, then with a light object.
+
+## Check and adjust
+
+Both target positions can be reached repeatedly without forcing the mechanism. If a target is wrong, reset at a real mechanical reference.
+
+Reference: [Pybricks Motor reference](https://docs.pybricks.com/en/stable/pupdevices/motor.html).
+
+<MarkComplete lessonId="fll-unit-07/motor-targets" nextUnit="/fll/unit-07/gearing-and-stalls" nextUnitName="Lesson F7.4: Gearing, Load, and Stalls" />

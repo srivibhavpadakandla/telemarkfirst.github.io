@@ -9,21 +9,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson 5.3: Test Cases and Debugging
 
-A **test case** is one set of inputs and the expected result. Good testing checks more than the easiest input.
+A **test case** pairs an input with its expected result. For a threshold, test a common value, the exact boundary, and a value just below it, writing down each expected Boolean before running. When a test fails, use Step to inspect the first wrong input, comparison, loop boundary, argument, or return value, then change one cause and rerun.
 
-- A normal case represents common input.
-- A boundary case is exactly at the edge of a rule.
-- An unexpected case checks an empty list, zero, a negative number, or another input that needs a clear response.
+## Check a threshold function
 
-Write the expected result before running the test. Otherwise, seeing any output can feel correct even when it does not meet the rule.
-
-When a test fails, reduce the problem. Find the first wrong state with Step. Check the input type, variable assignment, branch condition, loop boundary, function argument, return value, and list index in that order when they apply.
-
-## Guided practice
-
-Build a function that returns `true` when a number is at least 10. Create tests for 12, 10, and 9. Record the expected Boolean result for each.
-
-Then place those inputs in a list and run all three with a loop. Change the condition to `> 10`, observe the failed boundary test, and repair it.
+Create a function that returns `true` at 10 or above, then test 12, 10, and 9 for `true`, `true`, and `false`. Run the same inputs from a list. Change `>= 10` to `> 10` to see why the boundary test fails, then restore the operator. Real sensor trials will add variation that fixed values cannot show.
 
 <BlockPractice lessonId="blocks-unit-05/test-cases-and-debugging" />
 

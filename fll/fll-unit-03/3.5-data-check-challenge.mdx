@@ -1,0 +1,39 @@
+---
+id: data-check-challenge
+title: "Lesson F3.5: Data Check Challenge"
+slug: /unit-03/data-check-challenge
+sidebar_label: "F3.5 · Data Check Challenge"
+sidebar_position: 5
+---
+
+# Lesson F3.5: Data Check Challenge
+
+Convert a planned distance from centimeters to millimeters once, use that value for a short drive, and print both the plan and the encoder estimate afterward. Calculate their difference to inspect the command, then measure actual travel separately on the physical robot because an encoder reading is not a ruler measurement.
+
+## Worked example
+
+~~~python
+target_cm = 30
+target_mm = target_cm * 10
+robot.reset()
+robot.straight(target_mm)
+error_mm = robot.distance() - target_mm
+print("target mm:", target_mm)
+print("encoder error mm:", error_mm)
+~~~
+
+## Simulator practice
+
+Change target_cm twice. Confirm that both route and output change without editing the DriveBase call.
+
+<FllPythonPractice lessonId="fll-unit-03/data-check-challenge" />
+
+## On the robot
+
+Compare encoder distance with a ruler measurement for three trials and explain any difference.
+
+## Check and adjust
+
+The printed target is 300 mm for 30 cm, and your log separates encoder error from physical error. If encoder error is near zero but the ruler shows a miss, inspect slip.
+
+Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).

@@ -1,0 +1,42 @@
+---
+id: navigation-challenge
+title: "Lesson F8.5: Navigation Challenge"
+slug: /unit-08/navigation-challenge
+sidebar_label: "F8.5 · Navigation Challenge"
+sidebar_position: 5
+---
+
+# Lesson F8.5: Navigation Challenge
+
+Plan a route that crosses the practice line, uses two measured turns, and returns home. Record each segment and add a heading check after the longest one, then compare runs under at least two simulator calibration profiles. Add an arc only after the straight and turn route is reliable.
+
+## Worked example
+
+~~~python
+def cross_line_and_return():
+    robot.straight(850)
+    robot.turn(90)
+    robot.straight(50)
+    robot.straight(-50)
+    robot.turn(-90)
+    robot.straight(-850)
+
+cross_line_and_return()
+print("Heading:", hub.imu.heading())
+~~~
+
+## Simulator practice
+
+Run from the fixed home pose and check line crossing, both turns, and home return. Compare the automatic calibration profile table after the run and record the first missed landmark in a profile.
+
+<FllPythonPractice lessonId="fll-unit-08/navigation-challenge" />
+
+## On the robot
+
+Trace the route on the mat with the tool installed. Test at moderate speed and mark every corner.
+
+## Check and adjust
+
+The route crosses the line, uses two measured turns, and returns home without a collision. If a profile fails, identify the first missed landmark.
+
+Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).

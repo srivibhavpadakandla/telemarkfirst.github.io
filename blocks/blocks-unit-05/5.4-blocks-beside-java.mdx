@@ -9,35 +9,21 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson 5.4: Read Blocks Beside Java-Shaped Code
 
-Blocks and text code can express the same programming ideas. Text code uses typed words, punctuation, and braces where blocks use shapes and connections.
-
-This block plan:
-
-1. Set `score` to 0.
-2. Repeat 3 times and change `score` by 2.
-3. If `score >= 6`, print `ready`.
-
-has the same flow as this Java-shaped code:
+Blocks and Java can express the same sequence, loop, and decision. Blocks use connections to show nesting, while Java uses typed statements, braces, and punctuation. This example starts a mission counter at 0, adds 2 for each of three tasks, and reports `ready` when the total reaches 6:
 
 ```java
-int score = 0;
-
-for (int count = 0; count < 3; count++) {
-    score = score + 2;
+int completedPoints = 0;
+for (int task = 0; task < 3; task++) {
+    completedPoints = completedPoints + 2;
 }
-
-if (score >= 6) {
+if (completedPoints >= 6) {
     System.out.println("ready");
 }
 ```
 
-`int` states that `score` stores a whole number. Semicolons end statements. Braces group the loop and condition bodies. The variable, repeated assignment, comparison, and branch still have the same roles.
+## Match the structures
 
-## Guided practice
-
-Build the block version and trace `score` through 0, 2, 4, and 6. Point to the Java line that matches each block.
-
-Change both versions so the loop adds 3 twice. Predict the final value and condition result. You do not need to write a full Java program yet. The goal is to recognize structure you already understand.
+Build the block version and trace `completedPoints` through 0, 2, 4, and 6. Match its assignment, loop, comparison, and print command to the Java lines, then change both versions so two tasks add 3 points each. This example uses ordinary Java syntax, with FTC SDK and hardware commands introduced later.
 
 <BlockPractice lessonId="blocks-unit-05/blocks-beside-java" />
 

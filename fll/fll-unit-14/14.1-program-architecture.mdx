@@ -1,0 +1,46 @@
+---
+id: program-architecture
+title: "Lesson F14.1: Organize the Program"
+slug: /unit-14/program-architecture
+sidebar_label: "F14.1 · Organize the Program"
+sidebar_position: 1
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F14.1: Organize the Program
+
+Arrange imports and device setup first, measured constants next, mission functions after them, and the launch choice last. Keep port assignments and wheel dimensions easy for teammates to find, and pass measured parameters when launches use different values. Limit shared program state to values with a clear purpose.
+
+## Worked example
+
+~~~python
+WHEEL_DIAMETER_MM = 56
+AXLE_TRACK_MM = 112
+LINE_THRESHOLD = 35
+
+def line_mission():
+    robot.straight(250)
+    return color_sensor.reflection() < LINE_THRESHOLD
+
+result = line_mission()
+print("Line mission:", result)
+~~~
+
+## Simulator practice
+
+Reorder a practice program into setup, constants, functions, and calls. Run before and after to compare behavior.
+
+<FllPythonPractice lessonId="fll-unit-14/program-architecture" />
+
+## On the robot
+
+Print the program and ask a teammate to locate ports, geometry, and the main launch function.
+
+## Check and adjust
+
+A new teammate can identify what to measure and where to update it. If a value is hard to find, move it into named configuration.
+
+Reference: [Pybricks first robot program](https://pybricks.com/learn/making-programs/your-first-program/).
+
+<MarkComplete lessonId="fll-unit-14/program-architecture" nextUnit="/fll/unit-14/code-review" nextUnitName="Lesson F14.2: Review Units and Stops" />

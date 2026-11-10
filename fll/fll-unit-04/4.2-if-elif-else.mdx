@@ -1,0 +1,47 @@
+---
+id: if-elif-else
+title: "Lesson F4.2: Choose One Branch"
+slug: /unit-04/if-elif-else
+sidebar_label: "F4.2 · Choose One Branch"
+sidebar_position: 2
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F4.2: Choose One Branch
+
+An `if`/`elif`/`else` chain chooses one action from several conditions in order. Put urgent cases first so a close obstacle stops the robot before a lower priority color cue can trigger another action, and reserve `else` for the normal case. Arrange known field states to test every branch.
+
+## Worked example
+
+~~~python
+range_mm = distance_sensor.distance()
+light = color_sensor.reflection()
+if range_mm < 150:
+    robot.stop()
+    print("stop")
+elif light < 35:
+    robot.turn(90)
+    print("line")
+else:
+    robot.straight(100)
+    print("clear")
+~~~
+
+## Simulator practice
+
+Keep the field fixed. Change the numeric thresholds to trigger each branch in turn, and verify only one action runs per test.
+
+<FllPythonPractice lessonId="fll-unit-04/if-elif-else" />
+
+## On the robot
+
+Run the branches with the robot lifted, then test at low speed on the mat. Record the input readings for each result.
+
+## Check and adjust
+
+Your test log has a case for stop, line, and clear. If two actions run, check indentation and use one if, elif, else chain.
+
+Reference: [Pybricks UltrasonicSensor reference](https://docs.pybricks.com/en/stable/pupdevices/ultrasonicsensor.html).
+
+<MarkComplete lessonId="fll-unit-04/if-elif-else" nextUnit="/fll/unit-04/and-or-not" nextUnitName="Lesson F4.3: Combine Conditions" />

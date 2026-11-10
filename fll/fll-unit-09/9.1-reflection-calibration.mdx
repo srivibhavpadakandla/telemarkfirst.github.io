@@ -1,0 +1,42 @@
+---
+id: reflection-calibration
+title: "Lesson F9.1: Calibrate Reflected Light"
+slug: /unit-09/reflection-calibration
+sidebar_label: "F9.1 · Calibrate Reflected Light"
+sidebar_position: 1
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F9.1: Calibrate Reflected Light
+
+Measure several light and dark readings with the sensor at the height and angle used during the mission. A midpoint between typical values is a starting threshold, but line edges and event lighting can change the result. Print readings while the robot is still, then test the threshold at the line edge.
+
+## Worked example
+
+~~~python
+light_samples = [color_sensor.reflection() for _ in range(5)]
+robot.straight(750)
+dark_samples = [color_sensor.reflection() for _ in range(5)]
+print("Light:", light_samples, "Dark:", dark_samples)
+threshold = (min(light_samples) + max(dark_samples)) / 2
+print("Candidate:", threshold)
+~~~
+
+## Simulator practice
+
+Read five values at the fixed start, then drive toward the dark line and read five more. Adjust the drive distance in code if the second position misses the line.
+
+<FllPythonPractice lessonId="fll-unit-09/reflection-calibration" />
+
+## On the robot
+
+Collect five light and five dark values. Choose a threshold between the highest dark reading and lowest light reading if that gap exists.
+
+## Check and adjust
+
+Your threshold is based on measured ranges and you know whether the ranges overlap. If light and dark samples overlap, improve mounting and remeasure.
+
+Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).
+
+<MarkComplete lessonId="fll-unit-09/reflection-calibration" nextUnit="/fll/unit-09/line-stop" nextUnitName="Lesson F9.2: Stop at a Dark Line" />

@@ -1,0 +1,42 @@
+---
+id: straight-and-turn
+title: "Lesson F8.2: Straight and Turn Segments"
+slug: /unit-08/straight-and-turn
+sidebar_label: "F8.2 · Straight and Turn Segments"
+sidebar_position: 2
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F8.2: Straight and Turn Segments
+
+A route of straight and turn segments is easier to measure because each command finishes before the next begins. Use a negative distance to reverse and a negative angle to turn left, then read the final heading. If the route misses, locate the first segment that diverged before editing a later command.
+
+## Worked example
+
+~~~python
+robot.reset()
+robot.straight(300)
+robot.turn(90)
+robot.straight(50)
+print("Distance mm:", robot.distance())
+print("Angle deg:", robot.angle())
+~~~
+
+## Simulator practice
+
+Mark the expected corner and final point. Run Step and find the first mismatch.
+
+<FllPythonPractice lessonId="fll-unit-08/straight-and-turn" />
+
+## On the robot
+
+Place tape at each corner. Measure the first error before changing a later segment.
+
+## Check and adjust
+
+If the endpoint misses, use the route log to identify the first segment that diverged, then retest that segment on its own.
+
+Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).
+
+<MarkComplete lessonId="fll-unit-08/straight-and-turn" nextUnit="/fll/unit-08/curves-and-settings" nextUnitName="Lesson F8.3: Arcs and Speed Settings" />

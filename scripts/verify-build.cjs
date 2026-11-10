@@ -38,15 +38,16 @@ findRoute('/simulator');
 findRoute('/search');
 findRoute('/blocks');
 findRoute('/blocks/blocks-unit-00/workspace-and-run-controls');
-findRoute('/blocks/blocks-unit-00/workspace-and-run-controls');
 findRoute('/blocks/blocks-unit-05/delivery-controller-challenge');
 findRoute('/blocks/next-step');
 findRoute('/blocks/python-resources');
-findRoute('/blocks/fll');
-findRoute('/blocks/fll/unit-00/what-is-fll-challenge');
-findRoute('/blocks/fll/unit-00/what-is-fll-challenge');
-findRoute('/blocks/fll/unit-01/retrieve-deliver-challenge');
-findRoute('/blocks/fll/unit-02/mission-run-capstone');
+findRoute('/fll');
+findRoute('/fll/unit-00/design-as-simple-machines');
+findRoute('/fll/unit-00/what-is-fll-challenge');
+findRoute('/fll/python-starter');
+findRoute('/fll/unit-01/retrieve-deliver-challenge');
+findRoute('/fll/unit-02/mission-run-capstone');
+findRoute('/fll/unit-14/full-match-capstone');
 findRoute('/docs/unit-00/classes-and-objects');
 findRoute('/docs/unit-00/classes-and-objects');
 findRoute('/docs/unit-01/prerequisites');
@@ -78,7 +79,7 @@ for (const file of walk(buildRoot).filter((name) => name.endsWith('.html'))) {
   }
 }
 
-const sourceDirs = ['mechanical', 'docs', 'blocks']
+const sourceDirs = ['mechanical', 'docs', 'blocks', 'fll']
   .map((name) => path.join(repoRoot, name))
   .filter((directory) => fs.existsSync(directory));
 
@@ -87,7 +88,7 @@ let linksChecked = 0;
 
 for (const file of sourceDirs.flatMap(walk).filter((name) => name.endsWith('.mdx'))) {
   const text = fs.readFileSync(file, 'utf8');
-  for (const match of text.matchAll(/\]\((\/(?:mechanical|docs|blocks)[^)#\s]*)\)/g)) {
+  for (const match of text.matchAll(/\]\((\/(?:mechanical|docs|blocks|fll)[^)#\s]*)\)/g)) {
     linksChecked += 1;
     const route = match[1].replace(/\/+$/, '');
     if (!builtRoutes.has(route)) {

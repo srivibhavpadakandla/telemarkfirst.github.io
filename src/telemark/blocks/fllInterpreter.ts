@@ -1,4 +1,5 @@
 import type {BlockNode, WorkspaceNode} from './blockInterpreter';
+import {fllColorSensorFootprint, getFllObstaclePosition, type FllFieldObject} from '../fllSceneProfiles';
 
 export interface FllMissionState {
   crossedLine: boolean;
@@ -54,16 +55,22 @@ const OBSTACLE = {x: 20, z: 0, radius: 12};
 const CARGO_START = {x: -5, z: 20};
 const DELIVERY = {x: 78, z: -28, radius: 18};
 const TARGET = {x: 38, z: 36, radius: 15};
+const DEFAULT_FIELD_OBJECTS: readonly FllFieldObject[] = ['home', 'line', 'obstacle', 'target', 'cargo', 'delivery'];
 
 export const FLL_REPEATABILITY_PROFILES = [-0.02, 0, 0.02] as const;
 
-export function initialFllScene(): FllSceneState {
-  return {
+export function initialFllScene(fieldObjects: readonly FllFieldObject[] = DEFAULT_FIELD_OBJECTS): FllSceneState {
+  const visible = new Set(fieldObjects);
+  const obstaclePosition = getFllObstaclePosition({fieldObjects});
+  const obstacle = {...obstaclePosition, radius: OBSTACLE.radius};
+  const scene: FllSceneState = {
     xCm: -100, zCm: 38, headingDeg: 0, speedPercent: 35, attachmentDeg: 0,
     elapsedSeconds: 0, distanceCm: 200, reflection: 78, score: 0, collision: false,
     objectX: CARGO_START.x, objectZ: CARGO_START.z,
-    missions: {crossedLine: false, targetActive: false, carryingObject: false, deliveredObject: false, atHome: true},
+    missions: {crossedLine: false, targetActive: false, carryingObject: false, deliveredObject: false, atHome: visible.has('home')},
   };
+  scene.distanceCm = sensedDistanceCm(scene, visible, obstacle);
+  return scene;
 }
 
 const cloneScene = (scene: FllSceneState): FllSceneState => ({...scene, missions: {...scene.missions}});
@@ -72,8 +79,29 @@ const truth = (value: unknown): boolean => typeof value === 'number' ? value !==
 const normalizeHeading = (value: number): number => ((value + 180) % 360 + 360) % 360 - 180;
 const distance = (x1: number, z1: number, x2: number, z2: number) => Math.hypot(x2 - x1, z2 - z1);
 
-function executeFllProgram(workspace: WorkspaceNode, wheelBias: number, collectPlayback: boolean): FllRunResult {
-  const scene = initialFllScene();
+function sensedDistanceCm(scene: FllSceneState, visible: ReadonlySet<FllFieldObject>, obstacle: typeof OBSTACLE): number {
+  const heading = scene.headingDeg * Math.PI / 180;
+  const candidates = [
+    ...(visible.has('obstacle') ? [obstacle] : []),
+    ...(visible.has('cargo') ? [{x: scene.objectX, z: scene.objectZ, radius: 5}] : []),
+    ...(visible.has('target') ? [TARGET] : []),
+  ];
+  let sensed = 200;
+  for (const item of candidates) {
+    const dx = item.x - scene.xCm;
+    const dz = item.z - scene.zCm;
+    const forward = dx * Math.cos(heading) + dz * Math.sin(heading);
+    const side = Math.abs(-dx * Math.sin(heading) + dz * Math.cos(heading));
+    if (forward > 0 && side < item.radius + 5) sensed = Math.min(sensed, Math.max(0, forward - item.radius));
+  }
+  return sensed;
+}
+
+function executeFllProgram(workspace: WorkspaceNode, wheelBias: number, collectPlayback: boolean, fieldObjects: readonly FllFieldObject[]): FllRunResult {
+  const visible = new Set(fieldObjects);
+  const obstaclePosition = getFllObstaclePosition({fieldObjects});
+  const obstacle = {...obstaclePosition, radius: OBSTACLE.radius};
+  const scene = initialFllScene(fieldObjects);
   const playback: FllPlaybackFrame[] = [];
   const scopes: Array<Record<string, unknown>> = [{}];
   const functions = new Map<string, FunctionDefinition>();
@@ -106,31 +134,23 @@ function executeFllProgram(workspace: WorkspaceNode, wheelBias: number, collectP
     if (collectPlayback) playback.push({blockId: block.id, blockType: block.type, kind, scene: cloneScene(scene), variables: vars()});
   };
   const updateSensorsAndMissions = () => {
-    scene.reflection = Math.abs(scene.xCm + 20) < 3 ? 18 : 78;
+    scene.reflection = visible.has('line') && Math.abs(fllColorSensorFootprint(scene).x + 20) <= 3 ? 18 : 78;
     const heading = scene.headingDeg * Math.PI / 180;
-    const candidates = [OBSTACLE, {x: scene.objectX, z: scene.objectZ, radius: 5}, TARGET];
-    scene.distanceCm = 200;
-    for (const item of candidates) {
-      const dx = item.x - scene.xCm;
-      const dz = item.z - scene.zCm;
-      const forward = dx * Math.cos(heading) + dz * Math.sin(heading);
-      const side = Math.abs(-dx * Math.sin(heading) + dz * Math.cos(heading));
-      if (forward > 0 && side < item.radius + 5) scene.distanceCm = Math.min(scene.distanceCm, Math.max(0, forward - item.radius));
-    }
-    scene.missions.crossedLine ||= scene.xCm >= -20;
-    if (!scene.missions.targetActive && scene.attachmentDeg >= 45
+    scene.distanceCm = sensedDistanceCm(scene, visible, obstacle);
+    scene.missions.crossedLine ||= visible.has('line') && scene.xCm >= -20;
+    if (visible.has('target') && !scene.missions.targetActive && scene.attachmentDeg >= 45
       && distance(scene.xCm, scene.zCm, TARGET.x, TARGET.z) <= TARGET.radius) scene.missions.targetActive = true;
-    if (!scene.missions.carryingObject && !scene.missions.deliveredObject && scene.attachmentDeg >= 55
+    if (visible.has('cargo') && !scene.missions.carryingObject && !scene.missions.deliveredObject && scene.attachmentDeg >= 55
       && distance(scene.xCm, scene.zCm, scene.objectX, scene.objectZ) <= 14) scene.missions.carryingObject = true;
     if (scene.missions.carryingObject) {
       scene.objectX = scene.xCm + Math.cos(heading) * 9;
       scene.objectZ = scene.zCm + Math.sin(heading) * 9;
       if (scene.attachmentDeg <= 12) {
         scene.missions.carryingObject = false;
-        if (distance(scene.objectX, scene.objectZ, DELIVERY.x, DELIVERY.z) <= DELIVERY.radius) scene.missions.deliveredObject = true;
+        if (visible.has('delivery') && distance(scene.objectX, scene.objectZ, DELIVERY.x, DELIVERY.z) <= DELIVERY.radius) scene.missions.deliveredObject = true;
       }
     }
-    scene.missions.atHome = scene.xCm < -82 && scene.zCm > 25;
+    scene.missions.atHome = visible.has('home') && scene.xCm < -82 && scene.zCm > 25;
     scene.score = (scene.missions.crossedLine ? 10 : 0) + (scene.missions.targetActive ? 20 : 0) + (scene.missions.deliveredObject ? 30 : 0);
   };
   const move = (block: BlockNode, requestedCm: number, steering = 0) => {
@@ -145,7 +165,7 @@ function executeFllProgram(workspace: WorkspaceNode, wheelBias: number, collectP
       scene.zCm += Math.sin(rad) * step;
       scene.elapsedSeconds += Math.abs(step) / Math.max(4, scene.speedPercent * 0.55);
       if (Math.abs(scene.xCm) > FIELD_X - ROBOT_RADIUS || Math.abs(scene.zCm) > FIELD_Z - ROBOT_RADIUS
-        || distance(scene.xCm, scene.zCm, OBSTACLE.x, OBSTACLE.z) < ROBOT_RADIUS + OBSTACLE.radius) {
+        || (visible.has('obstacle') && distance(scene.xCm, scene.zCm, obstacle.x, obstacle.z) < ROBOT_RADIUS + obstacle.radius)) {
         scene.collision = true;
         throw new Error('The robot collided with a wall or practice-field obstacle.');
       }
@@ -261,10 +281,10 @@ function profilePassed(result: FllRunResult): boolean {
   return result.error === null && !result.scene.collision && result.scene.missions.atHome;
 }
 
-export function runFllProgram(workspace: WorkspaceNode): FllRunResult {
-  const result = executeFllProgram(workspace, 0, true);
+export function runFllProgram(workspace: WorkspaceNode, fieldObjects: readonly FllFieldObject[] = DEFAULT_FIELD_OBJECTS): FllRunResult {
+  const result = executeFllProgram(workspace, 0, true, fieldObjects);
   result.repeatabilityPasses = FLL_REPEATABILITY_PROFILES
-    .map((bias) => executeFllProgram(workspace, bias, false))
+    .map((bias) => executeFllProgram(workspace, bias, false, fieldObjects))
     .filter(profilePassed).length;
   return result;
 }

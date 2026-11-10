@@ -1,0 +1,42 @@
+---
+id: mission-value
+title: "Lesson F13.1: Compare Mission Value"
+slug: /unit-13/mission-value
+sidebar_label: "F13.1 · Compare Mission Value"
+sidebar_position: 1
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F13.1: Compare Mission Value
+
+Compare a mission's points with its measured success rate and time before choosing its place in the match. Multiplying points by success probability gives a simple expected value, though it does not account for interactions between missions. Record how trials produced the success estimate so the team can judge it alongside route time.
+
+## Worked example
+
+~~~python
+points = 20
+successes = 4
+trials = 5
+success_rate = successes / trials
+expected_points = points * success_rate
+print("Expected points:", expected_points)
+~~~
+
+## Simulator practice
+
+Enter two practice mission estimates and compare them. Do not treat simulator score as an official season score.
+
+<FllPythonPractice lessonId="fll-unit-13/mission-value" />
+
+## On the robot
+
+Use real team trial counts and current Robot Game point values. Discuss whether attachment changes alter the choice.
+
+## Check and adjust
+
+Your comparison includes points, trials, success rate, and time for both missions. If expected value seems high, check the trial count.
+
+Reference: [FIRST season materials](https://www.firstinspires.org/resources/library/fll/season-materials).
+
+<MarkComplete lessonId="fll-unit-13/mission-value" nextUnit="/fll/unit-13/time-budget" nextUnitName="Lesson F13.2: Budget the Match" />

@@ -1,0 +1,40 @@
+---
+id: attachment-control-challenge
+title: "Lesson F7.5: Attachment Control Challenge"
+slug: /unit-07/attachment-control-challenge
+sidebar_label: "F7.5 · Attachment Control Challenge"
+sidebar_position: 5
+---
+
+# Lesson F7.5: Attachment Control Challenge
+
+Drive to a target, move the attachment once, return the tool to its home angle, and bring the robot home. Put navigation and tool motion in separate functions so each can be tested alone, and record the tool angle before and after the complete run. Stop physical trials if the tool touches the chassis.
+
+## Worked example
+
+~~~python
+def activate_target():
+    robot.straight(300)
+    attachment.run_angle(150, 90)
+    attachment.run_angle(150, -90)
+
+activate_target()
+robot.straight(-300)
+print("Tool angle:", attachment.angle())
+~~~
+
+## Simulator practice
+
+Use the yellow practice target. Adjust the approach distance before changing the tool angle.
+
+<FllPythonPractice lessonId="fll-unit-07/attachment-control-challenge" />
+
+## On the robot
+
+Run five target activations at low speed. Record target contact, tool return angle, and home position.
+
+## Check and adjust
+
+The target is activated and the tool returns near its starting angle. If target contact fails, adjust the approach before the tool angle.
+
+Reference: [Pybricks Motor reference](https://docs.pybricks.com/en/stable/pupdevices/motor.html).

@@ -1,0 +1,43 @@
+---
+id: scope-and-constants
+title: "Lesson F6.3: Scope and Calibration Constants"
+slug: /unit-06/scope-and-constants
+sidebar_label: "F6.3 · Scope and Calibration Constants"
+sidebar_position: 3
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F6.3: Scope and Calibration Constants
+
+A local variable exists inside its function, while a named calibration constant can be shared across route functions. Keep measured dimensions near the top of the program and use distinct names for field distances and sensor readings. In Python, uppercase names signal values the team intends to keep fixed during a run.
+
+## Worked example
+
+~~~python
+LINE_THRESHOLD = 35
+
+def is_on_line():
+    light_percent = color_sensor.reflection()
+    return light_percent < LINE_THRESHOLD
+
+print(is_on_line())
+~~~
+
+## Simulator practice
+
+Change LINE_THRESHOLD once and check every call to is_on_line.
+
+<FllPythonPractice lessonId="fll-unit-06/scope-and-constants" />
+
+## On the robot
+
+Record the measured light and dark ranges next to the constant in your team's program notes.
+
+## Check and adjust
+
+You can identify which names are local and which calibration value is shared. If a threshold changes only one call, remove a duplicated literal.
+
+Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).
+
+<MarkComplete lessonId="fll-unit-06/scope-and-constants" nextUnit="/fll/unit-06/lists-and-routes" nextUnitName="Lesson F6.4: Represent a Route with a List" />

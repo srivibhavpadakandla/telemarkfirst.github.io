@@ -9,19 +9,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson 3.3: Counting Loops and Loop Variables
 
-A counting loop changes a **loop variable** through a planned range. The loop variable tells which repeat is currently running.
+A **counting loop** changes a variable through a planned range, which can label positions in a scan. From 1 through 4, it repeats four times. From 0 through 4, it repeats five, creating an **off-by-one error** if the route expected four moves.
 
-A loop from 1 to 4 by 1 uses the values 1, 2, 3, and 4. That is four repeats. A loop from 0 to 4 that includes both ends uses five values. Confusing those counts causes an **off-by-one error**.
+## Label four positions
 
-The step value controls how the loop variable changes. A positive step counts upward. A negative step counts downward when the start and end values are arranged for it.
-
-## Guided practice
-
-Create a counting loop with `i` from 1 to 4 by 1. Print `i` inside the loop. Predict all four output values.
-
-Now move forward by 1 each time and print the final scene position after the loop. Test a loop from 0 to 3 and compare its repeat count. Both examples repeat four times even though their first and last loop-variable values differ.
-
-Use clear loop variable names when they have a meaning, such as `row` or `itemIndex`.
+Create a loop with `position` from 1 through 4 by 1, printing its value and moving forward once on each repeat. Predict four output lines, four movement steps, and a final x position of 4. Change the range to 0 through 3 and use Step to compare the new labels with the same four field positions.
 
 <BlockPractice lessonId="blocks-unit-03/counting-loops" />
 

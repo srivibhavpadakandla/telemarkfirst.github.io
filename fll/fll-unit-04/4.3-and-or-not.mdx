@@ -1,0 +1,43 @@
+---
+id: and-or-not
+title: "Lesson F4.3: Combine Conditions"
+slug: /unit-04/and-or-not
+sidebar_label: "F4.3 · Combine Conditions"
+sidebar_position: 3
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F4.3: Combine Conditions
+
+Use `and` when both conditions are required, `or` when either is enough, and `not` when the opposite of a Boolean is needed. A mission action might require a nearby object and a clear tool position. Name those intermediate results so the full condition remains readable. Parentheses help when `and` and `or` appear together.
+
+## Worked example
+
+~~~python
+near_object = distance_sensor.distance() < 160
+on_dark_line = color_sensor.reflection() < 35
+safe_to_pick = near_object and not on_dark_line
+if safe_to_pick:
+    attachment.run_angle(180, 60)
+else:
+    print("Pickup condition failed")
+~~~
+
+## Simulator practice
+
+Add a short truth-table test for all four Boolean combinations before using sensor readings. Record which combination moves the tool.
+
+<FllPythonPractice lessonId="fll-unit-04/and-or-not" />
+
+## On the robot
+
+Before powering a tool, check physical clearance for the combination that makes safe_to_pick true.
+
+## Check and adjust
+
+Only a nearby object away from the dark line triggers the tool. If the tool moves unsafely, print each intermediate Boolean.
+
+Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).
+
+<MarkComplete lessonId="fll-unit-04/and-or-not" nextUnit="/fll/unit-04/thresholds-and-hysteresis" nextUnitName="Lesson F4.4: Avoid Threshold Chatter" />

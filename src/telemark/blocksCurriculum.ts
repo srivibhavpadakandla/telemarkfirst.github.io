@@ -10,13 +10,13 @@ interface BlocksUnitSeed {
 
 const BLOCKS_UNIT_SEEDS: BlocksUnitSeed[] = [
   {
-    title: 'How Programs Run',
-    desc: 'Build, run, trace, and repair programs made from ordered commands.',
-    overview: 'A program follows instructions in a specific order. You will learn how a run starts, how to follow each step, and how to find the first step that went wrong.',
+    title: 'Start and Sequence Robot Programs',
+    desc: 'Connect commands, start a run, and trace a route across the practice field.',
+    overview: 'Start with a grid robot and an ordered program. Predict its route, inspect each step, and repair the first command that produces an unexpected result.',
     outcomes: [
-      'Connect blocks into an ordered program and use Run, Step, Reset, and Stop.',
-      'Explain how a start event begins a program and how execution moves between commands.',
-      'Trace a short program and repair a command that is missing or out of order.',
+      'Connect blocks into an ordered program and use the workspace controls.',
+      'Explain how the start event begins a robot route.',
+      'Trace position and direction after each command and repair an incorrect route.',
     ],
     lessons: [
       {slug: 'workspace-and-run-controls', title: 'The Workspace and Run Controls'},
@@ -27,13 +27,13 @@ const BLOCKS_UNIT_SEEDS: BlocksUnitSeed[] = [
     ],
   },
   {
-    title: 'Values and Variables',
-    desc: 'Store numbers, text, and true-or-false values, then use them in expressions.',
-    overview: 'Programs work with information. You will choose a useful data type, save a value under a clear name, change it, and inspect the result while the program runs.',
+    title: 'Values and Robot State',
+    desc: 'Represent distances, status text, Boolean flags, and changing mission values.',
+    overview: 'Robot programs use values to represent route plans, readings, and status. Choose a data type, store a value, update it, and inspect the result during a run.',
     outcomes: [
-      'Tell numbers, text, and Boolean values apart.',
-      'Create, set, read, and change variables.',
-      'Build expressions and trace how their results change.',
+      'Distinguish numeric measurements from text labels and Boolean flags.',
+      'Create, set, read, and change variables that represent robot state.',
+      'Calculate a planned value and trace each change in the workspace.',
     ],
     lessons: [
       {slug: 'numbers-text-booleans', title: 'Numbers, Text, and True or False'},
@@ -44,13 +44,13 @@ const BLOCKS_UNIT_SEEDS: BlocksUnitSeed[] = [
     ],
   },
   {
-    title: 'Decisions and Logic',
-    desc: 'Compare values and choose exactly which part of a program should run.',
-    overview: 'A condition is a question with a true-or-false result. You will use conditions to choose one path, handle several cases, and combine rules without making them unclear.',
+    title: 'Conditions and Control',
+    desc: 'Use comparisons and Boolean rules to select a response to test data.',
+    overview: 'A condition has a true-or-false result. Compare a test reading with a threshold, select one branch, and check the boundary where that selection changes.',
     outcomes: [
-      'Build comparisons that return true or false.',
-      'Use if, else if, and else branches in a clear order.',
-      'Combine conditions with and, or, and not.',
+      'Compare a test reading with a threshold and identify its Boolean result.',
+      'Order if, else if, and else branches so the intended response runs.',
+      'Combine readiness and acceptance rules with and, or, and not.',
     ],
     lessons: [
       {slug: 'compare-values', title: 'Compare Two Values'},
@@ -61,13 +61,13 @@ const BLOCKS_UNIT_SEEDS: BlocksUnitSeed[] = [
     ],
   },
   {
-    title: 'Loops and Repeated Work',
-    desc: 'Repeat commands safely with counts, conditions, and loop variables.',
-    overview: 'A loop repeats a group of commands. You will choose a loop that matches the job, check its stopping rule, and trace repeated work without losing your place.',
+    title: 'Loops for Movement and Scanning',
+    desc: 'Repeat route steps, count field positions, and stop a loop at the right time.',
+    overview: 'Loops express repeated route steps and scan positions. Choose a count or condition, calculate how many actions will run, and check the stopping rule.',
     outcomes: [
-      'Use fixed-count, condition-controlled, and counting loops.',
-      'Trace loop variables and recognize off-by-one errors.',
-      'Stop an endless loop and simplify repeated patterns with nesting.',
+      'Use fixed-count, condition-controlled, and counting loops for repeated work.',
+      'Trace movement counts and locate off-by-one errors.',
+      'Use nested loops for a scan and repair a loop that does not stop.',
     ],
     lessons: [
       {slug: 'repeat-known-count', title: 'Repeat a Known Number of Times'},
@@ -78,13 +78,13 @@ const BLOCKS_UNIT_SEEDS: BlocksUnitSeed[] = [
     ],
   },
   {
-    title: 'Functions and Lists',
-    desc: 'Name reusable work, pass values into it, return results, and process lists.',
-    overview: 'Functions give one name to a useful group of commands. Lists keep several related values in order. You will use both to make programs easier to test and change.',
+    title: 'Functions and Route Data',
+    desc: 'Reuse named routines and process ordered route or measurement values.',
+    overview: 'Functions group repeated robot tasks under clear names. Lists keep route values in order. Use parameters, returns, and loops to process the same data without copying commands.',
     outcomes: [
-      'Define and call a function at the correct point in a program.',
-      'Use parameters, local values, and returned results.',
-      'Read list items by index and process each item with a loop.',
+      'Define and call a named routine from the main program.',
+      'Pass a route value into a function and use a returned result.',
+      'Read planned values by index and process each item with a loop.',
     ],
     lessons: [
       {slug: 'define-and-call-functions', title: 'Define and Call a Function'},
@@ -95,13 +95,13 @@ const BLOCKS_UNIT_SEEDS: BlocksUnitSeed[] = [
     ],
   },
   {
-    title: 'Plan, Test, and Move to Text Code',
-    desc: 'Combine the foundations, test them carefully, and connect each idea to Java.',
-    overview: 'A complete program is easier to build when the work is split into small parts. You will plan those parts, test them with useful cases, and read the same ideas in blocks and Java.',
+    title: 'Build and Test a Robot Program',
+    desc: 'Combine the foundations, test boundaries, and recognize the same flow in Java.',
+    overview: 'Plan a small robot control program, test its parts with normal and boundary inputs, and match block structures to text code before moving to a robotics track.',
     outcomes: [
-      'Break a problem into small steps and write a short plan before building.',
-      'Test normal, boundary, and unexpected inputs while tracing program state.',
-      'Recognize variables, conditions, loops, functions, and lists in Java-shaped code.',
+      'Split a mission requirement into data, decisions, route actions, and reports.',
+      'Test normal and boundary values while tracing program state.',
+      'Recognize the same variables, conditions, loops, and functions in Java.',
     ],
     lessons: [
       {slug: 'break-programs-into-parts', title: 'Break a Program into Smaller Parts'},

@@ -108,7 +108,7 @@ export const CHANGELOG: readonly ChangeEntry[] = [
       'Use color, distance, and heading sensors in retrieval challenges.',
       'Plan and test a full mission run in the capstone.',
     ],
-    href: '/blocks/fll',
+    href: '/fll',
     actionLabel: 'Open FLL lessons',
   },
   {

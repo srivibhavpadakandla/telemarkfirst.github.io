@@ -1,0 +1,49 @@
+---
+id: sensor-fallback
+title: "Lesson F10.4: Handle Missing or Conflicting Cues"
+slug: /unit-10/sensor-fallback
+sidebar_label: "F10.4 · Handle Missing or Conflicting Cues"
+sidebar_position: 4
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F10.4: Handle Missing or Conflicting Cues
+
+Choose a safe action for a mission when a required cue is absent. An invalid ultrasonic range is not evidence that the path is clear, so limit the wait and stop conservatively if valid readings never arrive. Check heading separately before a turn so one failed sensor cannot silently alter the rest of the route.
+
+## Worked example
+
+~~~python
+watch = StopWatch()
+valid = False
+while watch.time() < 1000:
+    range_mm = distance_sensor.distance()
+    if range_mm < 2000:
+        valid = True
+        break
+    wait(20)
+if valid and range_mm > 150:
+    robot.straight(100)
+else:
+    robot.stop()
+print("Valid range:", valid)
+~~~
+
+## Simulator practice
+
+Use sample range values of 100 and 2000 mm to test both branches, then run against the fixed field. Record whether the real reading is valid.
+
+<FllPythonPractice lessonId="fll-unit-10/sensor-fallback" />
+
+## On the robot
+
+Run the same cases at low speed with clear space. Decide whether your team should skip the mission after an invalid reading.
+
+## Check and adjust
+
+An invalid reading produces a safe stop and an explicit log message. If an invalid reading moves the robot, inspect the valid flag.
+
+Reference: [Pybricks UltrasonicSensor reference](https://docs.pybricks.com/en/stable/pupdevices/ultrasonicsensor.html).
+
+<MarkComplete lessonId="fll-unit-10/sensor-fallback" nextUnit="/fll/unit-10/sensor-fusion-challenge" nextUnitName="Lesson F10.5: Sensor Check Challenge" />

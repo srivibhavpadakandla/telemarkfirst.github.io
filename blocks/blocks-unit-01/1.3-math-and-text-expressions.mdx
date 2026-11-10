@@ -9,19 +9,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson 1.3: Math and Text Expressions
 
-An **expression** is code that produces a value. A number block is a small expression. A math block is a larger expression because it reads input values, performs an operation, and produces a result.
+An **expression** calculates one value from other values. A route with segments of 3 and 4 steps has `3 + 4 = 7` planned steps, while `(3 + 4) * 2` evaluates to 14 because the addition happens inside the larger expression. Changing how the blocks nest changes the result.
 
-Expressions can fit inside other blocks. In `set total to 4 + 3`, the addition runs first and produces `7`. The assignment then stores that result in `total`.
+## Calculate and label a plan
 
-Math expressions use operations such as add, subtract, multiply, and divide. Text expressions can join values. Joining `Team ` and `12` produces the text `Team 12`. It does not perform number addition.
-
-Nested expressions are read from the inside out. In `(2 + 3) * 4`, the inner addition produces `5`, then multiplication produces `20`.
-
-## Guided practice
-
-Create a variable named `total`. Store the result of `(6 + 2) * 3`, then print `total`. Use Step to confirm when the expression is evaluated and when its result is assigned.
-
-Next, join the text `Total: ` with the variable value and print the result. Keep the number in `total`; only the output needs joined text.
+Build `(3 + 4) * 2`, store it in `plannedSteps`, and print the number. Join `planned steps: ` with the variable and print the labeled result, predicting `14` and `planned steps: 14` before running. This output checks the calculation, while a movement command would be needed to change the robot's route.
 
 <BlockPractice lessonId="blocks-unit-01/math-and-text-expressions" />
 

@@ -1,0 +1,40 @@
+---
+id: for-range
+title: "Lesson F5.1: Repeat a Known Count"
+slug: /unit-05/for-range
+sidebar_label: "F5.1 · Repeat a Known Count"
+sidebar_position: 1
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F5.1: Repeat a Known Count
+
+A `for` loop repeats a known number of times, and `range(3)` produces the values 0, 1, and 2. Use a loop for a measured pattern or repeatable test, while keeping different mission actions separate. Print the count during each repeat so a field result can be matched to the iteration that caused it.
+
+## Worked example
+
+~~~python
+for trial in range(3):
+    print("Trial:", trial + 1)
+    robot.straight(100)
+    robot.straight(-100)
+~~~
+
+## Simulator practice
+
+Run three short out-and-back moves. Change range(3) to range(2) and predict the count.
+
+<FllPythonPractice lessonId="fll-unit-05/for-range" />
+
+## On the robot
+
+With wheels lifted, verify the number of moves. On the floor, check whether the robot returns to its starting mark after each iteration.
+
+## Check and adjust
+
+The printed count matches the number of completed out-and-back moves. If the pattern repeats too many times, check range and indentation.
+
+Reference: [Pybricks first robot program](https://pybricks.com/learn/making-programs/your-first-program/).
+
+<MarkComplete lessonId="fll-unit-05/for-range" nextUnit="/fll/unit-05/while-and-stop" nextUnitName="Lesson F5.2: Repeat Until a Cue" />

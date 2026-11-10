@@ -1,0 +1,39 @@
+---
+id: motor-directions
+title: "Lesson F7.1: Check Motor Direction"
+slug: /unit-07/motor-directions
+sidebar_label: "F7.1 · Check Motor Direction"
+sidebar_position: 1
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F7.1: Check Motor Direction
+
+A positive motor angle follows the direction configured when a `Motor` object is created, although physical gearing may reverse the visible tool movement. Test a small angle with the robot lifted. If the tool moves the wrong way, correct the construction setting or requested angle rather than compensating in every later call.
+
+## Worked example
+
+~~~python
+attachment = Motor(Port.E, Direction.COUNTERCLOCKWISE)
+attachment.run_angle(150, 30)
+print("Tool angle:", attachment.angle())
+~~~
+
+## Simulator practice
+
+Run a 30 degree move and observe which way the virtual tool moves. Reverse the configured direction and compare.
+
+<FllPythonPractice lessonId="fll-unit-07/motor-directions" />
+
+## On the robot
+
+Mark the tool's home position. Run a 30 degree test with clearance around the tool, then write down which direction is positive.
+
+## Check and adjust
+
+A teammate can predict the tool direction from its constructor and angle sign. If the tool rotates backward, check its configured direction.
+
+Reference: [Pybricks Motor reference](https://docs.pybricks.com/en/stable/pupdevices/motor.html).
+
+<MarkComplete lessonId="fll-unit-07/motor-directions" nextUnit="/fll/unit-07/motor-angles" nextUnitName="Lesson F7.2: Relative Tool Angles" />

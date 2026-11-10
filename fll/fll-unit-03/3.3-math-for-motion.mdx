@@ -1,0 +1,41 @@
+---
+id: math-for-motion
+title: "Lesson F3.3: Arithmetic for Motion"
+slug: /unit-03/math-for-motion
+sidebar_label: "F3.3 · Arithmetic for Motion"
+sidebar_position: 3
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F3.3: Arithmetic for Motion
+
+Calculate route commands from measured distances instead of scattering unrelated constants through a program. Add or subtract clearances in millimeters, and use a negative straight distance when the robot needs to reverse. Print intermediate values before sending a calculated result to a motor command.
+
+## Worked example
+
+~~~python
+field_gap_mm = 420
+tool_clearance_mm = 55
+approach_mm = field_gap_mm - tool_clearance_mm
+robot.straight(approach_mm)
+print("Approach:", approach_mm, "mm")
+~~~
+
+## Simulator practice
+
+Change the clearance from 55 to 70 mm and predict the new stopping position.
+
+<FllPythonPractice lessonId="fll-unit-03/math-for-motion" />
+
+## On the robot
+
+Measure the gap from launch to a safe tool position. Record the clearance you chose and why.
+
+## Check and adjust
+
+You can calculate the approach distance without trial-and-error changes to several commands. If the approach stops too close, remeasure tool clearance.
+
+Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).
+
+<MarkComplete lessonId="fll-unit-03/math-for-motion" nextUnit="/fll/unit-03/strings-and-output" nextUnitName="Lesson F3.4: Print Useful Diagnostics" />

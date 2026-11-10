@@ -1,0 +1,40 @@
+---
+id: while-and-stop
+title: "Lesson F5.2: Repeat Until a Cue"
+slug: /unit-05/while-and-stop
+sidebar_label: "F5.2 · Repeat Until a Cue"
+sidebar_position: 2
+---
+
+import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
+
+# Lesson F5.2: Repeat Until a Cue
+
+A `while` loop repeats while its condition remains `True`, so the sensor reading must be updated inside the loop. Start a continuous drive, check reflection, and stop the drive base when the condition ends. A short `wait(10)` spaces the readings. A later lesson adds a timeout for the case where no line appears.
+
+## Worked example
+
+~~~python
+robot.drive(100, 0)
+while color_sensor.reflection() > 35:
+    wait(10)
+robot.stop()
+~~~
+
+## Simulator practice
+
+Drive toward the line and confirm the robot stops after the reading falls below 35 percent.
+
+<FllPythonPractice lessonId="fll-unit-05/while-and-stop" />
+
+## On the robot
+
+Place the robot near the line and run at low speed. Check that the sensor reaches the line before the wheels cross the target area.
+
+## Check and adjust
+
+You can point to the line that refreshes the reading and the line that stops motion. If the loop never ends, refresh the reading and add a timeout.
+
+Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).
+
+<MarkComplete lessonId="fll-unit-05/while-and-stop" nextUnit="/fll/unit-05/wait-and-stopwatch" nextUnitName="Lesson F5.3: Wait and Measure Time" />
