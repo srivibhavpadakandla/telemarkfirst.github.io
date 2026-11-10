@@ -118,4 +118,13 @@ check(() => {
   assert.equal(message.evidence[0].sources[0].passage, null);
 });
 
+check(() => {
+  const {store, backing} = freshStore();
+  const citations = [{n:1,mode:'summarize',canExcerpt:true},{n:2,mode:'link',canExcerpt:true},{n:3,canExcerpt:true},{n:4,mode:'full',canExcerpt:true}];
+  backing.set('telemark:chats', JSON.stringify([{id:'mode',title:'Lesson',path:'/x',updatedAt:2,messages:[{role:'ai',text:'Answer',citations,evidence:[{claim:'Claim',sources:citations.map(({n})=>({n,status:'matched',passage:'Passage'}))}]}]}]));
+  const message = store.listChats()[0].messages[0];
+  assert.deepEqual(message.citations.map(c=>c.canExcerpt), [false,false,true,true]);
+  assert.deepEqual(message.evidence[0].sources.map(s=>s.passage), [null,null,'Passage','Passage']);
+});
+
 console.log(`Chat store tests passed (${checks} cases)`);

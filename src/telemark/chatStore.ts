@@ -55,8 +55,9 @@ function read(): StoredChat[] {
           if (!c || typeof c.n !== 'number' || !Number.isInteger(c.n) || c.n < 1 || c.n > 48) return [];
           let url: string | undefined;
           try {const parsed = new URL(c.url); if (/^https?:$/.test(parsed.protocol) && !parsed.username && !parsed.password) url = parsed.href;} catch {}
+          const canExcerpt = c.canExcerpt === true && (c.mode === 'full' || c.mode === undefined);
           return [{n: c.n, title: stringField(c.title, 300), pageTitle: stringField(c.pageTitle, 300),
-            version: stringField(c.version, 200), sourceName: stringField(c.sourceName, 200), canExcerpt: c.canExcerpt === true, mode: c.mode === 'summarize' ? 'summarize' as const : c.canExcerpt === true ? 'full' as const : 'link' as const, url}];
+            version: stringField(c.version, 200), sourceName: stringField(c.sourceName, 200), canExcerpt, mode: c.mode === 'summarize' ? 'summarize' as const : canExcerpt ? 'full' as const : 'link' as const, url}];
         }) : [];
         const evidence: EvidenceClaim[] = Array.isArray(m.evidence) ? m.evidence.slice(0, 12).flatMap((entry) => {
           if (!entry || typeof entry.claim !== 'string' || !Array.isArray(entry.sources)) return [];
