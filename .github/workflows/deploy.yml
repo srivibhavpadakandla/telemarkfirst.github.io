@@ -61,7 +61,6 @@ jobs:
   publish-pages:
     needs: deploy
     runs-on: ubuntu-latest
-    timeout-minutes: 35
     permissions:
       pages: write
       id-token: write
@@ -72,8 +71,6 @@ jobs:
       - name: Deploy Pages artifact
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          timeout: 1800000
 
   smoke-pages:
     needs: publish-pages
