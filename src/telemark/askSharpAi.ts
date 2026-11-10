@@ -8,6 +8,8 @@ export interface Citation {
   version?: string;
   url?: string;
   sourceName?: string;
+  canExcerpt?: boolean;
+  mode?: 'full' | 'summarize' | 'link';
 }
 
 export interface PageContext {

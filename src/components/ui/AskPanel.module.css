@@ -289,3 +289,7 @@
 .followUps { display: flex; gap: var(--tm-sp-2); flex-wrap: wrap; margin-top: var(--tm-sp-3); }
 .followUps button { text-align: left; letter-spacing: normal; text-transform: none; }
 .context :focus-visible, .evidence :focus-visible, .toolBtn:focus-visible { outline: 2px solid var(--tm-accent); outline-offset: 2px; }
+
+.contextHead, .recovery { display: flex; align-items: center; justify-content: space-between; gap: var(--tm-sp-2); flex-wrap: wrap; }
+.recovery { justify-content: flex-start; margin-block: var(--tm-sp-2); }
+.workspaceStatus { margin-block: var(--tm-sp-3); color: var(--tm-text-muted); font-size: var(--tm-fs-2xs); line-height: var(--tm-lh-normal); }

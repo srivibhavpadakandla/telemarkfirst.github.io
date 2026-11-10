@@ -380,3 +380,27 @@ sources and claims**. Matching words are an inspection aid, not proof that a
 claim is correct. Restricted sources show links instead of copied text.
 Personalized requests bypass Sharp AI's shared cache and query log; generated
 replies can remain in local browser history.
+
+Draft questions, help mode, attached code, errors, and attempts recover when
+the panel reopens or the lesson reloads in the same browser tab. Each lesson
+has a separate workspace, bounded to the ten most recently edited lessons in
+`sessionStorage`; this is not account sync. **Clear draft and context** removes
+the current workspace contents. Oversized attachments or denied browser storage
+show a recovery warning, so students know when to copy their work first.
+
+**Stop response** keeps the partial answer and immediately unlocks the composer.
+**Retry question** replaces the failed reply without duplicating its question,
+using the code and context currently displayed. Leaving a lesson cancels its
+request; late tokens cannot update a different lesson or a newer response.
+Interrupted saved answers recover with a retry message. Invalid saved entries
+are ignored, and restored evidence respects source excerpt restrictions.
+
+Regression checks: `node scripts/assistant-workspace.test.cjs`,
+`node scripts/chat-store.test.cjs`, and `node scripts/ask-stream.test.cjs`.
+On November 9, 2026, headed Chromium checks covered workspace isolation,
+reopening, retry, stop, late tokens, clearing context, and 390 px layout with
+explicitly synthetic authentication and answers. Actual local guest checks
+opened software, mechanical, and FLL lessons and their sign-in entry; the FLL
+measured-distance starter executed in Python and reported a 1.5-second route.
+These checks do not verify a real Google sign-in or an authenticated production
+answer. The production site must deploy the integrated revision separately.

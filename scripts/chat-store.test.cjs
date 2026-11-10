@@ -102,4 +102,20 @@ check(() => {
   assert.notEqual(store.newChatId(), store.newChatId());
 });
 
+check(() => {
+  const {store, backing} = freshStore();
+  backing.set('telemark:chats', JSON.stringify([null, 'broken', {id:'bad',title:'x',path:'/x',updatedAt:1,messages:{}},
+    {id:'good',title:'Lesson',path:'/x',updatedAt:2,messages:[{role:'ai',text:'Partial answer',complete:false}]}]));
+  const chats = store.listChats();
+  assert.equal(chats.length, 1);
+  assert.match(chats[0].messages[0].error, /interrupted/);
+});
+check(() => {
+  const {store, backing} = freshStore();
+  backing.set('telemark:chats', JSON.stringify([{id:'good',title:'Lesson',path:'/x',updatedAt:2,messages:[{role:'ai',text:'Answer',citations:[{n:1,url:'javascript:alert(1)'},{n:2,url:'https://example.org/docs'}],evidence:[{claim:'Claim',sources:[{n:2,status:'restricted',passage:'Do not restore this text'}]}]}]}]));
+  const message = store.listChats()[0].messages[0];
+  assert.equal(message.citations[0].url, undefined);
+  assert.equal(message.evidence[0].sources[0].passage, null);
+});
+
 console.log(`Chat store tests passed (${checks} cases)`);
