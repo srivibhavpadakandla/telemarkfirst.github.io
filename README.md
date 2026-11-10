@@ -404,3 +404,11 @@ opened software, mechanical, and FLL lessons and their sign-in entry; the FLL
 measured-distance starter executed in Python and reported a 1.5-second route.
 These checks do not verify a real Google sign-in or an authenticated production
 answer. The production site must deploy the integrated revision separately.
+
+Calculator lesson links now follow the Docusaurus router hash after hydration,
+so direct links and in-app navigation select the matching design calculator.
+Headed checks covered `/simulator#gear-ratio` and the chain/belt lesson link with
+no hydration errors. The refreshed dependency set also passed a separate clean
+install, full site checks, TypeScript, and production build in the integration
+checkout. Build-time anchor warnings refer to calculator panels selected after
+hydration; the tested links work in the browser.
