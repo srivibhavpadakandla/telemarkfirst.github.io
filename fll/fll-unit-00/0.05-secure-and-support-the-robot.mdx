@@ -10,21 +10,20 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F0.M5: Secure and Support the Robot
 
-A mechanism works only when its shape stays the same from one run to the next. Before programming, secure the base robot and every attachment so a bump or turn cannot shift the hub, loosen a wheel, or change the tool's contact point.
+A tool may reach the model once and miss it on the next run if its support moves. Before programming, we can check whether the robot frame and attachment keep the same shape under a gentle push. The aim is a contact point that stays in place across repeated starts.
 
 ## Build checks
 
-- **Make the robot frame rigid.** Join the left and right sides with cross beams. Attach the hub and motors firmly to the frame, and make sure the battery and cables cannot snag a model or wheel.
-- **Secure the attachment.** Connect it at two spaced points where possible. Check that pins are fully seated and that the tool cannot twist loose when pushed sideways. Make swaps easy to repeat at the same position.
-- **Avoid cantilevers.** A **cantilever** sticks out from one support with a load at its free end. It bends and twists more easily. Do not leave a wheel, axle, motor, or mission tool hanging from one unsupported side. Place a second frame support on the far side of an axle or arm, shorten the overhang, or add a brace when the design needs reach.
-- **Keep motion clear.** Turn every wheel and moving attachment by hand. Nothing should rub, bind, fall off, or hit the hub through its full travel.
+Cross beams can help the left and right sides of the frame move together. The hub, motors, battery, and cables should stay clear of wheels and field models. Two spaced attachment points may keep a tool from twisting when it is pushed sideways, and fully seated pins make a swap easier to repeat.
+
+A **cantilever** extends from one support with a load at its free end. A long unsupported wheel axle or tool may bend or twist. A second frame support, a shorter overhang, or a brace can help when the design needs reach. Turning each wheel and moving part by hand may reveal rubbing or binding before a powered test.
 
 ## Quick reliability test
 
-Lift the robot by the frame, set it down, and gently push the attachment in the direction it will meet the model. Its height and angle should stay the same. Run the mechanism three times from the same start mark. If it works once and fails twice, inspect loose connections and unsupported overhangs before changing the program.
+After lifting and setting down the robot by its frame, the tool should return to the same height and angle. A gentle push in the model's contact direction can show whether it twists. Three trials from one start mark may reveal movement that a single successful run hides. If the results vary, inspect loose connections and unsupported overhangs before changing the program.
 
 ## Check and adjust
 
-Point to the path that carries force from the contact point back into the robot frame. If that path ends at a single pin or a long unsupported beam, add support and test again. You are ready for the programming lessons when the mechanism stays aligned through repeated runs.
+The load from the contact point needs a path back into the frame. If that path depends on one pin or a long unsupported beam, another support may improve repeatability. The mechanism is ready for the programming lessons when repeated runs keep it aligned.
 
 <MarkComplete lessonId="fll-unit-00/secure-and-support-the-robot" nextUnit="/fll/unit-00/what-is-fll-challenge" nextUnitName="Lesson F0.1: What FLL Challenge Is" />

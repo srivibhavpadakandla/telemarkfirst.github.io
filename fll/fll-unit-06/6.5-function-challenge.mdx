@@ -8,9 +8,11 @@ sidebar_position: 5
 
 # Lesson F6.5: Reusable Route Challenge
 
-Write one drive function with a distance parameter and call it at least twice in a route that returns home. Keep mission values in calls or a route list instead of copying DriveBase commands. Print the planned segment count and check it against the simulator playback.
+This challenge uses one route function more than once. The simulator checks for a function definition, at least two calls to a route function, and movement without a collision. A return toward home gives those calls a route to describe, even though the check focuses on reuse and safe motion.
 
 ## Worked example
+
+`drive_and_turn()` takes a distance and a turn angle. Four calls request the sides and corners of a rectangle. If those distances and turns match the field, the path should finish near its starting point.
 
 ~~~python
 def drive_and_turn(distance_mm, turn_deg):
@@ -25,16 +27,16 @@ drive_and_turn(50, 90)
 
 ## Simulator practice
 
-Run the rectangle from a marked launch pose. Change one width through the call values and predict the new final position.
+The example gives the simulator a route that calls the same function four times. Changing one width in its call values may move the final position, which you can compare with a prediction from the route shape.
 
 <FllPythonPractice lessonId="fll-unit-06/function-challenge" />
 
 ## On the robot
 
-Run three copies of the same route on the mat. Log where the final position differs from the launch mark.
+Three physical runs from the same launch mark can show how closely the rectangle closes. Recording each final position may help separate a repeated distance error from a turn that varies.
 
 ## Check and adjust
 
-The function is called more than once and the route finishes inside home. If the rectangle does not close, measure turns and sides separately.
+The simulator should record a function definition, repeated calls, and motion without collision. On the mat, a rectangle that does not close may need its sides and turns measured separately.
 
 Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).

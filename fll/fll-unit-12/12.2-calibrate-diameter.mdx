@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F12.2: Calibrate Wheel Diameter
 
-Measure a long straight drive on the real mat before changing wheel diameter. Reduce the configured diameter when the robot consistently stops short, and increase it when the robot travels too far. Keep axle track fixed during this pass, using `old diameter × actual distance ÷ requested distance` as a starting estimate.
+After recording repeatable straight-drive errors, we can estimate a better wheel diameter. A robot that consistently stops short may need a smaller configured diameter; one that travels too far may need a larger one. The estimate uses the old diameter multiplied by actual distance and divided by requested distance.
 
 ## Worked example
+
+The example turns a 480 mm measured drive for a 500 mm request into a new starting value. Axle track stays fixed during this pass so its effect is easier to separate.
 
 ~~~python
 old_diameter_mm = 56
@@ -24,17 +26,17 @@ print("Try wheel diameter mm:", new_diameter_mm)
 
 ## Simulator practice
 
-Change the wheel diameter in code, rerun a 500 mm drive, and compare the automatic three-profile table after each run.
+Try the calculated diameter in code and rerun the 500 mm drive. The automatic profile table can show whether the adjustment improves distance across different calibrations.
 
 <FllPythonPractice lessonId="fll-unit-12/calibrate-diameter" />
 
 ## On the robot
 
-Measure at least three 500 mm drives. Try the calculated value, then repeat the measurement before accepting it.
+At least three measured 500 mm drives can show whether the error is consistent. After trying the estimate on the real robot, another set of measurements should confirm the change.
 
 ## Check and adjust
 
-Your new value reduces consistent straight-line error without relying on one trial. If diameter correction worsens error, check the formula order.
+The chosen value should reduce the repeated straight error. If the estimate makes it worse, check which distance was actual and which was requested before adjusting again.
 
 Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).
 

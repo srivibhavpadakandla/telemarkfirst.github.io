@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F7.1: Check Motor Direction
 
-A positive motor angle follows the direction configured when a `Motor` object is created, although physical gearing may reverse the visible tool movement. Test a small angle with the robot lifted. If the tool moves the wrong way, correct the construction setting or requested angle rather than compensating in every later call.
+Before choosing a tool angle, we need to know which way a positive command moves the attachment. `Motor` takes a configured positive direction, but gears and mounting may change the tool's visible direction. This lesson compares two settings with a small motor move so the sign can be recorded before a mission route uses it.
 
 ## Worked example
+
+The constructor sets the motor's positive direction to counterclockwise. `run_angle(150, 30)` requests a 30 degree move at 150 degrees per second, and `attachment.angle()` prints the motor's reported angle. The physical tool may move differently from that motor reading if gears reverse its output.
 
 ~~~python
 attachment = Motor(Port.E, Direction.COUNTERCLOCKWISE)
@@ -22,17 +24,17 @@ print("Tool angle:", attachment.angle())
 
 ## Simulator practice
 
-Run a 30 degree move and observe which way the virtual tool moves. Reverse the configured direction and compare.
+The simulator starter moves the attachment with its default direction. Change the constructor to `Direction.COUNTERCLOCKWISE` and use the same positive 30 degree command. The visible arm should move the opposite way, while `attachment.angle()` still reports a positive motor angle. Comparing both runs helps establish which direction to use in later tool calls.
 
 <FllPythonPractice lessonId="fll-unit-07/motor-directions" />
 
 ## On the robot
 
-Mark the tool's home position. Run a 30 degree test with clearance around the tool, then write down which direction is positive.
+The real tool should have room to move during a small 30 degree test. A mark at its starting position can help show which direction a positive motor command actually moves the output.
 
 ## Check and adjust
 
-A teammate can predict the tool direction from its constructor and angle sign. If the tool rotates backward, check its configured direction.
+The recorded direction should let a teammate predict the next tool move. If the tool moves toward the frame instead of away from it, check the configured direction and gearing before using a larger angle.
 
 Reference: [Pybricks Motor reference](https://docs.pybricks.com/en/stable/pupdevices/motor.html).
 

@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F14.3: Test the Whole Route
 
-An integration test runs mission actions in match order with the planned launch marks, attachment, and program selection. Record an observation after each action. If the final result is wrong, find the first incorrect observation and retest that action alone.
+After individual actions work, we can run them in match order. An integration test keeps the planned launch marks, attachment, and program selection together and records a result after each action. Those intermediate results can show where a full route first changes from the plan.
 
 ## Worked example
+
+The printed distance and tool angle are checkpoints after the approach and tool move. The final time describes the full sequence, but the field view is still needed to confirm home position and clearance.
 
 ~~~python
 watch = StopWatch()
@@ -26,17 +28,17 @@ print("Total ms:", watch.time())
 
 ## Simulator practice
 
-Run the whole route three times without changing code. Record approach, tool action, return, and elapsed time.
+Run the worked route three times from the same start. A table for approach, tool action, return, and elapsed time can reveal which result varies.
 
 <FllPythonPractice lessonId="fll-unit-14/integration-test" />
 
 ## On the robot
 
-Run the exact physical sequence with your match team. Record the first failure in each unsuccessful trial.
+The match team should run the physical sequence with the intended attachment. Record the first incorrect action in each unsuccessful trial, including handling errors.
 
 ## Check and adjust
 
-Your log separates each action result rather than recording only a final score. If a full run fails, find the first incorrect intermediate log.
+The log should make the first incorrect result visible without relying only on final score. That action can then be retested from a known pose.
 
 Reference: [Pybricks timing tools reference](https://docs.pybricks.com/en/stable/tools/).
 

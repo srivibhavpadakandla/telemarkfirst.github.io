@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F10.2: Use a Force Sensor
 
-A SPIKE Force Sensor can confirm contact between a tool or bumper and a mission model. The simulator estimates contact from tool angle and proximity, but physical force still needs a hardware reading. `ForceSensor.pressed()` returns a Boolean using a minimum force in newtons. Mount the sensor so the bumper moves before rigid parts hit, and retain a mechanical stop.
+A Force Sensor can report whether a bumper or tool has pressed against an object. In the simulator, contact is estimated from position and tool angle; on a robot, `ForceSensor.pressed()` tests a minimum force in newtons. This lesson compares the simulated contact cue with the hardware setup needed to measure real contact.
 
 ## Worked example
+
+Port F is only an example assignment. The force threshold and mounting should match the physical bumper, which needs room to move before rigid parts meet the model.
 
 ~~~python
 # Optional Force Sensor on port F:
@@ -23,17 +25,17 @@ print("Contact:", bumper.pressed(force=3))
 
 ## Simulator practice
 
-Print contact at the fixed start. Then add a route toward the yellow target and a 60 degree attachment move before a second print. The simulated contact uses approximate position and tool angle.
+Use the worked example's force reading at the start, then add a route toward the yellow target and a 60 degree tool move before reading again. A changed value would indicate simulated contact under this approximate model.
 
 <FllPythonPractice lessonId="fll-unit-10/force-contact" />
 
 ## On the robot
 
-Install a force sensor on port F, press it by hand, and check both released and pressed results before a slow approach.
+With a real sensor on the configured port, hand presses should show both released and pressed results before a slow approach is attempted.
 
 ## Check and adjust
 
-The simulated contact changes with proximity and tool angle. On hardware, record the actual force at contact. If simulated contact appears at the wrong point, calibrate on hardware.
+Record the actual force and tool position when contact occurs on hardware. The simulator's contact estimate can suggest a route, but the real bumper determines the usable threshold.
 
 Reference: [Pybricks ForceSensor reference](https://docs.pybricks.com/en/stable/pupdevices/forcesensor.html).
 

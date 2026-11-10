@@ -242,7 +242,7 @@ class Field:
             attachment = self.motors.get("E")
             if attachment and attachment._run_speed:
                 attachment._angle += attachment._run_speed * dt
-                self.attachment = max(0, min(90, attachment._angle * attachment.positive_direction))
+                self.attachment = max(-90, min(90, attachment._angle * attachment.positive_direction))
                 self.update()
         self.frame("wait", line, force=True)
 
@@ -329,7 +329,7 @@ def _make_modules(field):
             else:
                 self._angle += rotation_angle
                 if self.port == Port.E:
-                    field.attachment = max(0, min(90, self._angle * self.positive_direction))
+                    field.attachment = max(-90, min(90, self._angle * self.positive_direction))
                 field.add_time(abs(rotation_angle) / max(1, abs(speed)))
                 field.update()
                 field.frame("attachment", line, force=True)

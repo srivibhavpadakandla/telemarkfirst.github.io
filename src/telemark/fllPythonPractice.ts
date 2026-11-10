@@ -85,6 +85,8 @@ while distance_sensor.distance() > 150 and watch.time() < 3000:
     wait(10)
 robot.stop()
 print("Range mm:", distance_sensor.distance())`;
+  if (lessonId === 'fll-unit-01/hub-heading') return 'robot.stop()\nhub.imu.reset_heading(0)\nrobot.turn(90)\nprint("Heading:", hub.imu.heading())';
+  if (lessonId === 'fll-unit-01/attachment-motors') return 'attachment.run_angle(200, 90)\nattachment.run_angle(200, -90)';
   if (lessonId === 'fll-unit-04/thresholds-and-hysteresis') return 'robot.straight(750)\nprint("Reflection:", color_sensor.reflection())';
   if (!parts.includes('drivebase')) {
     if (parts.includes('ultrasonicSensor') && parts.includes('colorSensor')) return 'print("Range mm:", distance_sensor.distance())\nprint("Reflection:", color_sensor.reflection())';
@@ -202,7 +204,10 @@ const UNIT_GOALS: Record<number, string> = {
 };
 
 const LESSON_GOALS: Readonly<Record<string, string>> = {
+  'fll-unit-01/color-and-reflected-light': 'Use reflected light to stop at the dark practice line.',
   'fll-unit-01/distance-and-wait-until': 'Drive toward the obstacle, then stop from a range reading or timeout.',
+  'fll-unit-01/hub-heading': 'Reset heading, turn right, and compare the reading with the commanded angle.',
+  'fll-unit-01/attachment-motors': 'Move the attachment through a known angle and return it to its start.',
   'fll-unit-04/compare-readings': 'Read the obstacle distance and compare it with a threshold in millimeters.',
   'fll-unit-06/scope-and-constants': 'Use a named light threshold while reading the practice line.',
   'fll-unit-07/motor-directions': 'Run the attachment motor in each direction and inspect the lever.',

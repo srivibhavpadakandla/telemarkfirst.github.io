@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F7.2: Relative Tool Angles
 
-`Motor.run_angle(speed, rotation_angle)` moves relative to the current motor position, so two positive 90 degree moves add roughly 180 degrees. Record the angle after each push and return. A blocked tool may stop short of the requested angle and change where the next mission begins.
+Now that a positive direction is known, we can use relative angles to move the tool out and back. `Motor.run_angle()` adds each requested rotation to the current motor position. A positive move followed by an equal negative move should bring the motor near its starting angle if the mechanism can complete both moves.
 
 ## Worked example
+
+`start_deg` records the initial motor angle. The two `run_angle()` calls request 90 degrees out and 90 degrees back. The printed values can show whether the motor returned to its recorded start.
 
 ~~~python
 start_deg = attachment.angle()
@@ -24,17 +26,17 @@ print("Back at:", attachment.angle(), "start:", start_deg)
 
 ## Simulator practice
 
-Compare the final tool angle with start_deg. Change the first move to 60 degrees and predict the result.
+The simulator starter moves the attachment and prints its angle. Using the example's out-and-back pair should end near `start_deg`. Changing the first move to 60 degrees while leaving the return at 90 should produce a different final angle.
 
 <FllPythonPractice lessonId="fll-unit-07/motor-angles" />
 
 ## On the robot
 
-Repeat the push and return three times. Inspect clearance and whether the tool drifts away from its marked home angle.
+Three physical out-and-back moves from a marked start may show whether the tool returns to the same place. A blocked mechanism can stop before the requested angle, so clearance matters as much as the printed motor value.
 
 ## Check and adjust
 
-The final angle is near the starting angle and the tool clears the frame. If it does not return home, compare angles after both relative moves.
+The motor reading should be close to its start after equal and opposite moves. If the physical tool is not, compare both printed angles and inspect the linkage for binding or slip.
 
 Reference: [Pybricks Motor reference](https://docs.pybricks.com/en/stable/pupdevices/motor.html).
 

@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F5.3: Wait and Measure Time
 
-`wait()` pauses for milliseconds, while `StopWatch.time()` reports elapsed milliseconds since the watch started. Use a short wait to space sensor polls and measure a maneuver instead of guessing its duration from the number of commands. A blocking wait does not check sensors until it finishes.
+We have used `wait(10)` to space sensor readings. `StopWatch.time()` gives us a way to measure how long a drive takes in milliseconds. In this lesson, the distance stays at 300 mm while we compare the time at two speeds. A long blocking wait would delay the next sensor check.
 
 ## Worked example
+
+The watch starts before `robot.straight(300)`. The print line reports the elapsed time when that move finishes, and `wait(100)` then pauses for another 100 ms. Because the print comes first, its value does not include that final pause.
 
 ~~~python
 watch = StopWatch()
@@ -24,17 +26,17 @@ wait(100)
 
 ## Simulator practice
 
-Compare elapsed time at two straight speeds. Keep distance at 300 mm.
+Use the worked example in place of the starter's three short moves. The same 300 mm drive should take different simulated times at different straight speeds; keeping the distance fixed makes the time comparison clearer.
 
 <FllPythonPractice lessonId="fll-unit-05/wait-and-stopwatch" />
 
 ## On the robot
 
-Record five run times and the corresponding battery state. Use the longest time for conservative match planning.
+Five physical run times with the battery state recorded beside each one may show a wider range than the simulator. The longest time can be a cautious number for match planning.
 
 ## Check and adjust
 
-You can convert the printed milliseconds to seconds and explain what the 100 ms wait does. If elapsed time seems large, count the milliseconds added by wait().
+The printed time should describe the drive before the last 100 ms wait. Dividing it by 1000 gives seconds. If the number seems too large, check where the watch starts and which waits occur before the print.
 
 Reference: [Pybricks timing tools reference](https://docs.pybricks.com/en/stable/tools/).
 

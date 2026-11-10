@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F3.2: Variables and Units
 
-A variable gives a measured value a name, and a unit in that name can prevent a distance or angle from being used incorrectly. DriveBase distances use millimeters, color reflection uses percent, and motor angles use degrees. Convert at a clear boundary so another teammate can find the value to adjust after measuring the robot.
+Once a value has a name, its unit should be clear too. DriveBase distances use millimeters, while a field measurement may be written in centimeters. In this lesson we will convert a 30 cm target to 300 mm once, then use the converted value for the drive. A name such as `target_mm` can help keep the two units apart.
 
 ## Worked example
+
+`TARGET_CM * 10` converts centimeters to millimeters. The print line exposes the converted value before `robot.straight(target_mm)` uses it. The speed and turn settings use their own units, shown in the code comment.
 
 ~~~python
 TARGET_CM = 30
@@ -25,17 +27,17 @@ robot.straight(target_mm)
 
 ## Simulator practice
 
-Change TARGET_CM to 40. Check that the robot moves 400 mm, not 40 mm.
+A second run with `TARGET_CM = 40` should send 400 mm to `robot.straight()`. The printed target and final pose can help you check that the conversion happened once.
 
 <FllPythonPractice lessonId="fll-unit-03/variables-and-units" />
 
 ## On the robot
 
-Measure a route in centimeters, write the converted millimeters in your notebook, and compare the output with the tape marks.
+A centimeter measurement from the practice mat should be converted before it is used by the DriveBase. Writing both values in a notebook can make a tenfold unit error easier to notice when you compare the route with tape marks.
 
 ## Check and adjust
 
-Your code and notebook show the same unit conversion and measured target. If a 30 cm route moves only 30 mm, check the conversion.
+The code's `target_mm` and the notebook's converted value should agree. If a 30 cm plan commands only 30 mm, the missing factor of ten is a useful first check.
 
 Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).
 

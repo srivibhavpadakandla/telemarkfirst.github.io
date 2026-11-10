@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F6.1: Define and Call Functions
 
-A function groups an action in an indented body, but that body runs only when the program calls it. Name a routine for its result, such as `approach_line`, and keep DriveBase setup outside the function so each call uses the same calibrated robot.
+The route from the last unit can be grouped into named actions. A function's indented body runs only when the program calls it. Here we will define a short launch route and check what happens when the call is present or missing. The DriveBase should be created outside the function so each call uses the same robot settings.
 
 ## Worked example
+
+`leave_home()` contains a drive and a turn. Python stores that body at the `def` line, runs it at `leave_home()`, and then prints the completion message. Removing the call would leave the definition in place without moving the robot.
 
 ~~~python
 def leave_home():
@@ -25,17 +27,17 @@ print("Launch route finished")
 
 ## Simulator practice
 
-Call leave_home twice with a reset between runs. Remove the call once and confirm no movement occurs.
+The starter already defines a simple drive function. Replacing it with `leave_home()` lets you compare a run with the call against one without it. The robot should move only when the function is called.
 
 <FllPythonPractice lessonId="fll-unit-06/function-definitions" />
 
 ## On the robot
 
-Add one named route function in Pybricks Code and have a teammate explain it without seeing the field.
+A named route function in Pybricks Code can help a teammate understand what a section of the program does. If its name and body disagree, the function may need a clearer name or a smaller job.
 
 ## Check and adjust
 
-The function name, body, and call have distinct roles you can explain. If a definition causes no movement, check whether it is called.
+The definition should describe the action, and the call should be the point where it happens. If the robot stays still after a definition, check for the call before changing the DriveBase code.
 
 Reference: [Pybricks first robot program](https://pybricks.com/learn/making-programs/your-first-program/).
 

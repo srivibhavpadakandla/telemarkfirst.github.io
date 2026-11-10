@@ -10,9 +10,13 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F1.1: Color and Reflected Light
 
-A ColorSensor reports reflected light as a percentage, and a dark line usually reads lower than the surrounding mat. Print readings over the actual light and dark surfaces with the sensor at its normal height, then choose a threshold between those measurements. Sensor height and surface finish can change the numbers, so a threshold from another robot is only a starting guess.
+Last unit, we drove measured distances. Now we can use reflected light as a signal to stop. The aim in this lesson is to stop with the color sensor over the dark practice line.
+
+`color_sensor.reflection()` reports how much of the sensor's light a surface reflects, from 0% to 100%. The dark line should give a lower reading than the mat. If the readings are separated, a value between them may work as a stopping threshold. The example below uses 35, but the value for your robot may differ with sensor height and surface finish.
 
 ## Worked example
+
+`robot.drive(100, 0)` starts a straight drive at 100 mm/s. The 10 ms wait spaces out the sensor readings as long as the sensor reading stays above 35. If a reading reaches 35 or less, Python leaves the loop and runs `robot.stop()`.
 
 ~~~python
 print("Light:", color_sensor.reflection())
@@ -22,19 +26,21 @@ while color_sensor.reflection() > 35:
 robot.stop()
 ~~~
 
+If the sensor never reads 35 or less, this loop will keep driving. The next lesson adds a time limit for that case.
+
 ## Simulator practice
 
-Run toward the dark line. Adjust 35 only after reading the simulated light and dark values.
+The starter prints one reflection reading before the drive and another near the line after a 750 mm move. A threshold between those readings is a starting point for replacing the fixed drive with the loop above. After running it, check whether the sensor stops over the line.
 
 <FllPythonPractice lessonId="fll-unit-01/color-and-reflected-light" />
 
 ## On the robot
 
-Mount the sensor at a fixed height and log five readings on each surface. Record the midpoint threshold and three line-stop results.
+The real sensor should stay at its normal mounting height while you collect readings from the mat and the line. Five readings on each surface will show whether there is a useful gap between them. Once you have a threshold in that gap, testing three line stops can show how consistently it works.
 
 ## Check and adjust
 
-Your threshold separates the measured surfaces and the program stops at the line. If light and dark readings overlap, fix sensor height before the threshold.
+A useful threshold should put the mat and line readings on opposite sides of it. The stopping point may still change between runs, so compare the three trials before relying on it. If the readings overlap, check the sensor height and measure again.
 
 Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).
 

@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F9.1: Calibrate Reflected Light
 
-Measure several light and dark readings with the sensor at the height and angle used during the mission. A midpoint between typical values is a starting threshold, but line edges and event lighting can change the result. Print readings while the robot is still, then test the threshold at the line edge.
+Now that the robot can cross the practice line, we can measure how its sensor sees the mat and the dark surface. Several readings at the intended mounting height should show whether the ranges are separate enough for a threshold. A midpoint may be a useful first value, although line edges and lighting can change the readings.
 
 ## Worked example
+
+The two lists come from positions before and after a drive. The candidate threshold is halfway between the lowest light sample and the highest dark sample, so it is useful only if the two ranges have a gap.
 
 ~~~python
 light_samples = [color_sensor.reflection() for _ in range(5)]
@@ -25,17 +27,17 @@ print("Candidate:", threshold)
 
 ## Simulator practice
 
-Read five values at the fixed start, then drive toward the dark line and read five more. Adjust the drive distance in code if the second position misses the line.
+Use the worked example to collect five readings at the fixed start and five more after the drive. The second set should come from the line; the drive distance may need adjusting if the sensor stops elsewhere.
 
 <FllPythonPractice lessonId="fll-unit-09/reflection-calibration" />
 
 ## On the robot
 
-Collect five light and five dark values. Choose a threshold between the highest dark reading and lowest light reading if that gap exists.
+Collect five values on each surface with the real sensor mounted as it will be used. If the ranges do not overlap, a threshold between the highest dark and lowest light reading can be tested at the line edge.
 
 ## Check and adjust
 
-Your threshold is based on measured ranges and you know whether the ranges overlap. If light and dark samples overlap, improve mounting and remeasure.
+The recorded ranges should show why a threshold was chosen. If they overlap, a mounting change or another set of readings may help before the stop code is used.
 
 Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).
 

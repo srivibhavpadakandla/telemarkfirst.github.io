@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F7.4: Gearing, Load, and Stalls
 
-Gears change output angle and torque, and Pybricks can describe them with a `gears` list when constructing a Motor. The simulator treats a tool as a simple angle driven mechanism, so measure physical travel separately. Use low force for deliberate homing with `run_until_stalled()` and a duty limit. An ordinary tool move should not rely on a stall against a fragile attachment.
+Gears can change how far the tool moves for one motor turn and how much torque reaches it. Pybricks can account for a known gear train through the Motor's `gears` setting. This lesson compares commanded angles with visible travel, then introduces a carefully limited way to find a physical home position. The simulator shows a simplified tool and cannot test binding.
 
 ## Worked example
+
+The commented lines are for a physical mechanism after its safe travel has been checked. They show a gear list and a low duty limit for `run_until_stalled()` before resetting the angle. The active line is a measured 60 degree move that the simulator can show.
 
 ~~~python
 # On real hardware, after checking the mechanism:
@@ -24,17 +26,17 @@ attachment.run_angle(120, 60)
 
 ## Simulator practice
 
-Use measured angle moves. Compare the simulated tool positions at 60 and 90 degrees. Check physical binding only on your real attachment.
+The virtual attachment can show how a 60 degree command differs from 90 degrees. It should not be used to decide how much force a real attachment can safely take at a stop.
 
 <FllPythonPractice lessonId="fll-unit-07/gearing-and-stalls" />
 
 ## On the robot
 
-With the robot off, inspect gear meshing and output travel. If you use the hardware-only homing lines, supervise the first test and keep the duty limit low.
+The real gear train and output travel should be inspected with the robot off. If the hardware-only homing lines are used, the first test should be supervised with a low duty limit and a clear way to stop it.
 
 ## Check and adjust
 
-Your tool has a documented safe angle range and a known response when it binds. If a tool binds, inspect gearing before stall-based homing.
+A recorded safe angle range should come from physical tests, not the virtual tool. If the attachment binds during an ordinary move, inspect the gears and supports before relying on stall-based homing.
 
 Reference: [Pybricks Motor reference](https://docs.pybricks.com/en/stable/pupdevices/motor.html).
 

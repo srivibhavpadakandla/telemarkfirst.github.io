@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F11.1: Break a Mission into Actions
 
-Write a mission as leave home, approach, act, verify, and return before turning it into code. Give each action one function and place measurements near the call. When a run fails, test the smallest function that reproduces the problem so unrelated movement does not hide the cause.
+A complete mission has several parts: leaving home, approaching a model, acting, checking the result, and returning. We can give each part a function so a missed target can be traced to a smaller piece of the route. This lesson starts with an approach, a tool action, and a return.
 
 ## Worked example
+
+The distance is passed to both movement functions, so the return is the same length as the approach. A real mission may need a different return path if the outgoing path is blocked.
 
 ~~~python
 def approach_target(distance_mm):
@@ -32,17 +34,17 @@ return_home(300)
 
 ## Simulator practice
 
-Run each function separately, then run the full mission. Note the first function that misses its target.
+Put the worked example's functions in the editor, then run each from a known pose before combining them. The first function that misses its planned position can then be adjusted without changing the others.
 
 <FllPythonPractice lessonId="fll-unit-11/mission-decomposition" />
 
 ## On the robot
 
-Label the function names on a printed route diagram. Have a teammate test one function from a known start pose.
+A route diagram with the function names can help a teammate connect code to field positions. Testing one function from a marked start may reveal an assumption about launch alignment.
 
 ## Check and adjust
 
-Each function has a clear precondition and a visible result. If the mission fails, run the first failing function alone.
+For each function, record where the robot should start and what visible result should follow. If the full route fails, the first mismatching result gives a focused place to retest.
 
 Reference: [Pybricks first robot program](https://pybricks.com/learn/making-programs/your-first-program/).
 

@@ -10,11 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F0.1: What Is FLL?
 
-In the FIRST LEGO League, a team launches an autonomous robot from home to attempt missions. You may use the practice field here to test out your code before running it on the field, but the intended use of the simulator is to educate.
+In FIRST LEGO League Challenge, the robot starts in a home area and runs without a driver during the Robot Game. We can use a short route to see how a program changes its position on the practice field. The aim here is to return to home after a drive and turn, then compare that simulated route with the current season's field rules.
 
 ## Worked example
 
-Use the [course port map](/fll/python-starter) already loaded in the simulator editor for this route, and update its wiring and dimensions before running the code on a physical robot.
+The [course port map](/fll/python-starter) is already loaded in the simulator editor. In this example, the robot drives away from home, turns around, and drives the same programmed distance back. On a physical build, the ports and dimensions would need to match your robot.
 
 ~~~python
 print("Robot Game practice")
@@ -25,17 +25,17 @@ robot.straight(200)
 
 ## Simulator practice
 
-Run the starter program. Record the starting pose, each movement, and whether the final pose is inside home.
+The starter makes a short measured move. Watching its start and final pose can help you connect each code line with a field movement. After adding a return, the blue home area gives you a place to check whether the route ended where you expected.
 
 <FllPythonPractice lessonId="fll-unit-00/what-is-fll-challenge" />
 
 ## On the robot
 
-Read the current FIRST season materials with your team. Place the physical robot in your chosen launch position and trace the same route without attaching a tool.
+The current [FIRST season materials](https://www.firstinspires.org/resources/library/fll/season-materials) should guide any physical Robot Game plan. Tracing this route from a chosen launch position without a tool can show whether the return would fit inside home on your field.
 
 ## Check and adjust
 
-You can explain which actions belong to code and which scoring details must come from the current rulebook. If the final pose misses home, mark the first divergent segment.
+The program determines the robot's moves, while the current rulebook determines what scores. If the final pose misses home, the first segment that differs from the plan may show where to adjust a distance or turn.
 
 Reference: [FIRST season materials](https://www.firstinspires.org/resources/library/fll/season-materials).
 

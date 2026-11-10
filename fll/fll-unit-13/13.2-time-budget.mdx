@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F13.2: Budget the Match
 
-Plan within the 150 second match clock, including launch setup, driving, tool motion, and time reserved for recovery. Convert StopWatch milliseconds to seconds before adding mission times. Use the longest recent trial or another conservative bound instead of the fastest run when deciding what fits.
+The match clock includes handling at home as well as driving and tool motion. We can add those times to see whether a planned set of missions fits within 150 seconds. A reserve for recovery gives the team room when a launch takes longer than expected.
 
 ## Worked example
+
+The list contains three mission estimates in seconds. Five seconds is added for each launch, followed by a 15 second reserve; the final Boolean reports whether the total fits.
 
 ~~~python
 mission_times_s = [32, 41, 28]
@@ -25,17 +27,17 @@ print("Fits match:", planned_s <= 150)
 
 ## Simulator practice
 
-Replace estimates with measured simulator times and check the total.
+Use the worked calculation in the editor and replace its mission estimates with measured times. If a stopwatch reports milliseconds, divide by 1000 before adding them to this seconds-based plan.
 
 <FllPythonPractice lessonId="fll-unit-13/time-budget" />
 
 ## On the robot
 
-Time full physical launches, including handling at home. Keep a visible record of the slowest complete run.
+Physical timing should include program selection, alignment, and attachment handling. The longest recent complete run may be a more useful planning number than the fastest one.
 
 ## Check and adjust
 
-The plan fits 150 seconds with a stated recovery reserve. If total time exceeds 150 seconds, remove an objective.
+The plan should fit inside 150 seconds with its reserve stated. If it does not, shortening a route or removing an objective may be more realistic than using only best-case times.
 
 Reference: [Pybricks timing tools reference](https://docs.pybricks.com/en/stable/tools/).
 

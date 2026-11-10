@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F9.2: Stop at a Dark Line
 
-`DriveBase.drive()` and `ColorSensor.reflection()` can stop a route at a dark line, provided the loop also has a timeout. Place the sensor ahead of the wheel contact point if the wheels must stop before the line, and measure a braking offset because higher speed can carry the robot farther after detection.
+With a measured reflection threshold, the robot can stop when the sensor reaches a dark line. `DriveBase.drive()` keeps moving while the program checks `ColorSensor.reflection()`, so the loop should also have a timeout. We will compare two speeds to see how far the robot travels after detecting the line.
 
 ## Worked example
+
+The loop ends when reflection falls to 35 or below, or when three seconds pass. `robot.stop()` is reached after either outcome; the printed distance alone does not identify which condition ended the loop.
 
 ~~~python
 watch = StopWatch()
@@ -25,17 +27,17 @@ print("Stop mm:", robot.distance())
 
 ## Simulator practice
 
-Run at 100 and 200 mm/s. Compare the final distance and line position.
+Use the worked example's timed line stop at 100 mm/s, then change the drive speed to 200 mm/s. The final distance and sensor position can show how speed affects the stop.
 
 <FllPythonPractice lessonId="fll-unit-09/line-stop" />
 
 ## On the robot
 
-Measure the gap from sensor to wheels and the overshoot at both speeds. Use the slower speed if the mission tolerance is narrow.
+The gap between sensor and wheel contact point should be measured on the real build. Repeated stops at both speeds can show whether the robot needs a slower approach or an offset.
 
 ## Check and adjust
 
-The program stops for a line and for a missing line within the time limit. If the robot overshoots, reduce speed or account for sensor offset.
+The robot should stop whether it finds the line or reaches the time limit. If it passes the desired mark, reducing speed or allowing for sensor position may improve the result.
 
 Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).
 

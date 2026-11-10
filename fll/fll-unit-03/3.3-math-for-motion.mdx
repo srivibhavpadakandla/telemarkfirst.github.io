@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F3.3: Arithmetic for Motion
 
-Calculate route commands from measured distances instead of scattering unrelated constants through a program. Add or subtract clearances in millimeters, and use a negative straight distance when the robot needs to reverse. Print intermediate values before sending a calculated result to a motor command.
+A robot tool may need to stop before it reaches a model. We can calculate that approach distance from a measured gap and a tool clearance. This lesson uses one subtraction in millimeters so the drive command can follow a measurement rather than a guessed constant.
 
 ## Worked example
+
+The field gap is 420 mm and the chosen tool clearance is 55 mm. Subtracting gives an approach command of 365 mm. Printing `approach_mm` makes the number visible when you compare the result with the field.
 
 ~~~python
 field_gap_mm = 420
@@ -24,17 +26,17 @@ print("Approach:", approach_mm, "mm")
 
 ## Simulator practice
 
-Change the clearance from 55 to 70 mm and predict the new stopping position.
+Increasing the clearance to 70 mm should shorten the approach to 350 mm. Predicting that value before a second simulator run can help you check whether the calculation and final pose agree.
 
 <FllPythonPractice lessonId="fll-unit-03/math-for-motion" />
 
 ## On the robot
 
-Measure the gap from launch to a safe tool position. Record the clearance you chose and why.
+The real field gap and tool reach should be measured from fixed reference points. A clearance chosen from those measurements may leave room for the attachment to act without the chassis touching the model.
 
 ## Check and adjust
 
-You can calculate the approach distance without trial-and-error changes to several commands. If the approach stops too close, remeasure tool clearance.
+The printed approach distance should equal the measured gap minus the chosen clearance. If the robot stops too close to the model, check where both measurements were taken before changing the subtraction.
 
 Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).
 

@@ -30,6 +30,13 @@ assert.match(pythonConfig.fllPythonPracticeConfig('fll-unit-01/distance-and-wait
 const lightStarter = pythonConfig.fllPythonPracticeConfig('fll-unit-01/color-and-reflected-light').starter;
 assert.match(lightStarter, /robot\.straight\(750\)/);
 assert.match(lightStarter, /print\("Line:", color_sensor\.reflection\(\)\)/);
+const headingStarter = pythonConfig.fllPythonPracticeConfig('fll-unit-01/hub-heading').starter;
+assert.match(headingStarter, /hub\.imu\.reset_heading\(0\)/);
+assert.match(headingStarter, /print\("Heading:", hub\.imu\.heading\(\)\)/);
+const toolStarter = pythonConfig.fllPythonPracticeConfig('fll-unit-01/attachment-motors').starter;
+assert.match(toolStarter, /attachment\.run_angle\(200, 90\)/);
+assert.match(toolStarter, /attachment\.run_angle\(200, -90\)/);
+assert.doesNotMatch(toolStarter, /robot\.straight\(300\)/);
 const attachmentStarter = pythonConfig.fllPythonPracticeConfig('fll-unit-07/motor-angles').starter;
 assert.match(attachmentStarter, /attachment\.run_angle/);
 assert.doesNotMatch(attachmentStarter, /robot\.straight\(/);

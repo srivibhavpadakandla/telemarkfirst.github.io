@@ -8,9 +8,13 @@ sidebar_position: 5
 
 # Lesson F1.5: Retrieve and Deliver Challenge
 
-Build a short mission that uses one sensor cue and one attachment action to retrieve the practice object, deliver it, and return home. Test the line stop, pickup angle, and delivery route separately before combining them, then record the first missed position and change only the measurement responsible.
+We have used a sensor reading to stop the robot and a motor angle to move its attachment. The aim of this challenge is to collect the red cargo and release it inside the green delivery area. The simulator checks for a sensor reading, an attachment move, and a delivery without collision.
+
+In the simulator, the robot needs to be near the cargo when the attachment rises. If it picks up the cargo, the object moves with the robot until the attachment lowers near its starting angle. A release inside the green area should count as a delivery.
 
 ## Worked example
+
+This fragment shows a line stop followed by an attachment move and release. The 500 mm drive is an example segment. To use it for the challenge, you will need measured moves that bring the robot near the cargo before pickup and into the delivery area before release.
 
 ~~~python
 robot.drive(100, 0)
@@ -24,16 +28,20 @@ attachment.run_angle(200, -90)
 
 ## Simulator practice
 
-Use the field objects and delivery zone to complete the mission. Add a return command after the release.
+The simulator starts the robot in the home area. A route should bring it near the red cargo before raising the attachment and into the green delivery area before lowering it. It should also read either the color or ultrasonic sensor.
+
+If the cargo stays behind, the robot may be too far away or the attachment may not have risen enough. If the cargo moves with the robot but delivery does not count, check where it was released and whether the attachment lowered far enough.
 
 <FllPythonPractice lessonId="fll-unit-01/retrieve-deliver-challenge" />
 
 ## On the robot
 
-Test pickup and release at reduced speed on a practice mat. Log three runs, including whether the object remains inside the delivery area.
+The first physical trials should use reduced speed. Recording the pickup and release positions across three runs can show whether they repeat. The simulator's distances may give you a starting point, but the final angles and drive lengths should come from tests with your tool and field.
 
 ## Check and adjust
 
-Your program uses a sensor reading, moves the attachment, delivers the object, and ends at home. If the object misses delivery, separate pickup error from release error.
+All three simulator checks should pass before you try the route on the practice mat. On the mat, check whether the object stays inside the delivery area across the trials. If a run misses, finding out whether the error happened at pickup or release can help you choose which distance or angle to change.
+
+If the line stop needs work, return to [Color and Reflected Light](/fll/unit-01/color-and-reflected-light). For the tool angle, see [Attachment Motors and Objects](/fll/unit-01/attachment-motors).
 
 Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).

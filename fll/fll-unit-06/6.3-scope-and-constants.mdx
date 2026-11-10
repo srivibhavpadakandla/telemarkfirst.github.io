@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F6.3: Scope and Calibration Constants
 
-A local variable exists inside its function, while a named calibration constant can be shared across route functions. Keep measured dimensions near the top of the program and use distinct names for field distances and sensor readings. In Python, uppercase names signal values the team intends to keep fixed during a run.
+We can give a measured threshold one name and use it in more than one function. A variable created inside a function is local to that function, while a value defined above it can be read by both. Here `LINE_THRESHOLD` is the shared value and `light_percent` is the local reading.
 
 ## Worked example
+
+`is_on_line()` reads reflection when called and compares it with `LINE_THRESHOLD`. The uppercase name signals a value the team intends to keep fixed during a run. A different measured threshold can be tried by changing that one definition.
 
 ~~~python
 LINE_THRESHOLD = 35
@@ -26,17 +28,17 @@ print(is_on_line())
 
 ## Simulator practice
 
-Change LINE_THRESHOLD once and check every call to is_on_line.
+The simulator starter prints a reflection reading. Put that reading in `is_on_line()`, then rerun with a different `LINE_THRESHOLD`. The changed Boolean can show that the function uses the named value.
 
 <FllPythonPractice lessonId="fll-unit-06/scope-and-constants" />
 
 ## On the robot
 
-Record the measured light and dark ranges next to the constant in your team's program notes.
+Physical light and dark readings may give a different threshold from the simulator's. Keeping those ranges beside the constant in the team's notes can show why that value was chosen.
 
 ## Check and adjust
 
-You can identify which names are local and which calibration value is shared. If a threshold changes only one call, remove a duplicated literal.
+Changing the shared constant should affect every call that reads it. If one call behaves differently, a second threshold literal or a local value may be hiding the intended constant.
 
 Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).
 

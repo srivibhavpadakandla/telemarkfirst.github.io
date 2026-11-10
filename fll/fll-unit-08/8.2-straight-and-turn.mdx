@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F8.2: Straight and Turn Segments
 
-A route of straight and turn segments is easier to measure because each command finishes before the next begins. Use a negative distance to reverse and a negative angle to turn left, then read the final heading. If the route misses, locate the first segment that diverged before editing a later command.
+A route can be built from short straight and turn segments. Each command finishes before the next starts, so we can compare the robot's position with a planned corner after every segment. A negative distance reverses, and a negative angle turns left. This lesson uses those signs to locate the first part of a route that misses.
 
 ## Worked example
+
+The reset gives the route a known distance and angle reading. The printed values describe the movement after the three segments, although they do not by themselves tell us whether the robot reached a field mark.
 
 ~~~python
 robot.reset()
@@ -25,17 +27,17 @@ print("Angle deg:", robot.angle())
 
 ## Simulator practice
 
-Mark the expected corner and final point. Run Step and find the first mismatch.
+Use the worked route to mark a predicted corner and endpoint, then step through it. The first mismatch is a better place to investigate than the final miss alone.
 
 <FllPythonPractice lessonId="fll-unit-08/straight-and-turn" />
 
 ## On the robot
 
-Place tape at each corner. Measure the first error before changing a later segment.
+Tape marks at the corners can make the first error visible on the mat. Measure that error before adjusting the next segment.
 
 ## Check and adjust
 
-If the endpoint misses, use the route log to identify the first segment that diverged, then retest that segment on its own.
+A route log should identify which segment first leaves the planned path. Retesting that segment on its own may show whether distance, turn angle, or launch pose caused the difference.
 
 Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).
 

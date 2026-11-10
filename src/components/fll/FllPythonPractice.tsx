@@ -1,10 +1,11 @@
-import React, {useEffect, useMemo, useRef, useState} from 'react';
+import React, {useEffect, useId, useMemo, useRef, useState} from 'react';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import {usePrismTheme} from '@docusaurus/theme-common';
 import {Highlight} from 'prism-react-renderer';
 import {fllPythonPracticeConfig, type FllPythonFrame, type FllPythonRunResult} from '@site/src/telemark/fllPythonPractice';
 import {highlightedWordParts, wordAt} from '@site/src/components/pythonWordHighlight';
+import {insertPythonCompletion, pythonCompletions, type PythonCompletion} from './pythonCompletions';
 import {getFllLessonsForUnit} from '@site/src/telemark/fllCurriculum';
 import {getFllSceneProfile} from '@site/src/telemark/fllSceneProfiles';
 import {initialFllScene} from '@site/src/telemark/blocks/fllInterpreter';
@@ -17,6 +18,7 @@ import styles from './FllPythonPractice.module.css';
 
 interface Props {lessonId: string}
 type RuntimeState = 'loading' | 'ready' | 'running' | 'error';
+type CompletionMenu = {items: PythonCompletion[]; selected: number; left: number; top: number; width: number};
 type WorkerMessage =
   | {type: 'ready'}
   | {type: 'load-error'; message: string}
@@ -46,6 +48,10 @@ export default function FllPythonPractice({lessonId}: Props): React.JSX.Element 
   const shellRef = useRef<HTMLDivElement>(null);
   const runButtonRef = useRef<HTMLButtonElement>(null);
   const editorRef = useRef<HTMLTextAreaElement>(null);
+  const editorStackRef = useRef<HTMLDivElement>(null);
+  const completionListRef = useRef<HTMLDivElement>(null);
+  const composingRef = useRef(false);
+  const completionId = useId();
   const syntaxRef = useRef<HTMLPreElement>(null);
   const gutterRef = useRef<HTMLPreElement>(null);
   const importRef = useRef<HTMLInputElement>(null);
@@ -57,6 +63,7 @@ export default function FllPythonPractice({lessonId}: Props): React.JSX.Element 
   const [runtimeState, setRuntimeState] = useState<RuntimeState>('loading');
   const [code, setCode] = useState(config.starter);
   const [activeWord, setActiveWord] = useState('');
+  const [completionMenu, setCompletionMenu] = useState<CompletionMenu | null>(null);
   const [result, setResult] = useState<FllPythonRunResult | null>(null);
   const [stepIndex, setStepIndex] = useState(-1);
   const [playing, setPlaying] = useState(false);
@@ -69,8 +76,13 @@ export default function FllPythonPractice({lessonId}: Props): React.JSX.Element 
   const recorded = isComplete(lessonId);
 
   useEffect(() => {
+    completionListRef.current?.querySelector('[aria-selected="true"]')?.scrollIntoView({block: 'nearest'});
+  }, [completionMenu?.selected, completionMenu?.items]);
+
+  useEffect(() => {
     setCode(readCode(lessonId, config.starter));
     setActiveWord('');
+    setCompletionMenu(null);
     setResult(null);
     setStepIndex(-1);
     setPlaying(false);
@@ -156,6 +168,7 @@ export default function FllPythonPractice({lessonId}: Props): React.JSX.Element 
   const updateCode = (value: string) => {
     setCode(value);
     setActiveWord('');
+    setCompletionMenu(null);
     saveCode(lessonId, value);
     setResult(null);
     setStepIndex(-1);
@@ -164,6 +177,7 @@ export default function FllPythonPractice({lessonId}: Props): React.JSX.Element 
   };
 
   const run = () => {
+    setCompletionMenu(null);
     if (playing) { setPlaying(false); setMessage('Playback paused.'); return; }
     if (result && stepIndex < playback.length - 1) { setPlaying(true); setMessage('Playback continued.'); return; }
     if (runtimeState !== 'ready' || !workerRef.current) return;
@@ -223,9 +237,63 @@ export default function FllPythonPractice({lessonId}: Props): React.JSX.Element 
     if (editor) setActiveWord(wordAt(editor.value, editor.selectionStart, editor.selectionEnd));
   };
 
+  const showCompletions = (value: string, cursor: number, force = false) => {
+    const editor = editorRef.current;
+    const stack = editorStackRef.current;
+    if (!editor || !stack || editor.selectionStart !== editor.selectionEnd) { setCompletionMenu(null); return; }
+    const items = pythonCompletions(value, cursor, force);
+    if (!items.length) { setCompletionMenu(null); return; }
+    const style = window.getComputedStyle(editor);
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    if (context) context.font = style.font;
+    const charWidth = context?.measureText('M').width || 7.2;
+    const lineHeight = parseFloat(style.lineHeight) || 19.2;
+    const lines = value.slice(0, cursor).split('\n');
+    const caretX = (parseFloat(style.paddingLeft) || 0) + lines[lines.length - 1].length * charWidth - editor.scrollLeft;
+    const caretY = (parseFloat(style.paddingTop) || 0) + (lines.length - 1) * lineHeight - editor.scrollTop;
+    if (caretY < 0 || caretY > editor.clientHeight) { setCompletionMenu(null); return; }
+    const width = Math.min(360, Math.max(0, stack.clientWidth - 16));
+    const height = Math.min(260, items.length * 35 + 38);
+    const below = caretY + lineHeight;
+    const top = below + height <= editor.clientHeight ? below : Math.max(8, caretY - height);
+    const left = Math.max(8, Math.min(caretX, stack.clientWidth - width - 8));
+    setCompletionMenu({items, selected: 0, left, top, width});
+  };
+
+  const acceptCompletion = (item: PythonCompletion) => {
+    const editor = editorRef.current;
+    const next = insertPythonCompletion(code, item);
+    updateCode(next.code);
+    window.requestAnimationFrame(() => {
+      editor?.focus();
+      editor?.setSelectionRange(next.start, next.end);
+    });
+  };
+
   const editorKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (event.key === 'Escape') { event.preventDefault(); runButtonRef.current?.focus(); return; }
+    if ((event.ctrlKey || event.metaKey) && event.key === ' ') {
+      event.preventDefault();
+      showCompletions(code, event.currentTarget.selectionStart, true);
+      return;
+    }
     if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') { event.preventDefault(); run(); return; }
+    if (completionMenu) {
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+        event.preventDefault();
+        const direction = event.key === 'ArrowDown' ? 1 : -1;
+        setCompletionMenu({...completionMenu, selected: (completionMenu.selected + direction + completionMenu.items.length) % completionMenu.items.length});
+        return;
+      }
+      if (event.key === 'Enter' || (event.key === 'Tab' && !event.shiftKey)) {
+        event.preventDefault();
+        acceptCompletion(completionMenu.items[completionMenu.selected]);
+        return;
+      }
+      if (event.key === 'Escape') { event.preventDefault(); setCompletionMenu(null); return; }
+      if (['ArrowLeft', 'ArrowRight', 'Home', 'End', 'PageUp', 'PageDown'].includes(event.key)) setCompletionMenu(null);
+    }
+    if (event.key === 'Escape') { event.preventDefault(); runButtonRef.current?.focus(); return; }
     if (event.key !== 'Tab' || event.shiftKey) return;
     event.preventDefault();
     const target = event.currentTarget;
@@ -303,17 +371,50 @@ export default function FllPythonPractice({lessonId}: Props): React.JSX.Element 
           <div className={styles.panelHeader}><h3>main.py</h3></div>
           <div className={styles.codeFrame}>
             <pre ref={gutterRef} className={styles.gutter} aria-hidden="true">{code.split('\n').map((_, index) => index + 1).join('\n')}</pre>
-            <div className={styles.editorStack}>
+            <div ref={editorStackRef} className={styles.editorStack}>
               <Highlight theme={prismTheme} code={code} language="python">
                 {({tokens, getLineProps, getTokenProps}) => <pre ref={syntaxRef} className={styles.syntax} aria-hidden="true"><code>{tokens.map((line, lineIndex) => <React.Fragment key={lineIndex}><span {...getLineProps({line})}>{line.map((token, tokenIndex) => {
                   const tokenProps = getTokenProps({token});
                   return <span key={tokenIndex} className={tokenProps.className} style={tokenProps.style}>{highlightedWordParts(tokenProps.children, activeWord)}</span>;
                 })}</span>{lineIndex < tokens.length - 1 ? '\n' : null}</React.Fragment>)}</code></pre>}
               </Highlight>
-              <textarea ref={editorRef} className={styles.editor} value={code} spellCheck={false} wrap="off" readOnly={runtimeState === 'running'} aria-label="Pybricks Python code editor" aria-describedby={`fll-python-help-${config.unit}`} onChange={(event) => updateCode(event.target.value)} onSelect={updateActiveWord} onClick={updateActiveWord} onKeyUp={updateActiveWord} onBlur={() => setActiveWord('')} onScroll={(event) => { if (gutterRef.current) gutterRef.current.scrollTop = event.currentTarget.scrollTop; if (syntaxRef.current) { syntaxRef.current.scrollTop = event.currentTarget.scrollTop; syntaxRef.current.scrollLeft = event.currentTarget.scrollLeft; } }} onKeyDown={editorKeyDown} />
+              <textarea
+                ref={editorRef}
+                className={styles.editor}
+                value={code}
+                spellCheck={false}
+                wrap="off"
+                readOnly={runtimeState === 'running'}
+                aria-label="Pybricks Python code editor"
+                aria-autocomplete="list"
+                aria-controls={completionMenu ? completionId : undefined}
+                aria-activedescendant={completionMenu ? `${completionId}-${completionMenu.selected}` : undefined}
+                onChange={(event) => {
+                  updateCode(event.target.value);
+                  if (!composingRef.current) showCompletions(event.target.value, event.target.selectionStart);
+                }}
+                onSelect={updateActiveWord}
+                onClick={() => { updateActiveWord(); setCompletionMenu(null); }}
+                onKeyUp={updateActiveWord}
+                onBlur={() => { setActiveWord(''); setCompletionMenu(null); }}
+                onCompositionStart={() => { composingRef.current = true; setCompletionMenu(null); }}
+                onCompositionEnd={(event) => { composingRef.current = false; showCompletions(event.currentTarget.value, event.currentTarget.selectionStart); }}
+                onScroll={(event) => {
+                  setCompletionMenu(null);
+                  if (gutterRef.current) gutterRef.current.scrollTop = event.currentTarget.scrollTop;
+                  if (syntaxRef.current) {
+                    syntaxRef.current.scrollTop = event.currentTarget.scrollTop;
+                    syntaxRef.current.scrollLeft = event.currentTarget.scrollLeft;
+                  }
+                }}
+                onKeyDown={editorKeyDown}
+              />
+              {completionMenu && <div ref={completionListRef} id={completionId} className={styles.completionMenu} role="listbox" aria-label="Python code completions" style={{left: completionMenu.left, top: completionMenu.top, width: completionMenu.width}}>
+                {completionMenu.items.map((item, index) => <button key={item.label} id={`${completionId}-${index}`} type="button" role="option" aria-selected={index === completionMenu.selected} className={styles.completionOption} onPointerDown={(event) => { event.preventDefault(); acceptCompletion(item); }} onClick={() => { if (completionListRef.current) acceptCompletion(item); }}><span className={styles.completionLabel}>{item.label}</span><span className={styles.completionDetail}>{item.detail}</span></button>)}
+                <div className={styles.completionFooter}>↑↓ choose · Tab or Enter insert · Ctrl+Space open</div>
+              </div>}
             </div>
           </div>
-          <p id={`fll-python-help-${config.unit}`} className={styles.editorHelp}>Use Ctrl+Enter to run. Press Escape to leave the editor, or Shift+Tab to move to the previous control. Distances use millimeters. The model assumes motor A is mounted opposite motor B, so the starter sets A to counterclockwise. Test final code on a physical robot.</p>
         </div>
         <div className={styles.fieldPanel}>
           <FllRobotScene3D key={lessonId} profile={profile} scene={scene} trail={trail} interactionTrail={interactionTrail} currentStep={shown ? stepIndex + 1 : 0} totalSteps={playback.length} playing={playing} />

@@ -8,9 +8,11 @@ sidebar_position: 5
 
 # Lesson F7.5: Attachment Control Challenge
 
-Drive to a target, move the attachment once, return the tool to its home angle, and bring the robot home. Put navigation and tool motion in separate functions so each can be tested alone, and record the tool angle before and after the complete run. Stop physical trials if the tool touches the chassis.
+This challenge brings the drive and attachment together. The simulator checks for a tool move, an outward drive and return home, and no collision. We can use separate route and tool functions to see which part needs adjustment if the yellow target is missed.
 
 ## Worked example
+
+`activate_target()` requests a 300 mm approach and a 90 degree tool move followed by its return. The reverse drive requests a return toward home, and the print shows the final motor angle. The distance may need adjustment before the tool is close enough to touch the target.
 
 ~~~python
 def activate_target():
@@ -25,16 +27,16 @@ print("Tool angle:", attachment.angle())
 
 ## Simulator practice
 
-Use the yellow practice target. Adjust the approach distance before changing the tool angle.
+The yellow target gives the simulator a visible point to approach. A run should move the tool and return home without a collision. If the target stays inactive, the robot's approach position may be worth checking before the tool angle.
 
 <FllPythonPractice lessonId="fll-unit-07/attachment-control-challenge" />
 
 ## On the robot
 
-Run five target activations at low speed. Record target contact, tool return angle, and home position.
+Five low-speed physical trials may show whether the robot reaches the target and whether the tool returns to its starting angle. Notes on contact, angle, and home position can separate navigation error from tool error.
 
 ## Check and adjust
 
-The target is activated and the tool returns near its starting angle. If target contact fails, adjust the approach before the tool angle.
+The simulator's required checks should pass, and the target can be inspected in the field view. If the target is missed on a real mat, compare approach position and tool travel before changing either value.
 
 Reference: [Pybricks Motor reference](https://docs.pybricks.com/en/stable/pupdevices/motor.html).

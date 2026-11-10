@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F2.2: Launch Marks and Home
 
-A consistent launch position reduces variation before the program starts, so align the same chassis edges with the same field marks for each trial. Write the route as distance, turn, action, and return, keeping the first mission near home. Reverse along the outgoing path only when it remains clear. Otherwise use a measured turn and return route.
+The route from the last lesson depends on where the robot starts. This lesson uses two physical marks to give each launch the same position and heading, then checks whether a short route can return home. A repeated starting pose may make differences in the route easier to interpret.
 
 ## Worked example
+
+`run_short_mission()` drives 250 mm, turns, makes a short side move, and reverses that side move. The final turn and reverse drive request a return to the original pose. This only works as a field route if the return path stays clear.
 
 ~~~python
 def run_short_mission():
@@ -28,17 +30,17 @@ run_short_mission()
 
 ## Simulator practice
 
-Draw the planned path, then run it from the same start pose. Compare the final pose with home boundaries.
+A drawing of the outgoing and return segments can help you predict the final pose before running the code. In the simulator, compare that prediction with the blue home boundary. If the route misses, note which segment first differs from the drawing.
 
 <FllPythonPractice lessonId="fll-unit-02/launch-plan-and-home" />
 
 ## On the robot
 
-Add two physical launch references. Run five starts and mark each final position on paper.
+Two marks for the same chassis edges can make the physical launch position easier to repeat. Marking the final position after five starts may show whether the route ends in one area or spreads across the mat.
 
 ## Check and adjust
 
-Your launch method is written down, and you can repeat it without moving the code. If final position changes between launches, check launch marks and alignment.
+The launch notes should let another teammate place the robot the same way. If the five final positions vary, check the launch marks and alignment before changing the route.
 
 Reference: [FIRST season materials](https://www.firstinspires.org/resources/library/fll/season-materials).
 

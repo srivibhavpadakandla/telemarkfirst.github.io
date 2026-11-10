@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F12.3: Calibrate Axle Track
 
-Calibrate turns after straight travel, using a full 360 degree turn on a clear surface as recommended in the Pybricks reference. Reduce the configured axle track if the robot turns too far, or increase it if the turn is short. Recheck a straight drive afterward, and inspect grip or structure when turn results vary widely.
+Once straight travel is calibrated, a full turn can help estimate axle track. Pybricks recommends a 360 degree turn on a clear surface. If the robot repeatedly turns too far, a smaller configured track may help; a short turn may call for a larger one.
 
 ## Worked example
+
+The example uses a 375 degree actual turn for a 360 degree request to calculate a smaller starting track. A single turn is an estimate, so the result still needs repeated checks.
 
 ~~~python
 old_track_mm = 112
@@ -24,17 +26,17 @@ print("Try axle track mm:", new_track_mm)
 
 ## Simulator practice
 
-Run a 360 degree turn, then compare final heading in the automatic profile table. Change axle track in code and rerun.
+Replace the starter's straight drive with a 360 degree turn and compare headings in the automatic profile table. After changing axle track in code, the same route can show whether the difference shrinks.
 
 <FllPythonPractice lessonId="fll-unit-12/calibrate-track" />
 
 ## On the robot
 
-Measure three full turns from the same mark. Change the track value in small steps and retest straight distance.
+Three full turns from the same floor mark may show whether the error repeats. Small track adjustments can then be checked against both turns and straight distance.
 
 ## Check and adjust
 
-Your chosen track value improves the turn while retaining the straight calibration. If turn improves but straight worsens, revisit diameter first.
+The selected track should improve the turns without undoing the straight calibration. If results vary between trials, grip and chassis structure may need attention before another numerical change.
 
 Reference: [Pybricks DriveBase reference](https://docs.pybricks.com/en/stable/robotics.html).
 

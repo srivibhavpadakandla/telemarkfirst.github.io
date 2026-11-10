@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F14.4: Rehearse a Match
 
-Rehearse program choice, launch alignment, attachment handling, returns, and the full 150 second clock together. Use the current FIRST rulebook for handling and scoring rather than the simulator's generic score. Save the last reliable Pybricks program before any final adjustment.
+A match rehearsal combines code with the people and handling around it. The team can practice program choice, launch alignment, attachments, and returns under the full 150 second clock. The current FIRST rulebook should guide real scoring and handling decisions.
 
 ## Worked example
+
+The loop prints two launch names and timestamps, then runs a simple action for each. It illustrates order and timing but does not model the physical reset or attachment handoff between launches.
 
 ~~~python
 watch = StopWatch()
@@ -28,17 +30,17 @@ print("Rehearsal ms:", watch.time())
 
 ## Simulator practice
 
-Run the planned sequence against the simulator clock. Record every launch and return.
+Use the worked loop as a timing outline, then add the planned route for each launch. The simulator clock can show the code time, while a full physical rehearsal also needs human handling time.
 
 <FllPythonPractice lessonId="fll-unit-14/rehearsal" />
 
 ## On the robot
 
-Perform a timed physical rehearsal with the same people and attachments. Record a complete run, including handling and any recovery.
+The actual match team should time a complete physical rehearsal with the intended attachments. Record handling delays and any recovery along with the drive time.
 
 ## Check and adjust
 
-The team can execute the plan without reading the source during the match. If rehearsal time differs, include handling in the budget.
+The plan should be clear enough to follow at the field without reading the source. If the rehearsal exceeds the estimate, include its handling time in the budget and keep the last reliable program available.
 
 Reference: [FIRST season materials](https://www.firstinspires.org/resources/library/fll/season-materials).
 

@@ -104,6 +104,16 @@ async function main() {
     assert.ok(forwardLeftMotor.scene.xCm > -100 && reverseLeftMotor.scene.xCm < -100,
       'direct motor commands must respect positive_direction');
 
+    const clockwiseTool = run('from pybricks.pupdevices import Motor\nfrom pybricks.parameters import Port, Direction\ntool = Motor(Port.E, Direction.CLOCKWISE)\ntool.run_angle(150, 30)\nprint(tool.angle())\n', []);
+    const counterclockwiseTool = run('from pybricks.pupdevices import Motor\nfrom pybricks.parameters import Port, Direction\ntool = Motor(Port.E, Direction.COUNTERCLOCKWISE)\ntool.run_angle(150, 30)\nprint(tool.angle())\n', []);
+    assert.equal(clockwiseTool.scene.attachmentDeg, 30);
+    assert.equal(counterclockwiseTool.scene.attachmentDeg, -30,
+      'counterclockwise motor direction must move the visible attachment below its starting angle');
+    assert.match(counterclockwiseTool.output, /^30\s*$/m,
+      'motor angle remains positive when the configured positive direction is counterclockwise');
+    assert.ok(counterclockwiseTool.playback.some((frame) => frame.scene.attachmentDeg < 0),
+      'playback must show the counterclockwise tool motion');
+
     const fullMission = run(`${setup}\nrobot.straight(900)\nrobot.turn(-90)\nrobot.straight(80)\nprint(color_sensor.reflection())\nattachment.run_angle(300, 60)\nrobot.turn(90)\nrobot.straight(650)\nrobot.turn(-90)\nrobot.straight(580)\nrobot.turn(90)\nrobot.straight(230)\nattachment.run_angle(300, -60)\nrobot.turn(180)\nrobot.straight(1780)\nrobot.turn(-90)\nrobot.straight(660)\n`);
     assert.equal(fullMission.error, null);
     assert.equal(fullMission.scene.score, 60);

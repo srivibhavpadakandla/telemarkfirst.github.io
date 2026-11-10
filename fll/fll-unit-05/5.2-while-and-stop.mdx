@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F5.2: Repeat Until a Cue
 
-A `while` loop repeats while its condition remains `True`, so the sensor reading must be updated inside the loop. Start a continuous drive, check reflection, and stop the drive base when the condition ends. A short `wait(10)` spaces the readings. A later lesson adds a timeout for the case where no line appears.
+In F1.1 we used a line reading to stop a drive. A `while` loop makes that behavior possible because it checks the condition again after every pass. This lesson focuses on where the repeated reading happens and where the stop call belongs. If the line is missed, the loop will need a timeout, which we add later in this unit.
 
 ## Worked example
+
+`robot.drive(100, 0)` continues until another command stops it. Each pass through the loop waits 10 ms, then `color_sensor.reflection()` is checked again. When a reading is 35% or lower, Python leaves the loop and calls `robot.stop()`.
 
 ~~~python
 robot.drive(100, 0)
@@ -23,17 +25,17 @@ robot.stop()
 
 ## Simulator practice
 
-Drive toward the line and confirm the robot stops after the reading falls below 35 percent.
+Replace the starter's fixed-distance loop with the worked example's sensor loop. The simulator line should lower reflection enough to end it, and the field view can show where the sensor is at the stop. A real mat may need a different threshold.
 
 <FllPythonPractice lessonId="fll-unit-05/while-and-stop" />
 
 ## On the robot
 
-Place the robot near the line and run at low speed. Check that the sensor reaches the line before the wheels cross the target area.
+The first physical trial should be slow and start near the line. Watching where the sensor and wheels are when the robot stops can show whether the threshold and speed suit the available space.
 
 ## Check and adjust
 
-You can point to the line that refreshes the reading and the line that stops motion. If the loop never ends, refresh the reading and add a timeout.
+The condition should be checked after each 10 ms wait, and `robot.stop()` should run after the loop ends. If the robot never detects the line, a timeout can bound the drive in the next lesson.
 
 Reference: [Pybricks ColorSensor reference](https://docs.pybricks.com/en/stable/pupdevices/colorsensor.html).
 

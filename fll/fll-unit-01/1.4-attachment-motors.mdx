@@ -10,9 +10,13 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F1.4: Attachment Motors and Objects
 
-A tool motor can lift, push, or release a mission object through `Motor.run_angle()`, which takes an angle in motor degrees and a speed in degrees per second. The visible direction depends on the build, so test a small movement with the robot lifted before committing to a full tool action. Use a physical stop and limit force where the mechanism might jam.
+We can now use sensors to stop the robot and check its heading after a turn. The next piece is the attachment that will handle a mission object. The aim in this lesson is to rotate its motor through a known angle and bring it back to its starting position.
+
+`Motor.run_angle(speed, rotation_angle)` takes speed in degrees per second and a relative rotation in motor degrees. A positive angle turns the motor one way; a negative angle reverses it. Which way the tool moves depends on how the motor and gears are mounted.
 
 ## Worked example
+
+The first call asks the motor to turn 90 degrees at 200 degrees per second. The second asks it to turn back by the same amount. If the mechanism moves freely, the tool should return close to where it started. A gear train may make the tool's angle different from the motor's angle.
 
 ~~~python
 attachment = Motor(Port.E)
@@ -22,17 +26,17 @@ attachment.run_angle(200, -90)
 
 ## Simulator practice
 
-Move the virtual attachment forward and back. Then drive to the red object and test the tool at that position.
+The starter contains the two motor moves from the example. In the simulator, the attachment should rise and return. Watching its motion can help you check the direction and size of the command before using the tool near the red cargo in the next challenge.
 
 <FllPythonPractice lessonId="fll-unit-01/attachment-motors" />
 
 ## On the robot
 
-Measure the safe travel of your actual tool. Run 30, 60, and 90 degree moves and record which position reaches the object without binding.
+The real tool should be tested with the robot lifted so it can move freely. Short moves of 30, 60, and 90 motor degrees can help you find an angle that reaches the object without pressing against the frame or a hard stop. The angle you use in the mission route should come from those tests.
 
 ## Check and adjust
 
-The tool returns to its start angle without striking the frame or staying under load. If the tool binds, reduce angle and inspect clearance before increasing speed.
+A useful angle should let the tool return without striking the frame or holding against a hard stop. If it binds, reduce the travel and inspect the clearance before trying a faster move. The motor angle alone may not tell you where the tool ends up.
 
 Reference: [Pybricks Motor reference](https://docs.pybricks.com/en/stable/pupdevices/motor.html).
 

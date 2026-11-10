@@ -10,9 +10,11 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F5.1: Repeat a Known Count
 
-A `for` loop repeats a known number of times, and `range(3)` produces the values 0, 1, and 2. Use a loop for a measured pattern or repeatable test, while keeping different mission actions separate. Print the count during each repeat so a field result can be matched to the iteration that caused it.
+Some tests need the same movement more than once. A `for` loop repeats a known number of times, and `range(3)` gives the loop the values 0, 1, and 2. Here we will use it for three short out-and-back moves and print the trial number so each movement can be identified in the output.
 
 ## Worked example
+
+The body runs once for each value from `range(3)`. Adding one to `trial` prints 1, 2, and 3, while the two straight commands request an out-and-back move on each repeat.
 
 ~~~python
 for trial in range(3):
@@ -23,17 +25,17 @@ for trial in range(3):
 
 ## Simulator practice
 
-Run three short out-and-back moves. Change range(3) to range(2) and predict the count.
+The starter repeats only an outward move. Add the reverse command and trial print from the worked example inside its loop. It should then show three out-and-back movements for `range(3)` and two for `range(2)`.
 
 <FllPythonPractice lessonId="fll-unit-05/for-range" />
 
 ## On the robot
 
-With wheels lifted, verify the number of moves. On the floor, check whether the robot returns to its starting mark after each iteration.
+The first physical test should have the wheels lifted so you can count the repeats. On the floor, a start mark can show whether each out-and-back movement returns to the same place.
 
 ## Check and adjust
 
-The printed count matches the number of completed out-and-back moves. If the pattern repeats too many times, check range and indentation.
+The number of printed trials should match the number of completed moves. If it does not, check the `range()` value and which lines are indented under `for`.
 
 Reference: [Pybricks first robot program](https://pybricks.com/learn/making-programs/your-first-program/).
 

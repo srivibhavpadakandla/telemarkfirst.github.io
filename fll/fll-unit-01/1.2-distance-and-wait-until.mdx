@@ -10,9 +10,13 @@ import MarkComplete from '@site/src/components/HomepageFeatures/MarkComplete';
 
 # Lesson F1.2: Distance and Wait Until
 
-An UltrasonicSensor reports the distance to a nearby object in millimeters and returns 2000 when it has no valid reading. Poll it while the drive base moves, but include a timeout so a missing object cannot leave the robot driving indefinitely. Stop the drive base when either the distance condition or the timeout ends the loop.
+The line stop in the previous lesson depends on seeing the line. We can also use a distance reading to stop before an obstacle. The aim here is to stop when the ultrasonic sensor reads 150 mm or less, with a three-second time limit if that reading never arrives.
+
+`distance_sensor.distance()` reports millimeters. It returns 2000 when there is no valid reading, so the distance condition may remain true even if no object is detected. `StopWatch.time()` reports elapsed milliseconds. In the example, both conditions must remain true for the drive to continue.
 
 ## Worked example
+
+The stopwatch starts before `robot.drive(100, 0)`, and the 10 ms wait spaces out the readings. If the sensor reports 150 mm or less, or 3000 ms pass, Python leaves the loop and calls `robot.stop()`. The final line prints the distance reported at that point.
 
 ~~~python
 watch = StopWatch()
@@ -25,17 +29,17 @@ print("Range:", distance_sensor.distance())
 
 ## Simulator practice
 
-Run toward the fixed obstacle and record whether range or the three-second timeout ends the drive. Change the range threshold, rerun, and compare the stop point.
+The simulator has an obstacle directly ahead. With the starter code, the distance reading should end the drive first. With `100` in place of `3000`, the timer should end a second run first. The printed distance and final position can help you compare the two stopping conditions.
 
 <FllPythonPractice lessonId="fll-unit-01/distance-and-wait-until" />
 
 ## On the robot
 
-Measure the stop gap with a ruler. Repeat with a broad target and with an angled target to see how shape changes range readings.
+The sensor should stay at the height and angle it will use in the route. A ruler measurement after the stop can show whether a 150 mm sensor reading leaves enough room in front of the chassis. A broad target and an angled target may give different readings, so testing both can help you choose a threshold for your field.
 
 ## Check and adjust
 
-Range should stop the drive when a target is present, and the timeout should stop it when the target is absent. If either run continues, check where `robot.stop()` executes.
+Both the range reading and the timer should be able to end the loop. If the robot continues driving after the expected stop, check the printed distance, the elapsed time, and whether `robot.stop()` is outside the loop.
 
 Reference: [Pybricks UltrasonicSensor reference](https://docs.pybricks.com/en/stable/pupdevices/ultrasonicsensor.html).
 
